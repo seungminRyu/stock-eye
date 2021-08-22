@@ -1,3 +1,5 @@
+import React from 'react';
+import Search from './component/Search';
 import './App.css';
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
         <h1>home</h1>
       </header>
       <button>검색</button>
+      <Search />
     </div>
   );
 }

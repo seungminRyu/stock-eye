@@ -1,5 +1,5 @@
-import { useState } from "react";
-import searchResultItem from "./SerachResultItem";
+import React, { useState } from 'react';
+import SearchResultItem from './SearchResultItem';
 
 function Search() {
     const initList = [
@@ -32,17 +32,20 @@ function Search() {
             code: "0007"
         },
     ]
-    const [searchResultList, setSearchResultList] = useState([]);
-    setSearchResultList(initList);
-
+    const [searchResultList, setSearchResultList] = useState(initList);
+    
     return (
         <div className="search">
             <div className="search-wrapper">
                 <input className="search-input"></input>
                 <ul className="search-result">
-
+                    {searchResultList.map(item => (
+                        <SearchResultItem name={item.name} code={item.code} />
+                    ))}
                 </ul>
             </div>
         </div>
     );
 }
+
+export default Search;
