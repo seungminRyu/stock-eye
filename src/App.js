@@ -4,8 +4,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>stock eye</h1>
+        <h1>home</h1>
       </header>
+      <button>검색</button>
     </div>
   );
 }
