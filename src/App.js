@@ -10,7 +10,8 @@ function App() {
         <h1>home</h1>
       </header>
       <button>검색</button>
-      <Manage />
+      {/* <Manage /> */}
+      <Search />
     </div>
   );
 }

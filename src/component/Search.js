@@ -37,13 +37,23 @@ function Search() {
     return (
         <div className="search">
             <div className="search-wrapper">
+                <div className="search-header">
+                    <div className="search-header__title">
+                        <h1>주식 추가</h1>
+                    </div>
+                    <div className="search-header__quit-btn">
+                        <button className="quit-btn"></button>
+                    </div>
+                </div>
+                <div className="search-body">
                 <input className="search-input"></input>
-                <ul className="search-result">
-                    {searchResultList.map(item => (
-                        <SearchResultItem name={item.name} code={item.code} />
-                    ))}
-                </ul>
-            </div>
+                    <ul className="search-result">
+                        {searchResultList.map(resultItem => (
+                            <SearchResultItem name={resultItem.name} code={resultItem.code} />
+                        ))}
+                    </ul>
+                </div>
+            </div>            
         </div>
     );
 }
