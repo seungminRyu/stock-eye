@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from './component/Search';
+import Manage from './component/Manage';
 import './App.css';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
         <h1>home</h1>
       </header>
       <button>검색</button>
-      <Search />
+      <Manage />
     </div>
   );
 }
