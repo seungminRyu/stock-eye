@@ -48,8 +48,8 @@ function Search() {
                 <div className="search-body">
                 <input className="search-input"></input>
                     <ul className="search-result">
-                        {searchResultList.map(resultItem => (
-                            <SearchResultItem name={resultItem.name} code={resultItem.code} />
+                        {searchResultList.map((resultItem, i) => (
+                            <SearchResultItem key={i} name={resultItem.name} code={resultItem.code} />
                         ))}
                     </ul>
                 </div>

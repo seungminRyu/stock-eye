@@ -1,38 +1,10 @@
 import React from 'react';
 import ManagedStockItem from './ManagedStockItem';
+import { useStockState } from '../context/StockContext';
 
 function Manage() {
-    const managedStocklist = [
-        {
-            name: "삼성전자",
-            code: "0001"
-        },
-        {
-            name: "LG",
-            code: "0002"
-        },
-        {
-            name: "카카오",
-            code: "0003"
-        },
-        {
-            name: "네이버",
-            code: "0004"
-        },
-        {
-            name: "셀트리온",
-            code: "0005"
-        },
-        {
-            name: "카카오게임즈",
-            code: "0006"
-        },
-        {
-            name: "초코뮤직",
-            code: "0007"
-        },
-    ]
-
+    const managedStocklist = useStockState();
+    
     return (
         <div className="manage">
             <div className="manage-wrapper">
@@ -46,7 +18,7 @@ function Manage() {
                 </div>
                 <div className="manage-body">
                     <ul className="managed-stock-list">
-                        {managedStocklist.map(stockItem => <ManagedStockItem name={stockItem.name} code={stockItem.code} />)}
+                        {managedStocklist.map((stockItem, i) => <ManagedStockItem key={i} name={stockItem.name} code={stockItem.code} />)}
                     </ul>
                 </div>
             </div>            
