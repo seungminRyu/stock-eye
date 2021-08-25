@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useContext } from 'react';
 
 const initialStockList = [
     {
@@ -72,4 +72,12 @@ export function StockProvider({ children }) {
             </StockDispatchContext.Provider>
         </StockStateContext.Provider>
     );
+}
+
+export function useStockState() {
+    return useContext(StockStateContext);
+}
+
+export function useStockDispatch() {
+    return useContext(StockDispatchContext);
 }
