@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, createContext } from 'react';
 
 const initialStockList = [
     {
@@ -60,7 +60,16 @@ function stockReducer(state, action) {
     }
 }
 
+const StockStateContext = createContext();
+const StockDispatchContext = createContext();
+
 export function StockProvider({ children }) {
     const [state, dispatch] = useReducer(stockReducer, initialStockList);
-    return children;
+    return (
+        <StockStateContext.Provider value={state}>
+            <StockDispatchContext.Provider value={dispatch}>
+                {children}
+            </StockDispatchContext.Provider>
+        </StockStateContext.Provider>
+    );
 }
