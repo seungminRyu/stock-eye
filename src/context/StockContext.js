@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext } from 'react';
+import React, { useReducer, createContext, useContext, useRef } from 'react';
 
 const initialStockList = [
     {
@@ -62,22 +62,44 @@ function stockReducer(state, action) {
 
 const StockStateContext = createContext();
 const StockDispatchContext = createContext();
+const StockNextIdContext = createContext();
 
 export function StockProvider({ children }) {
     const [state, dispatch] = useReducer(stockReducer, initialStockList);
+    const initId = initialStockList.length + 1;
+    const nextId = useRef(initId);
+    
     return (
         <StockStateContext.Provider value={state}>
             <StockDispatchContext.Provider value={dispatch}>
-                {children}
+                <StockNextIdContext value={nextId}>
+                    {children}
+                </StockNextIdContext>
             </StockDispatchContext.Provider>
         </StockStateContext.Provider>
     );
 }
 
 export function useStockState() {
-    return useContext(StockStateContext);
+    const context = useContext(StockStateContext);
+    if (!context) {
+        throw new Error('Cannot find StockProvider')
+    }
+    return context;
 }
 
 export function useStockDispatch() {
-    return useContext(StockDispatchContext);
+    const context = useContext(StockDispatchContext);
+    if (!context) {
+        throw new Error('Cannot find StockProvider')
+    }
+    return context;
+}
+
+export function useStockNextId() {
+    const context = useContext(StockNextIdContext);
+    if (!context) {
+        throw new Error('Cannot find StockProvider')
+    }
+    return context;
 }
