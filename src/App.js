@@ -14,7 +14,9 @@ function App() {
         <StockProvider>
             <AppBlock>
                 <header className="header">
-                    <h1>home</h1>
+                    <h1>현재 내 주식의 예상 가치는</h1>
+                    <h1>0원</h1>
+                    <h1>입니다.</h1>
                 </header>
                 <main className="body">
                     <UserStocks/>
