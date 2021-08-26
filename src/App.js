@@ -1,24 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
+import { StockProvider, useStockState } from './context/StockContext';
 import Search from './component/Search';
 import Manage from './component/Manage';
-import StockList from './component/StockList';
-import { StockProvider, useStockState } from './context/StockContext';
-import './App.css';
+import UserStocks from './component/UserStocks';
+
+const AppBlock = styled.div`
+
+`;
 
 function App() {
-
     return (
         <StockProvider>
-            <div className="app">
-                <header className="app-header">
+            <AppBlock>
+                <header className="header">
                     <h1>home</h1>
                 </header>
-                <div className="app-body">
-                    <StockList />
+                <main className="body">
+                    <UserStocks/>
+                </main>
+                <div className="modal">
+                    <Manage/>
+                    <Search/>
                 </div>
-                <Manage />
-                <Search />
-            </div>
+            </AppBlock>
         </StockProvider>
     );
 }
