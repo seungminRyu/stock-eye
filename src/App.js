@@ -1,17 +1,20 @@
 import React from 'react';
 import Search from './component/Search';
 import Manage from './component/Manage';
-import { StockProvider } from './context/StockContext';
+import { StockProvider, useStockState } from './context/StockContext';
 import './App.css';
 
 function App() {
+
     return (
         <StockProvider>
-            <div className="App">
-                <header className="App-header">
+            <div className="app">
+                <header className="app-header">
                     <h1>home</h1>
                 </header>
-                <button>검색</button>
+                <div className="app-body">
+
+                </div>
                 <Manage />
                 <Search />
             </div>
