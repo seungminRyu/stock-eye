@@ -6,7 +6,9 @@ import Manage from './component/Manage';
 import UserStocks from './component/UserStocks';
 
 const AppBlock = styled.div`
-
+    .header {
+        font-weight: bold;
+    }
 `;
 
 function App() {
