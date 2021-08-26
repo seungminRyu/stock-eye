@@ -1,13 +1,4 @@
-import React, { useReducer, createContext, useContext, useRef } from 'react';
-
-const initialStockList = [
-    {
-        id: 1,
-        name: "삼성전자",
-        code: "0010",
-        processed: true,
-    },
-];
+import React, { useReducer, createContext, useContext } from 'react';
 
 function stockReducer(state, action) {
     switch (action.type) {
@@ -27,19 +18,23 @@ function stockReducer(state, action) {
 
 const StockStateContext = createContext();
 const StockDispatchContext = createContext();
-const StockNextIdContext = createContext();
 
 export function StockProvider({ children }) {
+    let initialStockList;
+    if (localStorage.getItem('STOCK_LIST') === null) {
+        localStorage.setItem('STOCK_LIST', JSON.stringify([]));
+        initialStockList = [];
+    } else {
+        initialStockList = JSON.parse(localStorage.getItem('STOCK_LIST'));
+    }
+
     const [state, dispatch] = useReducer(stockReducer, initialStockList);
     const initialId = initialStockList.length + 1;
-    const nextId = useRef(initialId);
     
     return (
         <StockStateContext.Provider value={state}>
             <StockDispatchContext.Provider value={dispatch}>
-                <StockNextIdContext.Provider value={nextId}>
-                    {children}
-                </StockNextIdContext.Provider>
+                { children }
             </StockDispatchContext.Provider>
         </StockStateContext.Provider>
     );
@@ -55,14 +50,6 @@ export function useStockState() {
 
 export function useStockDispatch() {
     const context = useContext(StockDispatchContext);
-    if (!context) {
-        throw new Error('Cannot find StockProvider')
-    }
-    return context;
-}
-
-export function useStockNextId() {
-    const context = useContext(StockNextIdContext);
     if (!context) {
         throw new Error('Cannot find StockProvider')
     }

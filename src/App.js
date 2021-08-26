@@ -10,14 +10,6 @@ const AppBlock = styled.div`
 `;
 
 function App() {
-    useEffect(() => {
-        if (localStorage.getItem('STOCK_LIST') === null) {
-            const json = JSON.stringify([]);
-            localStorage.setItem('STOCK_LIST', json);
-        }
-        return;
-    });
-
     return (
         <StockProvider>
             <AppBlock>
