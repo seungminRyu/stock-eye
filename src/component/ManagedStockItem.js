@@ -1,10 +1,23 @@
 import React from "react";
-import { useStockDispatch } from "../context/StockContext";
+import { useStockDispatch, useStockState } from "../context/StockContext";
 
-function ManagedStockItem(props) {
-    const { name, code, id } = props;
+function ManagedStockItem({ stock }) {
+    const { name, code, id } = stock;
     const dispatch = useStockDispatch();
-    const onRemove = () => dispatch({ type: 'REMOVE', id })
+    const state = useStockState();
+
+    const onRemove = () => {
+        const updateLocalStorage = () => {
+            const currentStockList = JSON.parse(localStorage.getItem('STOCK_LIST'));
+            const nextStockList = currentStockList.filter(stock => stock.id !== id);
+            localStorage.setItem('STOCK_LIST', JSON.stringify(nextStockList));
+        }
+
+        const removeStateItem = () => dispatch({ type: 'REMOVE', id });
+        
+        removeStateItem();
+        updateLocalStorage();
+    }
 
     return (
         <li className="managed-stock-item">
