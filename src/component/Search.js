@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
+import { useStockDispatch } from '../context/StockContext';
 import SearchResultItem from './SearchResultItem';
 
 function Search() {
     const initList = [
         {
-            name: "삼성전자",
-            code: "0001"
+            id: 1,
+            name: "새주식1",
+            code: "0011",
+            processed: true,
         },
         {
-            name: "LG",
-            code: "0002"
+            id: 2,
+            name: "새주식2",
+            code: "0022",
+            processed: true,
         },
         {
-            name: "카카오",
-            code: "0003"
+            id: 3,
+            name: "새주식3",
+            code: "0033",
+            processed: true,
         },
         {
-            name: "네이버",
-            code: "0004"
-        },
-        {
-            name: "셀트리온",
-            code: "0005"
-        },
-        {
-            name: "카카오게임즈",
-            code: "0006"
-        },
-        {
-            name: "초코뮤직",
-            code: "0007"
+            id: 4,
+            name: "새주식4",
+            code: "0044",
+            processed: true,
         },
     ]
     const [searchResultList, setSearchResultList] = useState(initList);
