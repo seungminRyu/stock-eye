@@ -5,30 +5,42 @@ import SearchResultItem from './SearchResultItem';
 function Search() {
     const initList = [
         {
-            id: 1,
-            name: "새주식1",
-            code: "0011",
-            processed: true,
-        },
-        {
             id: 2,
-            name: "새주식2",
-            code: "0022",
+            name: "LG",
+            code: "0020",
             processed: true,
         },
         {
             id: 3,
-            name: "새주식3",
-            code: "0033",
+            name: "카카오",
+            code: "0030",
             processed: true,
         },
         {
             id: 4,
-            name: "새주식4",
-            code: "0044",
+            name: "네이버",
+            code: "0040",
             processed: true,
         },
-    ]
+        {
+            id: 5,
+            name: "셀트리온",
+            code: "0050",
+            processed: true,
+        },
+        {
+            id: 6,
+            name: "카카오게임즈",
+            code: "0060",
+            processed: true,
+        },
+        {
+            id: 7,
+            name: "초코뮤직",
+            code: "0070",
+            processed: true,
+        },
+    ];
     const [searchResultList, setSearchResultList] = useState(initList);
     
     return (
