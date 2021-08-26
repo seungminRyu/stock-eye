@@ -21,6 +21,7 @@ function Manage() {
                         {managedStocklist.map((stockItem, i) => 
                             <ManagedStockItem 
                                 key={i}
+                                id={stockItem.id}
                                 name={stockItem.name}
                                 code={stockItem.code}
                             />

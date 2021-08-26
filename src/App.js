@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StockProvider, useStockState } from './context/StockContext';
+import { StockProvider } from './context/StockContext';
 import Search from './component/Search';
 import Manage from './component/Manage';
 import UserStocks from './component/UserStocks';

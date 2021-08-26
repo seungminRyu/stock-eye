@@ -11,7 +11,7 @@ const initialStockList = [
 
 function stockReducer(state, action) {
     switch (action.type) {
-        case 'CREATE':
+        case 'ADD':
             return state.concat(action.stock);
         case 'TOGGLE':
             return state.map(stock => 

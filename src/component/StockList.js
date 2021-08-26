@@ -11,8 +11,8 @@ function StockList(props) {
 
     return (
         <StockListBlock>
-            {stockList.map(stock =>
-                <StockItem name={stock.name} id={stock.id} />    
+            {stockList.map((stock, i) =>
+                <StockItem key={i} name={stock.name} id={stock.id} />    
             )}
         </StockListBlock>
     );
