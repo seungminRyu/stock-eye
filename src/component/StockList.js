@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStockState } from '../context/StockContext';
+import StockItem from './StockItem';
 
 const StockListBlock = styled.div`
    background-color: rgb(200, 255, 237);
@@ -11,9 +12,10 @@ function StockList() {
 
     return (
         <StockListBlock>
+
             <ul className="stock-list">
                 {stockList.map(stock =>
-                    <li className="stock-list-item">{stock.name}</li>    
+                    <StockItem name={stock.name} id={stock.id} />    
                 )}
             </ul>
         </StockListBlock>
