@@ -67,8 +67,8 @@ const StockNextIdContext = createContext();
 
 export function StockProvider({ children }) {
     const [state, dispatch] = useReducer(stockReducer, initialStockList);
-    const initId = initialStockList.length + 1;
-    const nextId = useRef(8);
+    const initialId = initialStockList.length + 1;
+    const nextId = useRef(initialId);
     
     return (
         <StockStateContext.Provider value={state}>
