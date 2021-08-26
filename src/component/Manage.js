@@ -18,7 +18,13 @@ function Manage() {
                 </div>
                 <div className="manage-body">
                     <ul className="managed-stock-list">
-                        {managedStocklist.map((stockItem, i) => <ManagedStockItem key={i} name={stockItem.name} code={stockItem.code} />)}
+                        {managedStocklist.map((stockItem, i) => 
+                            <ManagedStockItem 
+                                key={i}
+                                name={stockItem.name}
+                                code={stockItem.code}
+                            />
+                        )}
                     </ul>
                 </div>
             </div>            
