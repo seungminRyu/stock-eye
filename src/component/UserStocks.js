@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useStockState } from '../context/StockContext';
 import StockList from './StockList';
 
-const UserStocksBlock = styled.div`
+const UserStocksBlock = styled.main`
 
 `;
 

@@ -20,9 +20,7 @@ function App() {
                     <h1>0원</h1>
                     <h1>입니다.</h1>
                 </header>
-                <main className="body">
-                    <UserStocks/>
-                </main>
+                <UserStocks/>
                 <div className="modal">
                     <Manage/>
                     <Search/>
