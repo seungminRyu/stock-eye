@@ -4,6 +4,7 @@ import { StockProvider } from './context/StockContext';
 import Search from './component/Search';
 import Manage from './component/Manage';
 import UserStocks from './component/UserStocks';
+import Header from './component/Header';
 
 const AppBlock = styled.div`
     .header {
@@ -15,16 +16,10 @@ function App() {
     return (
         <StockProvider>
             <AppBlock>
-                <header className="header">
-                    <h1>현재 내 주식의 예상 가치는</h1>
-                    <h1>0원</h1>
-                    <h1>입니다.</h1>
-                </header>
+                <Header/>
                 <UserStocks/>
-                <div className="modal">
-                    <Manage/>
-                    <Search/>
-                </div>
+                <Manage/>
+                <Search/>
             </AppBlock>
         </StockProvider>
     );
