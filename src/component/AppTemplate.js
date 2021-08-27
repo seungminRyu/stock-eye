@@ -5,6 +5,7 @@ const AppTemplateBlock = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 512px;
+    max-height: 100%;
     position: relative;
     background: white;
     box-sizing: border-box;
