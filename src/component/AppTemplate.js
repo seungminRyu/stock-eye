@@ -4,17 +4,13 @@ import styled from 'styled-components';
 const AppTemplateBlock = styled.div`
     display: flex;
     flex-direction: column;
-    width: 512px;
-    height: 768px;
+    max-width: 512px;
     position: relative;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 0 8px #33333333;
     box-sizing: border-box;
     overflow: hidden;
+    padding-bottom: 100px;
     margin: 0 auto;
-    margin-top: 96px;
-    margin-bottom: 32px;
 `;
 
 function AppTemplate({ children }) {

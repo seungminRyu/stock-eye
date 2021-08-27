@@ -29,7 +29,6 @@ export function StockProvider({ children }) {
     }
 
     const [state, dispatch] = useReducer(stockReducer, initialStockList);
-    const initialId = initialStockList.length + 1;
     
     return (
         <StockStateContext.Provider value={state}>
