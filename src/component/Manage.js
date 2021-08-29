@@ -1,12 +1,22 @@
 import React from 'react';
 import ManagedStockItem from './ManagedStockItem';
 import { useStockState } from '../context/StockContext';
+import styled from 'styled-components';
+
+const ManageBlock = styled.div`
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(100% - 260px);
+    background-color: #becfff;
+`;
 
 function Manage() {
     const managedStocklist = useStockState();
     
     return (
-        <div className="manage">
+        <ManageBlock>
             <div className="manage-wrapper">
                 <div className="manage-header">
                     <div className="manage-header__title">
@@ -26,8 +36,8 @@ function Manage() {
                         )}
                     </ul>
                 </div>
-            </div>            
-        </div>
+            </div>
+        </ManageBlock>
     )
 }
 
