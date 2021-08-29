@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { StockProvider } from './context/StockContext';
 import Search from './component/Search';
@@ -15,14 +15,50 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+    const [isManageOpen, setIsManageOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    const onManageOpen = () => {
+        const activateManage = () => setIsManageOpen(true);
+        activateManage();
+        console.log("ma open", isSearchOpen);
+    }
+
+    const onManageQuit = () => {
+        const deactivateManage = () => setIsManageOpen(false);
+        deactivateManage();
+        console.log("ma quit", isSearchOpen);
+    }
+
+    const onSearchOpen = () => {
+        const activateSearch = () => setIsSearchOpen(true);
+        activateSearch();
+        console.log("se open: ", isManageOpen);
+    
+    }
+    const onSearchQuit = () => {
+        const deactivateSearch = () => setIsSearchOpen(false);
+        deactivateSearch();
+        console.log("se quit", isSearchOpen);
+    }
+
     return (
         <StockProvider>
             <GlobalStyle/>
             <AppTemplate>
                 <Header/>
-                <UserStocks/>
-                <Manage/>
-                <Search/>
+                <UserStocks
+                    onManageOpen={onManageOpen}
+                    onSearchOpen={onSearchOpen}
+                />
+                <Manage
+                    isManageOpen={isManageOpen}
+                    onManageQuit={onManageQuit}
+                />
+                <Search
+                    isSearchOpen={isSearchOpen}
+                    onSearchQuit={onSearchQuit}
+                />
             </AppTemplate>
         </StockProvider>
     );

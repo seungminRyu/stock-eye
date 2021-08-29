@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import SearchResultItem from './SearchResultItem';
 
 const initList = [
@@ -45,23 +45,35 @@ const SearchBlock = styled.div`
     position: absolute;
     left: 0;
     bottom: 0;
+    display: none;
     width: 100%;
-    height: calc(100% - 260px);
+    height: calc(100% - 60px);
     background-color: #ffbce9;
+    
+    ${props =>
+        props.isSearchOpen &&
+        css`
+            display: block;
+        `
+    }
 `;
 
-function Search() {
+function Search(props) {
+    const { 
+        isSearchOpen,
+        onSearchQuit,
+    } = props;
     const [searchResultList, setSearchResultList] = useState(initList);
 
     return (
-        <SearchBlock>
+        <SearchBlock isSearchOpen={isSearchOpen}>
             <div className="search-wrapper">
                 <div className="search-header">
                     <div className="search-header__title">
                         <h1>주식 추가</h1>
                     </div>
                     <div className="search-header__quit-btn">
-                        <button className="quit-btn"></button>
+                        <button className="quit-btn" onClick={onSearchQuit}>닫기</button>
                     </div>
                 </div>
                 <div className="search-body">
