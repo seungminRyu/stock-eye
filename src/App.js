@@ -21,25 +21,20 @@ function App() {
     const onManageOpen = () => {
         const activateManage = () => setIsManageOpen(true);
         activateManage();
-        console.log("ma open", isSearchOpen);
     }
 
     const onManageQuit = () => {
         const deactivateManage = () => setIsManageOpen(false);
         deactivateManage();
-        console.log("ma quit", isSearchOpen);
     }
 
     const onSearchOpen = () => {
         const activateSearch = () => setIsSearchOpen(true);
         activateSearch();
-        console.log("se open: ", isManageOpen);
-    
     }
     const onSearchQuit = () => {
         const deactivateSearch = () => setIsSearchOpen(false);
         deactivateSearch();
-        console.log("se quit", isSearchOpen);
     }
 
     return (
