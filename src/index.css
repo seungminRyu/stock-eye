@@ -4,19 +4,19 @@
 @font-face {
   font-family: 'NanumSqaure';
   src: url('./static/font/NanumSquareL.ttf') format('truetype');
-  font-weight: light;
+  font-weight: 300;
 }
 
 @font-face {
   font-family: 'NanumSqaure';
   src: url('./static/font/NanumSquareR.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'NanumSqaure';
   src: url('./static/font/NanumSquareB.ttf') format('truetype');
-  font-weight: bold;
+  font-weight: 600;
 }
 
 html, body, body > div {
