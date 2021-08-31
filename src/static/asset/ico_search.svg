@@ -1,0 +1,15 @@
+<svg id="ico_add-stock" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #3e4465;
+      }
+    </style>
+  </defs>
+  <rect id="사각형_48" data-name="사각형 48" class="cls-1" width="20" height="20"/>
+  <path id="Icon_ionic-ios-add-circle" data-name="Icon ionic-ios-add-circle" class="cls-2" d="M11.445,3.375a8.07,8.07,0,1,0,8.07,8.07A8.069,8.069,0,0,0,11.445,3.375Zm3.511,8.691H12.066v2.891a.621.621,0,0,1-1.242,0V12.066H7.934a.621.621,0,0,1,0-1.242h2.891V7.934a.621.621,0,0,1,1.242,0v2.891h2.891a.621.621,0,0,1,0,1.242Z" transform="translate(-1.473 -1.418)"/>
+</svg>

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AppTemplateBlock = styled.div`
+    display: flex;
+    flex-direction: column;
     max-width: 512px;
     height: 100%;
     min-height: 560px;

@@ -10,7 +10,7 @@ const HeaderBlock = styled.header`
 
     .current-value {
         display: inline-block;
-        font-size: 56px;
+        font-size: 52px;
         font-weight: 600;
         margin-left: -10px;
         margin-right: 12px;
