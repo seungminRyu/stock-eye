@@ -6,7 +6,7 @@ const AppTemplateBlock = styled.div`
     height: 100%;
     min-height: 560px;
     position: relative;
-    background: white;
+    background: var(--light-main);
     box-sizing: border-box;
     overflow-y: scroll;
     margin: 0 auto;
