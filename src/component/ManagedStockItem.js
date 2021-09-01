@@ -1,10 +1,9 @@
 import React from "react";
-import { useStockDispatch, useStockState } from "../context/StockContext";
+import { useStockDispatch } from "../context/StockContext";
 
 function ManagedStockItem({ stock }) {
     const { name, code, id } = stock;
     const dispatch = useStockDispatch();
-    const state = useStockState();
 
     const onRemove = () => {
         const updateLocalStorage = () => {

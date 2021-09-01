@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="ico_trending-down" transform="translate(-60 -80.823)">
+    <rect id="사각형_25" data-name="사각형 25" width="20" height="20" transform="translate(60 80.823)" fill="none"/>
+    <path id="Icon_ionic-ios-trending-down" data-name="Icon ionic-ios-trending-down" d="M20.554,18.856V14.03a.617.617,0,0,0-1.234,0v3.339l-6.1-6.2a.611.611,0,0,0-.437-.176.625.625,0,0,0-.437.176L8.834,14.6,3.289,9.176A.618.618,0,0,0,2.852,9a.625.625,0,0,0-.437.176.561.561,0,0,0-.172.417.6.6,0,0,0,.172.437l5.978,5.852a.618.618,0,0,0,.437.176.625.625,0,0,0,.437-.176l3.51-3.437,5.639,5.811H15a.6.6,0,1,0,0,1.21h4.936A.618.618,0,0,0,20.554,18.856Z" transform="translate(58.607 76.294)" fill="#658efd"/>
+  </g>
+</svg>
