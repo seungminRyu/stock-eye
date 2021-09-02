@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import axios from 'axios';
 import ModalTemplate from './ModalTemplate';
 import SearchResultItem from './SearchResultItem';
+import { debouncer } from '../util/util';
 
 const initList = [
     {
@@ -48,11 +50,21 @@ const SearchBlock = styled.div`
 `;
 
 function Search(props) {
-    const { 
-        isSearchOpen,
-        onSearchQuit,
-    } = props;
+    const { isSearchOpen, onSearchQuit } = props;
     const [searchResultList, setSearchResultList] = useState(initList);
+
+    const onKeyUp = (e) => {
+        const requestSearch = async (e) => {
+            const qeury = e.target.value;
+            // const url = `https://stock-mlp.com/graduation/search?name=${qeury}`;
+            const url = 'https://dd4e85e7-9286-4729-93bf-0bcae7acd922.mock.pstmn.io/stock/';
+            const respone = await axios.get(url);
+            const ret = respone.data;
+            return ret;
+        }
+
+        debouncer(300, async () => await requestSearch(e));
+    };
 
     return (
         <SearchBlock isSearchOpen={isSearchOpen}>
@@ -66,7 +78,7 @@ function Search(props) {
                     </div>
                 </div>
                 <div className="search-body">
-                <input className="search-input"></input>
+                <input className="search-input" onKeyUp={onKeyUp}></input>
                     <ul className="search-result">
                         {searchResultList.map((resultItem, i) => (
                             <SearchResultItem 
