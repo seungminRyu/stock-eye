@@ -6,10 +6,10 @@ function stockReducer(state, action) {
             return state.concat(action.stock);
         case 'TOGGLE':
             return state.map(stock => 
-                stock.id === action.id ? { ...stock, processed: !stock.processed } : stock
+                stock.id === action.code ? { ...stock, processed: !stock.processed } : stock
             );
         case 'REMOVE':
-            return state.filter(stock => stock.id !== action.id);
+            return state.filter(stock => stock.code !== action.code);
         default:
             throw new Error(`Unhandled action type: ${action.type}`);
 

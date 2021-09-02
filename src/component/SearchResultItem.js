@@ -2,10 +2,11 @@ import React from 'react';
 import { useStockDispatch } from '../context/StockContext';
 
 function SearchResultItem({stock}) {
-    const { name, code, id } = stock;
+    const { name, code } = stock;
     const dispatch = useStockDispatch();
+
     const isAdded = JSON.parse(localStorage.getItem('STOCK_LIST')).findIndex(stock => 
-        stock.id === id
+        stock.code === code
     ) === -1 ? false : true;
 
     const onAdd = () => {

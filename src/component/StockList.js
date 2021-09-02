@@ -13,7 +13,7 @@ function StockList(props) {
         <StockListBlock>
             <ul className="user-stock-list">
                 {stockList.map((stock, i) =>
-                    <StockItem key={i} index={i} name={stock.name} id={stock.id} />    
+                    <StockItem key={i} index={i} name={stock.name} code={stock.code} />    
                 )}
             </ul>
         </StockListBlock>
