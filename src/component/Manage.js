@@ -1,16 +1,12 @@
 import React from 'react';
-import ManagedStockItem from './ManagedStockItem';
 import { useStockState } from '../context/StockContext';
 import styled, { css } from 'styled-components';
+import ModalTemplate from './ModalTemplate';
+import ManagedStockItem from './ManagedStockItem';
+
 
 const ManageBlock = styled.div`
-    position: absolute;
-    left: 0;
-    bottom: 0;
     display: none;
-    width: 100%;
-    height: calc(100% - 60px);
-    background-color: #becfff;
 
     ${props =>
         props.isManageOpen &&
@@ -29,7 +25,7 @@ function Manage(props) {
     
     return (
         <ManageBlock isManageOpen={isManageOpen}>
-            <div className="manage-wrapper">
+            <ModalTemplate>
                 <div className="manage-header">
                     <div className="manage-header__title">
                         <h1>내 주식 관리</h1>
@@ -48,7 +44,7 @@ function Manage(props) {
                         )}
                     </ul>
                 </div>
-            </div>
+            </ModalTemplate>
         </ManageBlock>
     )
 }

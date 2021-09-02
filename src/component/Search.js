@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import ModalTemplate from './ModalTemplate';
 import SearchResultItem from './SearchResultItem';
 
 const initList = [
@@ -36,14 +37,8 @@ const initList = [
 ];
 
 const SearchBlock = styled.div`
-    position: absolute;
-    left: 0;
-    bottom: 0;
     display: none;
-    width: 100%;
-    height: calc(100% - 60px);
-    background-color: #ffbce9;
-    
+
     ${props =>
         props.isSearchOpen &&
         css`
@@ -61,7 +56,7 @@ function Search(props) {
 
     return (
         <SearchBlock isSearchOpen={isSearchOpen}>
-            <div className="search-wrapper">
+            <ModalTemplate>
                 <div className="search-header">
                     <div className="search-header__title">
                         <h1>주식 추가</h1>
@@ -81,7 +76,7 @@ function Search(props) {
                         ))}
                     </ul>
                 </div>
-            </div>    
+            </ModalTemplate>    
         </SearchBlock>
     );
 }
