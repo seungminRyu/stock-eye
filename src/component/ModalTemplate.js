@@ -13,6 +13,8 @@ const ModalTemplateBlock = styled.div`
 `;
 
 const ModalBody = styled.div`
+    display: flex;
+    flex-direction: column;
     max-width: 512px;
     width: 100%;
     height: calc(100% - 60px);
