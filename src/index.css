@@ -3,19 +3,22 @@
 
 @font-face {
   font-family: 'NanumSqaure';
-  src: url('./static/font/NanumSquareLight.ttf') format('truetype');
+  src: url('./static/font/NanumSquareLight.ttf') format('truetype'),
+    url('./static/font/NanumSquareLight.otf') format('opentype');
   font-weight: 300;
 }
 
 @font-face {
   font-family: 'NanumSqaure';
-  src: url('./static/font/NanumSquareRegular.ttf') format('truetype');
+  src: url('./static/font/NanumSquareRegular.ttf') format('truetype'),
+    url('./static/font/NanumSquareRegular.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'NanumSqaure';
-  src: url('./static/font/NanumSquareBold.ttf') format('truetype');
+  src: url('./static/font/NanumSquareBold.ttf') format('truetype'),
+    url('./static/font/NanumSquareBold.otf') format('opentype');
   font-weight: 600;
 }
 
