@@ -56,8 +56,8 @@ function Search(props) {
     const onKeyUp = (e) => {
         const requestSearch = async (e) => {
             const qeury = e.target.value;
-            // const url = `https://stock-mlp.com/graduation/search?name=${qeury}`;
-            const url = 'https://dd4e85e7-9286-4729-93bf-0bcae7acd922.mock.pstmn.io/stock/';
+            const url = `https://stock-mlp.com/graduation/search?name=${qeury}`;
+            // const url = 'https://dd4e85e7-9286-4729-93bf-0bcae7acd922.mock.pstmn.io/stock/';
             const respone = await axios.get(url);
             const ret = respone.data;
             return ret;
