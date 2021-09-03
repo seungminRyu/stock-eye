@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import imgRateVeryBad from '../static/asset/img_very_bad_rain.png';
-import imgRateBad from '../static/asset/img_bad_cloud.png';
-import imgRateGood from '../static/asset/img_good_cloudsun.png';
-import imgRateVeryGood from '../static/asset/img_very_good_sun.png';
+import imgRateVeryBad from '../static/asset/img_very-bad-rain.png';
+import imgRateBad from '../static/asset/img_bad-cloud.png';
+import imgRateGood from '../static/asset/img_good-cloudsun.png';
+import imgRateVeryGood from '../static/asset/img_very-good-sun.png';
 import imgCalculating from '../static/asset/img_calculating.png';
 import icoTrendUp from '../static/asset/ico_trending-up.svg';
 import icoTrendDown from '../static/asset/ico_trending-down.svg';

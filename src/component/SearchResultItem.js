@@ -1,5 +1,38 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useStockDispatch } from '../context/StockContext';
+
+const SearchResultItemBlock = styled.li`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px var(--border);
+    padding: 15px 0 16px;
+`;
+
+const StockLabel = styled.div`
+    .stock-code {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gray);
+    }
+
+    .stock-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--font);
+        margin-top: 4px;
+    }
+`;
+
+const AddButton = styled.button`
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--main);
+    border-radius: 8px;
+    padding: 12px;
+`;
 
 function SearchResultItem({stock}) {
     const { name, code } = stock;
@@ -22,18 +55,16 @@ function SearchResultItem({stock}) {
     };
 
     return (
-        <li className="search-result-item">
-            <div className="stock-info">
-                <span>{ code }</span>
-                <p>{ name }</p>
-            </div>
-            <div className="stock-add-btn">
-                { isAdded ?
-                    <button className="exist-btn">추가 됨</button> :
-                    <button className="add-btn" onClick={onAdd}>추가하기</button>
-                }
-            </div>
-        </li>
+        <SearchResultItemBlock>
+            <StockLabel>
+                <span className="stock-code">{ code }</span>
+                <p className="stock-name">{ name }</p>
+            </StockLabel>
+            { isAdded ?
+                <button className="exist-btn">추가 됨</button> :
+                <AddButton onClick={onAdd}>추가하기</AddButton>
+            }
+        </SearchResultItemBlock>
     )
 }
 

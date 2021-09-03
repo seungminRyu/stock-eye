@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
 import ModalTemplate from './ModalTemplate';
 import SearchResultItem from './SearchResultItem';
 import { debouncer } from '../util/util';
+import icoClose from '../static/asset/ico_close.svg';
+import icoSearchInput from '../static/asset/ico_search-input.svg'
 
 // const initList = [
 //     {
@@ -54,16 +56,31 @@ const SearchHeader = styled.div`
     grid-template-areas:
         ". title button";
     flex-shrink: 0;
+    padding: 24px 0;
 
     .search-header__title {
+        display: grid;
+        place-content: center;
         grid-area: title;
+        font-size: 14px;
+        color: var(--font);
     }
 
     .search-header__quit-btn {
         grid-area: button;
+        margin-left: auto;
     }
 `;
 
+const QuitButton = styled.button`
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    background-color: var(--light-gray);
+    background-image: url(${icoClose});
+    background-repeat: no-repeat;
+    background-position: center;
+`;
 
 const SearchBody = styled.div`
     display: flex;
@@ -71,14 +88,39 @@ const SearchBody = styled.div`
     overflow-y: hidden;
 `;
 
+const SearchInput = styled.input`
+    border: none;
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    background-image: url(${icoSearchInput});
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    padding: 14px 12px;
+`;
+
 const SearchResult = styled.div`
     height: 100%;
     overflow-y: scroll;
+    padding-bottom: 40px;
+    margin-top: 28px;
 `;
 
 function Search(props) {
-    const { isSearchOpen, onSearchQuit } = props;
+    const { isSearchOpen, setIsSearchOpen } = props;
     const [searchResultList, setSearchResultList] = useState([]);
+    const $input = useRef();
+
+    const onSearchQuit = () => {
+        const resetData = () => {
+            $input.current.value = "";
+            setSearchResultList([]);
+        }
+        
+        const deactivateSearch = () => setIsSearchOpen(false);
+
+        deactivateSearch();
+        resetData();
+    }
 
     const onKeyUp = (e) => {
         const requestSearch = async (e) => {
@@ -108,11 +150,15 @@ function Search(props) {
                         <h1>주식 추가</h1>
                     </div>
                     <div className="search-header__quit-btn">
-                        <button className="quit-btn" onClick={onSearchQuit}>닫기</button>
+                        <QuitButton onClick={onSearchQuit}/>
                     </div>
                 </SearchHeader>
                 <SearchBody>
-                    <input className="search-input" onKeyUp={onKeyUp}></input>
+                    <SearchInput
+                        placeholder="주식명, 코드명을 입력하세요." 
+                        onKeyUp={onKeyUp}
+                        ref={$input}
+                    />
                     <SearchResult>
                         <ul className="search-result-list">
                             {searchResultList.map((resultItem, i) => (

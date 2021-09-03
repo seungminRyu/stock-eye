@@ -18,7 +18,10 @@ const ModalBody = styled.div`
     max-width: 512px;
     width: 100%;
     height: calc(100% - 60px);
-    background-color: #ffbce9;
+    background-color: var(--bg-white);
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    padding: 0 24px;
     margin: 0 auto;
 `;
 

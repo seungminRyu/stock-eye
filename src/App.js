@@ -32,10 +32,6 @@ function App() {
         const activateSearch = () => setIsSearchOpen(true);
         activateSearch();
     }
-    const onSearchQuit = () => {
-        const deactivateSearch = () => setIsSearchOpen(false);
-        deactivateSearch();
-    }
 
     return (
         <StockProvider>
@@ -52,7 +48,7 @@ function App() {
                 />
                 <Search
                     isSearchOpen={isSearchOpen}
-                    onSearchQuit={onSearchQuit}
+                    setIsSearchOpen={setIsSearchOpen}
                 />
             </AppTemplate>
         </StockProvider>
