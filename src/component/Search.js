@@ -89,6 +89,8 @@ const SearchBody = styled.div`
 `;
 
 const SearchInput = styled.input`
+    font-size: 14px;
+    color: var(--black);
     border: none;
     border-radius: 8px;
     background-color: var(--light-gray);

@@ -31,7 +31,7 @@ const AddButton = styled.button`
     color: var(--white);
     background-color: var(--main);
     border-radius: 8px;
-    padding: 12px;
+    padding: 12px 12px 11px;
 `;
 
 function SearchResultItem({stock}) {
