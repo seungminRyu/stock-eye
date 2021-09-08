@@ -13,9 +13,11 @@ const StockItemBlock = styled.li`
     height: 162px;
     background-color: var(--main);
     border-radius: 24px;
+    opacity: 0;
+    transform: translateY(10px);
     padding: 24px 24px 0;
     margin-bottom: 16px;
-    animation: stock-fadein 0.4s ease-in-out 0.${props => props.index}s forwards;
+    animation: stock-fadein 0.3s ease-in-out 0.${props => props.index}s forwards;
 
     @keyframes stock-fadein {
         from {
