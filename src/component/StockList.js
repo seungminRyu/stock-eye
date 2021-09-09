@@ -12,9 +12,9 @@ function StockList(props) {
         <StockListBlock>
             <ul className="user-stock-list">
                 {stockList.map((stock, i) =>
-                    <Link to={`/stock?name=${stock.name}`}>
-                        <StockItem key={i} index={i} name={stock.name} code={stock.code} />
-                    </Link>    
+                    <Link to={`/stock?name=${stock.name}`} key={stock.code}>
+                        <StockItem index={i} name={stock.name} code={stock.code} key={`item_${i}`}/>
+                    </Link>
                 )}
             </ul>
         </StockListBlock>
