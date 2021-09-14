@@ -5,7 +5,7 @@ import UserStocks from './UserStocks';
 import Header from './Header';
 import AppTemplate from './AppTemplate';
 
-function App() {
+function Home() {
     const [isManageOpen, setIsManageOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -43,4 +43,4 @@ function App() {
     );
 }
 
-export default App;
+export default Home;
