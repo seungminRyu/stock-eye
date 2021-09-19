@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { createGlobalStyle } from 'styled-components';
 import { Route } from 'react-router';
-import axios from 'axios';
+import { getLocalStorageItem } from './lib/util/util';
 import { StockProvider } from './context/StockContext';
 import Home from './page/Home';
 import Stock from './page/Stock';
-import { getLocalStorageItem } from './lib/util/util';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -19,10 +19,11 @@ const requestStocks = () => {
     axios
         .all(
             stockList.map(stockItem => {
-                return axios.post("https://stock-mlp.com/graduation/stock", {
-                    body: {
-                        name: stockItem.name
-                    }
+                const formData = new FormData();
+                formData.append("name", stockItem.name);
+                return axios.post("https://stock-mlp.com/graduation/stock", formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' }
                 });
             })
         )
