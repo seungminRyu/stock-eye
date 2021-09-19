@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import dayjs from 'dayjs';
-import { parseQueryString } from '../util/util';
+import { parseQueryString } from '../lib/util/util';
 
 const initialSeries = [{
     name: 'candle',

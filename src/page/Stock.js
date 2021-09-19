@@ -1,7 +1,7 @@
 import React from 'react';
-import AppTemplate from './AppTemplate';
-import { parseQueryString } from '../util/util';
-import Chart from './Chart';
+import AppTemplate from '../component/AppTemplate';
+import { parseQueryString } from '../lib/util/util';
+import Chart from '../component/Chart';
 
 function Stock({ location }) {
     const queryObj = parseQueryString(location.search);

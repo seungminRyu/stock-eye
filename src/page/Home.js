@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Search from './Search';
-import Manage from './Manage';
-import UserStocks from './UserStocks';
-import Header from './Header';
-import AppTemplate from './AppTemplate';
+import Search from '../component/Search';
+import Manage from '../component/Manage';
+import UserStocks from '../component/UserStocks';
+import Header from '../component/Header';
+import AppTemplate from '../component/AppTemplate';
 
 function Home() {
     const [isManageOpen, setIsManageOpen] = useState(false);

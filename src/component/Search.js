@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import axios from 'axios';
 import ModalTemplate from './ModalTemplate';
 import SearchResultItem from './SearchResultItem';
-import { debouncer } from '../util/util';
+import { debouncer } from '../lib/util/util';
 import icoClose from '../static/asset/ico_close.svg';
 import icoSearchInput from '../static/asset/ico_search-input.svg'
 

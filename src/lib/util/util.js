@@ -7,7 +7,7 @@ export const debouncer = (time, callback) => {
     timer = setTimeout(callback, time);
 }
 
-export const parseQueryString = (queryString) => {
+export const parseQueryString = queryString => {
     const queryList = queryString[0] === "?" ? queryString.slice(1).split("&") : queryString.split("&");
     let ret = {};
     queryList.forEach(query => {
@@ -17,3 +17,5 @@ export const parseQueryString = (queryString) => {
 
     return ret;
 }
+
+export const getLocalStorageItem = key => JSON.parse(localStorage.getItem(key)); 
