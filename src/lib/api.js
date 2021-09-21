@@ -21,8 +21,12 @@ export const requestQueueInStocks = async (stockList) => {
 }
 
 export const fetchChartData = async (stockName) => {
+    console.log("fetching");
     const res = await axios.get(`${URL}/stock?name=${stockName}`);
-    const ret = res.data.data;
-    
-    return ret;
+    if (res.data.data) {
+        const ret = res.data.data;
+        return ret;
+    } else {
+        console.error('[fetchChartData]: ', res.data);
+    }
 }
