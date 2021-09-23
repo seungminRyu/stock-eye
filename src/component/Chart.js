@@ -58,7 +58,7 @@ function Chart(prop) {
     const initialOption = getInitialOption(name);
     console.log('Chart: ', data);
     console.log('Chart: ', initialSeries);
-    const [series, setSeries] = useState(data);
+    const [series, setSeries] = useState(initialSeries);
     const [options, setOptions] = useState(initialOption);
 
     return (

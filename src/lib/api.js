@@ -30,3 +30,13 @@ export const fetchChartData = async (stockName) => {
         console.error('[fetchChartData]: ', res.data);
     }
 }
+
+export const requestPredict = (stockName, predictDate) => {
+    const formData = new FormData();
+    formData.append("name", stockName);
+    formData.append("date", predictDate);
+    return axios.post(`${URL}/predict`, formData,
+    {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    });
+}

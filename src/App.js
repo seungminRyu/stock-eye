@@ -7,17 +7,11 @@ import { StockProvider } from './context/StockContext';
 import Home from './page/Home';
 import Stock from './page/Stock';
 
-const GlobalStyle = createGlobalStyle`
-    body {
-        display: block;
-        background: #e4e4e4;
-    }
-`;
-
 function App() {
     useEffect(async () => {
         const stockList = getLocalStorageItem("STOCK_LIST");
         await requestQueueInStocks(stockList);
+        initPredictList();
 
         return () => console.log("gone");
     }, [])
@@ -30,5 +24,18 @@ function App() {
         </StockProvider>
     );
 }
+
+const initPredictList = () => {
+    if (localStorage.getItem('PREDICT_LIST') === null) {
+        localStorage.setItem('PREDICT_LIST', JSON.stringify([]));
+    }
+}
+
+const GlobalStyle = createGlobalStyle`
+    body {
+        display: block;
+        background: #e4e4e4;
+    }
+`;
 
 export default App;

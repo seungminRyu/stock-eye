@@ -21,7 +21,7 @@ const reducer = (state, action) => {
                 error: action.error
             };
         default:
-            throw new Error(`[Stock] : Unhandled action type: ${action.type}`);
+            throw new Error(`[useAsync] Unhandled action type: ${action.type}`);
     }
 }
 
