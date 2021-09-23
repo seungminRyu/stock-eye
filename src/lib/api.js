@@ -40,3 +40,5 @@ export const requestPredict = (stockName, predictDate) => {
         headers: { 'Content-Type': 'multipart/form-data' }
     });
 }
+
+export const fetchPredictData = (stockName, id) => axios.get(`${URL}/predict?name=${stockName}&id=${id}`);

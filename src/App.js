@@ -6,6 +6,7 @@ import { requestQueueInStocks } from './lib/api';
 import { StockProvider } from './context/StockContext';
 import Home from './page/Home';
 import Stock from './page/Stock';
+import Predict from './page/Predict';
 
 function App() {
     useEffect(async () => {
@@ -21,6 +22,7 @@ function App() {
             <GlobalStyle/>
             <Route path="/" exact={true} component={Home}/>
             <Route path="/stock" component={Stock}/>
+            <Route path="/predict" component={Predict}/>
         </StockProvider>
     );
 }

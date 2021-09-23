@@ -2,9 +2,47 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStockState } from '../context/StockContext';
 import StockList from './StockList';
-import Predict from './Predict';
+import PredictList from './PredictList';
+
 import icoSearch from '../static/asset/ico_search.svg';
 import icoManage from '../static/asset/ico_manage.svg';
+
+function UserStocks(props) {
+    const {
+        onSearchOpen,
+        onManageOpen
+    } = props;
+    const stockList = useStockState();
+    const stockNum = stockList.length;
+
+    return (
+        <UserStocksBlock>
+            <UserDashBoard>
+                <h2 className="section-title">유승민 님의 Stock-eye</h2>
+                <DashBoardBody>
+                    <StockNum>
+                        <p>현재 관리중인 주식:</p>
+                        <p className="num-text">{stockNum} 개</p>
+                    </StockNum>
+                    <Menu>
+                        <MenuButton className="search-btn" onClick={onSearchOpen}>
+                            <span>주식추가</span>
+                        </MenuButton>
+                        <div className="split-bar"></div>
+                        <MenuButton className="manage-btn" onClick={onManageOpen}>
+                            <span>내 주식관리</span>
+                        </MenuButton>
+                    </Menu>
+                </DashBoardBody>
+            </UserDashBoard>
+            <PredictList/>
+            <UserStockList>
+                <h2 className="section-title">주식 목록</h2>
+                <StockList stockList={stockList}/>
+            </UserStockList>
+        </UserStocksBlock>
+    )
+}
 
 const UserStocksBlock = styled.main`
     width: 100%;
@@ -87,42 +125,5 @@ const UserStockList = styled.div`
     padding: 0 24px 80px;
     margin-top: 40px;
 `;
-
-function UserStocks(props) {
-    const {
-        onSearchOpen,
-        onManageOpen
-    } = props;
-    const stockList = useStockState();
-    const stockNum = stockList.length;
-
-    return (
-        <UserStocksBlock>
-            <UserDashBoard>
-                <h2 className="section-title">유승민 님의 Stock-eye</h2>
-                <DashBoardBody>
-                    <StockNum>
-                        <p>현재 관리중인 주식:</p>
-                        <p className="num-text">{stockNum} 개</p>
-                    </StockNum>
-                    <Menu>
-                        <MenuButton className="search-btn" onClick={onSearchOpen}>
-                            <span>주식추가</span>
-                        </MenuButton>
-                        <div className="split-bar"></div>
-                        <MenuButton className="manage-btn" onClick={onManageOpen}>
-                            <span>내 주식관리</span>
-                        </MenuButton>
-                    </Menu>
-                </DashBoardBody>
-            </UserDashBoard>
-            <Predict/>
-            <UserStockList>
-                <h2 className="section-title">주식 목록</h2>
-                <StockList stockList={stockList}/>
-            </UserStockList>
-        </UserStocksBlock>
-    )
-}
 
 export default UserStocks;
