@@ -9,10 +9,10 @@ import Stock from './page/Stock';
 import Predict from './page/Predict';
 
 function App() {
+    initPredictList();
     useEffect(async () => {
         const stockList = getLocalStorageItem("STOCK_LIST");
         await requestQueueInStocks(stockList);
-        initPredictList();
 
         return () => console.log("gone");
     }, [])
