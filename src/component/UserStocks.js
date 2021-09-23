@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStockState } from '../context/StockContext';
 import StockList from './StockList';
+import Predict from './Predict';
 import icoSearch from '../static/asset/ico_search.svg';
 import icoManage from '../static/asset/ico_manage.svg';
 
@@ -115,6 +116,7 @@ function UserStocks(props) {
                     </Menu>
                 </DashBoardBody>
             </UserDashBoard>
+            <Predict/>
             <UserStockList>
                 <h2 className="section-title">주식 목록</h2>
                 <StockList stockList={stockList}/>
