@@ -49,6 +49,7 @@ const StockNum = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 15px;
+    white-space: nowrap;
     border-bottom: solid 1px var(--border);
     padding-bottom: 20px;
 

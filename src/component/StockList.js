@@ -11,7 +11,7 @@ function StockList(props) {
             <h2 className="section-title">주식 목록</h2>
             <ul className="stock-list">
                 {stockList.map((stock, i) =>
-                    <Link to={`/stock?name=${stock.name}`} key={stock.code}>
+                    <Link to={`/stock?name=${stock.name}&code=${stock.code}`} key={stock.code}>
                         <StockItem index={i} name={stock.name} code={stock.code} key={`item_${i}`}/>
                     </Link>
                 )}

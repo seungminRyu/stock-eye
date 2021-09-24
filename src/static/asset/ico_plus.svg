@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="ico_plus" transform="translate(0 0.017)">
+    <rect id="사각형_36" data-name="사각형 36" width="18" height="18" transform="translate(0 -0.017)" fill="none" opacity="0.3"/>
+    <path id="Icon_ionic-ios-add" data-name="Icon ionic-ios-add" d="M20.909,14.54H16.126V9.758a.793.793,0,0,0-1.586,0V14.54H9.758a.793.793,0,0,0,0,1.586H14.54v4.783a.793.793,0,1,0,1.586,0V16.126h4.783a.793.793,0,1,0,0-1.586Z" transform="translate(-6.342 -6.342)" fill="#3e4465"/>
+  </g>
+</svg>
