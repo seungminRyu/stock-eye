@@ -4,14 +4,17 @@ import styled from "styled-components";
 import icoRight from "../static/asset/ico_right.svg";
 
 function PredictItem(props) {
-    const { predictInfo: {id, name, predictDate, startDate} } = props;
+    const { predictInfo: {id, name, predictDate, startDate}, isDone } = props;
     return (
         <PredictItemBlock>
             <StockName>
                 <p className="stock-name">{name}</p>
             </StockName>
             <PredictInfo>
-                <p className="predict-state">예측값 계산중</p>
+                {isDone ? 
+                    <p className="predict-done">완료</p> :
+                    <p className="predict-on-going">예측값 계산중</p>
+                }
                 <p className="predict-date">{startDate}로 부터 D+{predictDate}</p>
             </PredictInfo>
         </PredictItemBlock>
@@ -21,7 +24,7 @@ function PredictItem(props) {
 const PredictItemBlock = styled.div`
     display: flex;
     width: 100%;
-    padding: 14px 0;
+    padding: 16px 0;
 `;
 
 const StockName = styled.div`
@@ -41,9 +44,14 @@ const PredictInfo = styled.div`
     background-position: 100% center;
     padding-right: 26px;
 
-    .predict-state {
+    .predict-on-going {
         font-size: 14px;
         color: var(--gray);
+    }
+
+    .predict-done {
+        font-size: 14px;
+        color: var(--main);
     }
 
     .predict-date {
