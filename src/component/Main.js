@@ -7,7 +7,7 @@ import PredictList from './PredictList';
 import icoSearch from '../static/asset/ico_search.svg';
 import icoManage from '../static/asset/ico_manage.svg';
 
-function UserStocks(props) {
+function Main(props) {
     const {
         onSearchOpen,
         onManageOpen
@@ -16,8 +16,8 @@ function UserStocks(props) {
     const stockNum = stockList.length;
 
     return (
-        <UserStocksBlock>
-            <UserDashBoard>
+        <MainBlock>
+            <DashBoardBody>
                 <h2 className="section-title">유승민 님의 Stock-eye</h2>
                 <DashBoardBody>
                     <StockNum>
@@ -34,17 +34,17 @@ function UserStocks(props) {
                         </MenuButton>
                     </Menu>
                 </DashBoardBody>
-            </UserDashBoard>
+            </DashBoardBody>
             <PredictList/>
             <UserStockList>
                 <h2 className="section-title">주식 목록</h2>
                 <StockList stockList={stockList}/>
             </UserStockList>
-        </UserStocksBlock>
+        </MainBlock>
     )
 }
 
-const UserStocksBlock = styled.main`
+const MainBlock = styled.main`
     width: 100%;
     height: 100%;
     background-color: var(--bg-white);
@@ -60,7 +60,7 @@ const UserStocksBlock = styled.main`
     
 `;
 
-const UserDashBoard = styled.div`
+const DashBoardBody = styled.div`
     padding: 40px 24px 0;
 `;
 
@@ -126,4 +126,4 @@ const UserStockList = styled.div`
     margin-top: 40px;
 `;
 
-export default UserStocks;
+export default Main;

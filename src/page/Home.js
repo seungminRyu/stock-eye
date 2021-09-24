@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Search from '../component/Search';
 import Manage from '../component/Manage';
-import UserStocks from '../component/UserStocks';
+import Main from '../component/Main';
 import Header from '../component/Header';
 import AppTemplate from '../component/AppTemplate';
 
@@ -27,7 +27,7 @@ function Home() {
     return (
         <AppTemplate>
             <Header/>
-            <UserStocks
+            <Main
                 onManageOpen={onManageOpen}
                 onSearchOpen={onSearchOpen}
             />
