@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+function ModalTemplate({ children }) {
+    return (
+        <ModalTemplateBlock>
+            <ModalBody>{ children }</ModalBody>
+        </ModalTemplateBlock>
+    )
+}
+
 const ModalTemplateBlock = styled.div`
     position: fixed;
     left: 0;
@@ -24,13 +32,5 @@ const ModalBody = styled.div`
     padding: 0 24px;
     margin: 0 auto;
 `;
-
-function ModalTemplate({ children }) {
-    return (
-        <ModalTemplateBlock>
-            <ModalBody>{ children }</ModalBody>
-        </ModalTemplateBlock>
-    )
-}
 
 export default ModalTemplate;

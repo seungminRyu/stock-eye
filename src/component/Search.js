@@ -4,108 +4,9 @@ import axios from 'axios';
 import ModalTemplate from './ModalTemplate';
 import SearchResultItem from './SearchResultItem';
 import { debouncer } from '../lib/util';
+
 import icoClose from '../static/asset/ico_close.svg';
 import icoSearchInput from '../static/asset/ico_search-input.svg'
-
-// const initList = [
-//     {
-//         name: "LG",
-//         code: "0020",
-//         processed: true,
-//     },
-//     {
-//         name: "카카오",
-//         code: "0030",
-//         processed: true,
-//     },
-//     {
-//         name: "네이버",
-//         code: "0040",
-//         processed: true,
-//     },
-//     {
-//         name: "셀트리온",
-//         code: "0050",
-//         processed: true,
-//     },
-//     {
-//         name: "카카오게임즈",
-//         code: "0060",
-//         processed: true,
-//     },
-//     {
-//         name: "초코뮤직",
-//         code: "0070",
-//         processed: true,
-//     },
-// ];
-const SearchBlock = styled.div`
-    display: none;
-
-    ${props =>
-        props.isSearchOpen &&
-        css`
-            display: block;
-        `
-    }
-`;
-
-const SearchHeader = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-        ". title button";
-    flex-shrink: 0;
-    padding: 24px 0;
-
-    .search-header__title {
-        display: grid;
-        place-content: center;
-        grid-area: title;
-        font-size: 14px;
-        color: var(--font);
-    }
-
-    .search-header__quit-btn {
-        grid-area: button;
-        margin-left: auto;
-    }
-`;
-
-const QuitButton = styled.button`
-    width: 28px;
-    height: 28px;
-    border-radius: 14px;
-    background-color: var(--light-gray);
-    background-image: url(${icoClose});
-    background-repeat: no-repeat;
-    background-position: center;
-`;
-
-const SearchBody = styled.div`
-    display: flex;
-    flex-direction: column;
-    overflow-y: hidden;
-`;
-
-const SearchInput = styled.input`
-    font-size: 14px;
-    color: var(--black);
-    border: none;
-    border-radius: 8px;
-    background-color: var(--light-gray);
-    background-image: url(${icoSearchInput});
-    background-repeat: no-repeat;
-    background-position: calc(100% - 10px) center;
-    padding: 14px 12px;
-`;
-
-const SearchResult = styled.div`
-    height: 100%;
-    overflow-y: scroll;
-    padding-bottom: 40px;
-    margin-top: 28px;
-`;
 
 function Search(props) {
     const { isSearchOpen, setIsSearchOpen } = props;
@@ -176,5 +77,73 @@ function Search(props) {
         </SearchBlock>
     );
 }
+
+const SearchBlock = styled.div`
+    display: none;
+
+    ${props =>
+        props.isSearchOpen &&
+        css`
+            display: block;
+        `
+    }
+`;
+
+const SearchHeader = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        ". title button";
+    flex-shrink: 0;
+    padding: 24px 0;
+
+    .search-header__title {
+        display: grid;
+        place-content: center;
+        grid-area: title;
+        font-size: 14px;
+        color: var(--font);
+    }
+
+    .search-header__quit-btn {
+        grid-area: button;
+        margin-left: auto;
+    }
+`;
+
+const QuitButton = styled.button`
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    background-color: var(--light-gray);
+    background-image: url(${icoClose});
+    background-repeat: no-repeat;
+    background-position: center;
+`;
+
+const SearchBody = styled.div`
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+`;
+
+const SearchInput = styled.input`
+    font-size: 14px;
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    background-image: url(${icoSearchInput});
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    padding: 14px 12px;
+`;
+
+const SearchResult = styled.div`
+    height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 40px;
+    margin-top: 28px;
+`;
 
 export default Search;

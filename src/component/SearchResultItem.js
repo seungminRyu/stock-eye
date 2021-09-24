@@ -2,38 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStockDispatch } from '../context/StockContext';
 
-const SearchResultItemBlock = styled.li`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: solid 1px var(--border);
-    padding: 15px 0 16px;
-`;
-
-const StockLabel = styled.div`
-    .stock-code {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--gray);
-    }
-
-    .stock-name {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--font);
-        margin-top: 4px;
-    }
-`;
-
-const AddButton = styled.button`
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--white);
-    background-color: var(--main);
-    border-radius: 8px;
-    padding: 12px 12px 11px;
-`;
-
 function SearchResultItem({stock}) {
     const { name, code } = stock;
     const dispatch = useStockDispatch();
@@ -67,5 +35,37 @@ function SearchResultItem({stock}) {
         </SearchResultItemBlock>
     )
 }
+
+const SearchResultItemBlock = styled.li`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px var(--border);
+    padding: 15px 0 16px;
+`;
+
+const StockLabel = styled.div`
+    .stock-code {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gray);
+    }
+
+    .stock-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--font);
+        margin-top: 8px;
+    }
+`;
+
+const AddButton = styled.button`
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--main);
+    border-radius: 8px;
+    padding: 12px 12px 11px;
+`;
 
 export default SearchResultItem;

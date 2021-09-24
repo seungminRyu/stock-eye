@@ -7,10 +7,10 @@ function StockItem(props) {
 
     return (
         <StockItemBlock index={index}>
-            <StockInfo>
-                <p className="stock-name">{name}</p>
+            <StockLabel>
                 <p className="stock-code">{code}</p>
-            </StockInfo>
+                <p className="stock-name">{name}</p>
+            </StockLabel>
         </StockItemBlock>
     );
 }
@@ -37,17 +37,17 @@ const StockItemBlock = styled.li`
     }
 `;
 
-const StockInfo = styled.div`
+const StockLabel = styled.div`
     .stock-name {
         font-size: 14px;
         font-weight: 600;
         color: var(--font);
+        margin-top: 8px;
     }
 
     .stock-code {
         font-size: 12px;
         color: var(--gray);
-        margin-top: 12px;
     }
 `;
 
