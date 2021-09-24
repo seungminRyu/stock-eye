@@ -34,7 +34,7 @@ function DashBoard(props) {
     )
 }
 
-const DashBoardBlock = styled.div`
+const DashBoardBlock = styled.section`
     padding: 40px 24px 0;
 
     .dashboard-wrapper {
