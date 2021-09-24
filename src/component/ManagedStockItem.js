@@ -7,7 +7,13 @@ function ManagedStockItem({ stock }) {
     const dispatch = useStockDispatch();
 
     const onRemove = () => {
-        const updateLocalStorage = () => {
+        const updatePredictListStorage = () => {
+            const currentPredictList = JSON.parse(localStorage.getItem('PREDICT_LIST'));
+            const nextPredictList = currentPredictList.filter(stock => stock.name !== name);
+            localStorage.setItem('PREDICT_LIST', JSON.stringify(nextPredictList)); 
+        }
+
+        const updateStockListStorage = () => {
             const currentStockList = JSON.parse(localStorage.getItem('STOCK_LIST'));
             const nextStockList = currentStockList.filter(stock => stock.code !== code);
             localStorage.setItem('STOCK_LIST', JSON.stringify(nextStockList));
@@ -15,8 +21,9 @@ function ManagedStockItem({ stock }) {
 
         const removeStateItem = () => dispatch({ type: 'REMOVE', code });
         
+        updateStockListStorage();
+        updatePredictListStorage();
         removeStateItem();
-        updateLocalStorage();
     }
 
     return (
