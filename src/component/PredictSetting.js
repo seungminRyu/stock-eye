@@ -1,10 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import styled from 'styled-components';
 import { requestPredict } from '../lib/api';
 import { getLocalStorageItem, setLocalStorageItem } from '../lib/util';
 
 import icoPlus from '../static/asset/ico_plus.svg';
 import icoMinus from '../static/asset/ico_minus.svg';
+import aniLoading from '../static/asset/ani_loading.gif';
 
 const predictDateReducer = (state, action) => {
     switch (action.type) {
@@ -18,8 +19,9 @@ const predictDateReducer = (state, action) => {
 }
 
 function PredictSetting(props) {
-    const { name } = props;
+    const { name, values } = props;
     const [predictDate, dispatchPridictDate] = useReducer(predictDateReducer, 1);
+
     const onIncrease = () => {
         if (predictDate < 30) {
             dispatchPridictDate({ type: 'INCREASE' });
@@ -51,20 +53,38 @@ function PredictSetting(props) {
             setLocalStorageItem('PREDICT_LIST', nextPredictList);
         }
 
-        const createPredictItem = id => {
+        const getStartDayVals = () => {
+            const { data } = values;
+            let ret = {}
+            Object.keys(data).forEach(dataType => {
+                const todayIdx = Object.keys(data[dataType]).pop();
+                const todayVal = data[dataType][todayIdx];
+
+                ret = {
+                    ...ret,
+                    [dataType.toLowerCase()]: todayVal
+                }
+            });
+
+            return ret;
+        }
+
+        const createPredictItem = (id, startDayVals) => {
             const date = new Date();
             return {
                 id,
                 name,
                 predictDate,
-                startDate: `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+                startDate: `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`,
+                startVals: startDayVals
             };
         }
 
         try {
             const res = await requestPredict(name, predictDate);
             const { id } = res.data;
-            const predictItem = createPredictItem(id);
+            const startDayVals = getStartDayVals();
+            const predictItem = createPredictItem(id, startDayVals);
             updatePredictList(predictItem);
         } catch(e) {
             console.error('네트워트 에러: ', e.message);
@@ -147,5 +167,19 @@ const PredictBtn = styled.button`
     border-radius: 14px;
     margin-top: 16px;
 `;
+
+// const RequestingBtn = styled.button`
+//     display: grid;
+//     place-content: center;
+//     width: 100%;
+//     height: 58px;
+//     background-color: var(--main);
+//     background-image: url(${aniLoading});
+//     background-repeat: no-repeat;
+//     background-position: center center;
+//     background-size: 84px 84px;
+//     border-radius: 14px;
+//     margin-top: 16px;
+// `;
 
 export default PredictSetting;

@@ -40,21 +40,19 @@ function Stock({ location }) {
 
         const ret = [{
             name: 'candle',
-            data: _data.slice(0, 60)
+            data: _data.slice(-60)
         }];
 
         return ret;
     }
     
-    console.log("stock name: ", name)
     const { loading, data, error } = state;
     console.log("state: ", state);
-    let c;
-    if (data) {
-        c = parseData(data);
-        console.log(c);
-        // setChartData(chartData);
-    }
+    // if (data) {
+    //     c = parseData(data);
+    //     console.log(c);
+    //     // setChartData(chartData);
+    // }
 
     return (
         <AppTemplate>
@@ -67,8 +65,9 @@ function Stock({ location }) {
             </Header>
             {/* {loading ? <p>로딩</p> : <p>로딩 끝</p>} */}
             {/* <Chart name={name} data={c} /> */}
-            <PredictSetting name={name}/>
+            <PredictSetting name={name} values={state.data}/>
         </AppTemplate>
+        
     );
 }
 
