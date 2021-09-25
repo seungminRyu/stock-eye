@@ -30,22 +30,13 @@ function PredictSetting(props) {
             dispatchPridictDate({ type: 'DECREASE' });
         }
     }
-    const onRequestPredict = async () => {
+
+    const onPredictBtn = async () => {
         const findPredictItemIdx = (predictList, targetName) => {
             return predictList.findIndex(predictItem => predictItem.name === targetName);
         }
 
-        const createPredictItem = (id, name, predictDate) => {
-            const date = new Date();
-            return {
-                id,
-                name,
-                predictDate,
-                startDate: `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
-            };
-        }
-
-        const getNextPredictList = (predictItem) => {
+        const getNextPredictList = predictItem => {
             const curPredictList = getLocalStorageItem('PREDICT_LIST');
             const i = findPredictItemIdx(curPredictList, name);
             const ret = i !== -1 ?
@@ -55,16 +46,26 @@ function PredictSetting(props) {
             return ret;
         }
 
-        const updatePredictList = id => {
-            const predictItem = createPredictItem(id, name, predictDate);
+        const updatePredictList = predictItem => {
             const nextPredictList = getNextPredictList(predictItem);
             setLocalStorageItem('PREDICT_LIST', nextPredictList);
+        }
+
+        const createPredictItem = id => {
+            const date = new Date();
+            return {
+                id,
+                name,
+                predictDate,
+                startDate: `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+            };
         }
 
         try {
             const res = await requestPredict(name, predictDate);
             const { id } = res.data;
-            updatePredictList(id);
+            const predictItem = createPredictItem(id);
+            updatePredictList(predictItem);
         } catch(e) {
             console.error('네트워트 에러: ', e.message);
         }
@@ -78,7 +79,7 @@ function PredictSetting(props) {
                 <span>일 뒤</span>
                 <IncreaseBtn type="button" onClick={onIncrease}/>
             </DateSetting>
-            <PredictBtn type="button" onClick={onRequestPredict}>예측 가치 계산하기</PredictBtn>
+            <PredictBtn type="button" onClick={onPredictBtn}>예측 가치 계산하기</PredictBtn>
         </PredictSettingBlock>
     );
 }
