@@ -21,7 +21,7 @@ function PredictSetting(props) {
     const { name } = props;
     const [predictDate, dispatchPridictDate] = useReducer(predictDateReducer, 1);
     const onIncrease = () => {
-        if (predictDate < 10) {
+        if (predictDate < 30) {
             dispatchPridictDate({ type: 'INCREASE' });
         }
     }
