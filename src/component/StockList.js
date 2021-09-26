@@ -22,7 +22,7 @@ function StockList(props) {
 
 const StockListBlock = styled.section`
     background-color: var(--bg-white);
-    padding: 0 24px 80px;
+    padding: 0 20px 80px;
     margin-top: 40px;
 `;
 

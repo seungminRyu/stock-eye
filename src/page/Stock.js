@@ -72,7 +72,7 @@ function Stock({ location }) {
 }
 
 const Header = styled.header`
-    padding: 0 24px;
+    padding: 0 20px;
 
     .stock-code {
         font-size: 16px;

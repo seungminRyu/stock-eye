@@ -21,7 +21,7 @@ function PredictList() {
 
 const PredictListBlock = styled.section`
     width: 100%;
-    padding: 40px 24px 0;
+    padding: 60px 20px 0;
 `;
 
 

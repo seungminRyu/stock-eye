@@ -35,13 +35,13 @@ function DashBoard(props) {
 }
 
 const DashBoardBlock = styled.section`
-    padding: 40px 24px 0;
+    padding: 40px 20px 0;
 
     .dashboard-wrapper {
         width: 100%;
         border-radius: 24px;
         background-color: var(--bg-gray);
-        padding: 24px 24px 0;
+        padding: 24px 20px 0;
     }
 `;
 

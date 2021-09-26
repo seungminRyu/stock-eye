@@ -8,7 +8,7 @@ const AppTemplateBlock = styled.div`
     max-width: 512px;
     height: 100%;
     min-height: 560px;
-    background: var(--light-main);
+    background: var(--bg-white);
     box-sizing: border-box;
     overflow-y: scroll;
     margin: 0 auto;

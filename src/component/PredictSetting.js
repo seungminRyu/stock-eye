@@ -75,7 +75,7 @@ function PredictSetting(props) {
                 id,
                 name,
                 predictDate,
-                startDate: `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`,
+                startDate: `${date.getMonth() + 1}월 ${date.getDate()}일`,
                 startVals: startDayVals
             };
         }
@@ -110,8 +110,8 @@ const PredictSettingBlock = styled.div`
     left: 0;
     width: 100%;
     background-color: var(--white);
-    box-shadow: 0 0 6px #33333333;
-    padding: 16px 24px 18px;
+    box-shadow: 0 4px 20px #33333333;
+    padding: 16px 20px 18px;
 `;
 
 const DateSetting = styled.div`
