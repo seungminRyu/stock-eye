@@ -33,6 +33,7 @@ const MainBlock = styled.main`
     color: var(--font);
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
+    margin-top: -30px;
 
     .section-title {
         font-size: 16px;

@@ -80,6 +80,7 @@ const MenuButton = styled.button`
     padding: 20px 0 24px;
 
     & span {
+        color: var(--font);
         background-repeat: no-repeat;
         background-size: 20px 20px;
         background-position: 0 center;

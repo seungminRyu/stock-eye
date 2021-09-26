@@ -66,7 +66,11 @@ function Chart(prop) {
                     options={options}
                     series={series}
                     type="candlestick"
-                    width={window.innerWidth - 60}
+                    width={
+                        window.innerWidth < 512 ?
+                        window.innerWidth - 60 :
+                        512 - 60
+                    }
                     height={280}
                 />
             </div>

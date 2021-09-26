@@ -93,13 +93,15 @@ function PredictSetting(props) {
 
     return (
         <PredictSettingBlock>
-            <DateSetting>
-                <DecreaseBtn type="button" onClick={onDecrease}/>
-                <DateInput type="text" value={predictDate}/>
-                <span>일 뒤</span>
-                <IncreaseBtn type="button" onClick={onIncrease}/>
-            </DateSetting>
-            <PredictBtn type="button" onClick={onPredictBtn}>예측 가치 계산하기</PredictBtn>
+            <PredictSettingBody>
+                <DateSetting>
+                    <DecreaseBtn type="button" onClick={onDecrease}/>
+                    <DateInput type="text" value={predictDate}/>
+                    <span>일 뒤</span>
+                    <IncreaseBtn type="button" onClick={onIncrease}/>
+                </DateSetting>
+                <PredictBtn type="button" onClick={onPredictBtn}>예측 가치 계산하기</PredictBtn>
+            </PredictSettingBody>
         </PredictSettingBlock>
     );
 }
@@ -109,9 +111,14 @@ const PredictSettingBlock = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
+`;
+
+const PredictSettingBody = styled.div`
+    max-width: 512px;
     background-color: var(--bg-white);
     box-shadow: 0 4px 20px #33333333;
     padding: 16px 20px 18px;
+    margin: 0 auto;
 `;
 
 const DateSetting = styled.div`

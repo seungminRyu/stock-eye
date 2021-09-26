@@ -1,33 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HeaderBlock = styled.header`
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 36px;
-    color: var(--font);
-    padding: 80px 24px 52px;
+import icoMore from '../static/asset/ico_more.svg';
 
-    .current-value {
-        display: inline-block;
-        font-size: 52px;
+function Header() {
+    const date = new Date();
+
+    return (
+        <HeaderBlock>
+            <HeaderText>
+                <h1>스톡아이</h1>
+                <p className="date">{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`}</p>
+            </HeaderText>
+            <MoreBtn/>
+        </HeaderBlock>
+    )
+}
+
+const HeaderBlock = styled.header`
+    display: flex;
+    justify-content: space-between;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--main);
+    padding: 20px 20px 120px;
+
+    .date {
+        font-size: 16px;
         font-weight: 600;
-        margin-left: -10px;
-        margin-right: 12px;
+        color: var(--white);
         margin-top: 12px;
     }
 `;
 
-function Header() {
-    return (
-        <HeaderBlock>
-            <h1>
-                현재 내 주식의 예상 가치는<br/>
-                <span className="current-value">12,321,300</span>원<br/>
-                입니다.
-            </h1>
-        </HeaderBlock>
-    )
-}
+const HeaderText = styled.div`
+`;
+
+const MoreBtn = styled.button`
+    width: 36px;
+    height: 36px;
+    background-image: url(${icoMore});
+    background-repeat: no-repeat;
+    background-postion: center;
+    background-size: 36px 36px;
+`;
 
 export default Header;
