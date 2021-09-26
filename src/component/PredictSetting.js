@@ -105,11 +105,11 @@ function PredictSetting(props) {
 }
 
 const PredictSettingBlock = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--white);
+    background-color: var(--bg-white);
     box-shadow: 0 4px 20px #33333333;
     padding: 16px 20px 18px;
 `;

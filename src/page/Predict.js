@@ -198,7 +198,7 @@ export default Predict;
 
 const PredictBlock = styled.div`
     width: 100%;
-    padding: 0 20px;
+    padding: 0 20px 80px;
 
     .section-title {
         font-size: 16px;
@@ -344,7 +344,7 @@ const PredictInfo = styled.div`
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
     text-align: center;
-    margin-top: 24px;
+    margin-top: 30px;
 
     .info-data {
         display: inline-block;

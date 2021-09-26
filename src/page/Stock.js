@@ -11,75 +11,71 @@ import Chart from '../component/Chart';
 import icoBack from '../static/asset/ico_back.svg';
 import PredictSetting from '../component/PredictSetting';
 
-function Stock({ location }) {
-    const getStockInfo = () => {
-        const queryObj = parseQueryString(location.search);
-        const name = decodeURIComponent(queryObj.name);
-        const code = decodeURIComponent(queryObj.code);
-        return { name, code };
-    }
+// open, high, low, close
+const parseData = data => {
+    const { data: values } = data;
+    const xValList = Object.keys(values.Open);
+    const _data = xValList.map(xVal => {
+        return {
+            x: xVal,
+            y: [parseInt(values.Open[xVal]), parseInt(values.High[xVal]), parseInt(values.Low[xVal]), parseInt(values.Close[xVal])]
+        }
+    });
 
-    const { name, code } = getStockInfo();
+    return [{
+        name: 'candle',
+        data: _data.slice(-30)
+    }];
+}
+
+const getStockInfo = url => {
+    const queryObj = parseQueryString(url);
+    const name = decodeURIComponent(queryObj.name);
+    const code = decodeURIComponent(queryObj.code);
+    return { name, code };
+}
+
+function Stock({ location }) {
+    const { name, code } = getStockInfo(location.search);
     const [state, refetch] = useAsync({
         callback: fetchChartData,
         params: [name]
     });
-    const [chartData, setChartData] = useState(null);
 
-    // open, high, low, close
-    const parseData = (data) => {
-        const { data: values } = data;
-        const xValList = Object.keys(values.Open);
-        const _data = xValList.map(xVal => {
-            // console.log(xVal)
-            return {
-                x: xVal,
-                y: [parseInt(values.Open[xVal]), parseInt(values.High[xVal]), parseInt(values.Low[xVal]), parseInt(values.Close[xVal])]
-            }
-        });
-
-        const ret = [{
-            name: 'candle',
-            data: _data.slice(-60)
-        }];
-
-        return ret;
-    }
-    
     const { loading, data, error } = state;
-    console.log("state: ", state);
-    // if (data) {
-    //     c = parseData(data);
-    //     console.log(c);
-    //     // setChartData(chartData);
-    // }
+    const isDataLoaded = data ? true : false;
+    let chartData;
+    if (isDataLoaded) {
+        chartData = parseData(data);
+    }
 
     return (
         <AppTemplate>
-            <Header>
-                <Link to="/">
-                    <BackBtn/>
-                </Link>
-                <p className="stock-code">{code}</p>
-                <h1 className="stock-name">{name}</h1>
-            </Header>
-            {/* {loading ? <p>로딩</p> : <p>로딩 끝</p>} */}
-            {/* <Chart name={name} data={c} /> */}
-            <PredictSetting name={name} values={state.data}/>
+            <StockBlock>
+                <Header>
+                    <Link to="/">
+                        <BackBtn/>
+                    </Link>
+                    <p className="stock-code">{code}</p>
+                    <h1 className="stock-name">{name}</h1>
+                </Header>
+                { isDataLoaded && <Chart name={name} data={chartData} />}
+                <PredictSetting name={name} values={state.data}/>
+            </StockBlock>
         </AppTemplate>
-        
     );
 }
 
-const Header = styled.header`
-    padding: 0 20px;
+const StockBlock = styled.div`
+    padding: 0 20px 200px
+`;
 
+const Header = styled.header`
     .stock-code {
         font-size: 16px;
         font-weight: 600;
         color: var(--gray);
         margin-top: 24px;
-        margin-left: 18px;
     }
 
     .stock-name {
@@ -87,7 +83,6 @@ const Header = styled.header`
         font-weight: 600;
         color: var(--font);
         margin-top: 12px;
-        margin-left: 18px;
     }
 `;
 
