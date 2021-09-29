@@ -76,13 +76,15 @@ const Header = styled.header`
         font-weight: 600;
         color: var(--gray);
         margin-top: 24px;
+        margin-left: 16px;
     }
 
     .stock-name {
         font-size: 22px;
         font-weight: 600;
         color: var(--font);
-        margin-top: 12px;
+        margin-top: 8px;
+        margin-left: 16px;
     }
 `;
 

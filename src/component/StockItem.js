@@ -23,9 +23,9 @@ const StockItemBlock = styled.li`
     background-repeat: no-repeat;
     background-position: 100% center;
     padding: 16px 0;
-    animation: stock-fadein 0.3s ease-in-out 0.${props => props.index}s forwards;
+    animation: fade-in 0.2s ease-in-out 0.${props => props.index}s forwards;
 
-    @keyframes stock-fadein {
+    @keyframes fade-in {
         from {
             opacity: 0;
             transform: translateY(10px);
