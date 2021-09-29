@@ -125,14 +125,16 @@ function Predict({ location }) {
                 </Nav>
                 <Header>
                     <div className="predict-header__indicator">
-                        <Indicator varienceState={getVarianceState(variances.close)}/>
+                        <Indicator varienceState={getVarianceState(variances.close)}>
+                            <div className="indicator-symbol --ani-fade-in"></div>
+                        </Indicator>
                     </div>
                     <div className="predict-header__summary">
                         <Summary varienceState={getVarianceState(variances.close)}>
                             <p>{startDate}로 부터 <strong>{predictDate}일</strong> 뒤</p>
                             <p><strong>{name}</strong>의 예상가치는</p>
                             <p>
-                                <span className="close-value">
+                                <span className="close-value --ani-fade-in">
                                     {predictDayVals.close} 원 
                                     ({variances.close}%)
                                 </span> 입니다.
@@ -156,31 +158,31 @@ function Predict({ location }) {
                     <PredictValues>
                         <ValueContainer varienceState={getVarianceState(variances.open)}>
                             <p className="label">예상 시가</p>
-                            <p className="predict-value">
+                            <p className="predict-value --ani-fade-in">
                                 {predictDayVals.open}원 ({variances.open}%)
                             </p>
                         </ValueContainer>
                         <ValueContainer varienceState={getVarianceState(variances.close)}>
                             <p className="label">예상 종가</p>
-                            <p className="predict-value">
+                            <p className="predict-value --ani-fade-in">
                                 {predictDayVals.close}원 ({variances.close}%)
                             </p>
                         </ValueContainer>
                         <ValueContainer varienceState={getVarianceState(variances.high)}>
                             <p className="label">예상 고가</p>
-                            <p className="predict-value">
+                            <p className="predict-value --ani-fade-in">
                                 {predictDayVals.high}원 ({variances.high}%)
                             </p>
                         </ValueContainer>
                         <ValueContainer varienceState={getVarianceState(variances.low)}>
                             <p className="label">예상 저가</p>
-                            <p className="predict-value">
+                            <p className="predict-value --ani-fade-in">
                                 {predictDayVals.low}원 ({variances.low}%)
                             </p>
                         </ValueContainer>
                         <ValueContainer varienceState={getVarianceState(variances.volume)}>
                             <p className="label">예상 거래량</p>
-                            <p className="predict-value">
+                            <p className="predict-value --ani-fade-in">
                                 {predictDayVals.volume} ({variances.volume}%)
                             </p>
                         </ValueContainer>
@@ -205,6 +207,24 @@ const PredictBlock = styled.div`
         font-size: 16px;
         font-weight: 600;
         color: var(--font);
+    }
+
+    .--ani-fade-in {
+        opacity: 0;
+        transform: translateY(4px);
+        animation: fade-in 0.4s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+        to {
+            opacity: 100%;
+            transform: translateY(0);
+        }
     }
 `;
 
@@ -259,18 +279,28 @@ const Header = styled.header`
 `;
 
 const Indicator = styled.div`
+    display: grid;
+    place-content: center;
     width: 48px;
     height: 48px;
     border-radius: 28px;
-    background-repeat: no-repeat;
-    background-size: 24px 24px;
-    background-position: center;
+
+    .indicator-symbol {
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-size: 24px 24px;
+        background-position: center;
+        animation-delay: 0.1s;
+    }
 
     ${ props => 
         props.varienceState === 'PLUS' &&
         css`
             background-color: var(--red);
-            background-image: url(${imgGood});
+            .indicator-symbol {         
+                background-image: url(${imgGood});
+            }
         `
     }
     
@@ -278,7 +308,9 @@ const Indicator = styled.div`
         props.varienceState === 'MINUS' &&
         css`
             background-color: var(--blue);
-            background-image: url(${imgBad});
+            .indicator-symbol {         
+                background-image: url(${imgBad});
+            }
         `
     }
     
@@ -286,7 +318,9 @@ const Indicator = styled.div`
         props.varienceState === 'ZERO' &&
         css`
             background-color: var(--gray);
-            background-image: url(${imgSoso});
+            .indicator-symbol {         
+                background-image: url(${imgSoso});
+            }
         `
     }
 `;
@@ -307,6 +341,7 @@ const Summary = styled.div`
         display: inline-block;
         font-size: 16px;
         font-weight: 600;
+        animation-delay: 0.1s;
         padding-top: 4px;
 
         ${props => 
@@ -372,6 +407,7 @@ const ValueContainer = styled.div`
         display: inline-block;
         font-size: 14px;
         font-weight: 600;
+        animation-delay: 0.2s;
         margin-top: 8px;
         ${props =>
             props.varienceState === 'PLUS' &&
