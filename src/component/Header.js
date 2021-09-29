@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import icoMore from '../static/asset/ico_more.svg';
+import icoMenu from '../static/asset/ico_menu.svg';
+import imgHeaderBg from '../static/asset/img_header_bg.png';
 
 function Header() {
     const date = new Date();
@@ -22,15 +23,17 @@ const HeaderBlock = styled.header`
     justify-content: space-between;
     font-size: 32px;
     font-weight: 600;
-    color: var(--white);
-    background-color: var(--main);
+    color: var(--font);
+    background: url(${imgHeaderBg}) no-repeat;
+    background-size: cover;
+    background-position: center;
     padding: 20px 20px 120px;
 
     .date {
         font-size: 16px;
-        font-weight: 600;
-        color: var(--white);
-        margin-top: 12px;
+        font-weight: 300;
+        color: var(--font);
+        margin-top: 14px;
     }
 `;
 
@@ -40,7 +43,7 @@ const HeaderText = styled.div`
 const MoreBtn = styled.button`
     width: 36px;
     height: 36px;
-    background-image: url(${icoMore});
+    background-image: url(${icoMenu});
     background-repeat: no-repeat;
     background-postion: center;
     background-size: 36px 36px;

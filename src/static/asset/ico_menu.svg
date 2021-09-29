@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="ico_menu" transform="translate(-270 -81)">
+    <rect id="사각형_141" data-name="사각형 141" width="32" height="32" transform="translate(270 81)" fill="none"/>
+    <path id="패스_98" data-name="패스 98" d="M27.56,12.13H5.5a1.006,1.006,0,0,1-1-1h0a1.006,1.006,0,0,1,1-1H27.56a1.006,1.006,0,0,1,1,1h0A1.006,1.006,0,0,1,27.56,12.13Z" transform="translate(269.469 79.857)" fill="#3e4465"/>
+    <path id="패스_99" data-name="패스 99" d="M27.56,18.88H5.5a1.006,1.006,0,0,1-1-1h0a1.006,1.006,0,0,1,1-1H27.56a1.006,1.006,0,0,1,1,1h0A1.006,1.006,0,0,1,27.56,18.88Z" transform="translate(269.469 79.122)" fill="#3e4465"/>
+    <path id="패스_100" data-name="패스 100" d="M27.56,25.63H5.5a1.006,1.006,0,0,1-1-1h0a1.006,1.006,0,0,1,1-1H27.56a1.006,1.006,0,0,1,1,1h0A1.006,1.006,0,0,1,27.56,25.63Z" transform="translate(269.469 78.388)" fill="#3e4465"/>
+  </g>
+</svg>
