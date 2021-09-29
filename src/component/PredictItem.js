@@ -4,9 +4,9 @@ import styled from "styled-components";
 import icoRight from "../static/asset/ico_right.svg";
 
 function PredictItem(props) {
-    const { predictInfo: {id, name, predictDate, startDate}, isDone } = props;
+    const { predictInfo: {id, name, predictDate, startDate}, isDone, index } = props;
     return (
-        <PredictItemBlock>
+        <PredictItemBlock index={index}>
             <StockName>
                 <p className="stock-name">{name}</p>
             </StockName>
@@ -24,7 +24,21 @@ function PredictItem(props) {
 const PredictItemBlock = styled.div`
     display: flex;
     width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
     padding: 16px 0;
+    animation: fade-in 0.2s ease-in-out 0.${props => props.index}s forwards;
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 100%;
+            transform: translateY(0);
+        }
+    }
 `;
 
 const StockName = styled.div`

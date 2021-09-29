@@ -12,7 +12,7 @@ function PredictList() {
             <h2 className="section-title">예측중인 주식 목록</h2>
             {predictList.map((item, i) =>
                 <Link to={`/predict?name=${item.name}`} key={i} >
-                    <PredictItem predictInfo={item} />
+                    <PredictItem index={i} predictInfo={item} />
                 </Link>
             )}
         </PredictListBlock>
