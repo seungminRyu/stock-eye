@@ -53,6 +53,17 @@ function PredictSetting(props) {
             setLocalStorageItem('PREDICT_LIST', nextPredictList);
         }
 
+        const createPredictItem = (id, startDayVals) => {
+            const date = new Date();
+            return {
+                id,
+                name,
+                predictDate,
+                startDate: `${date.getMonth() + 1}월 ${date.getDate()}일`,
+                startVals: startDayVals
+            };
+        }
+
         const getStartDayVals = () => {
             const { data } = values;
             let ret = {}
@@ -68,18 +79,7 @@ function PredictSetting(props) {
 
             return ret;
         }
-
-        const createPredictItem = (id, startDayVals) => {
-            const date = new Date();
-            return {
-                id,
-                name,
-                predictDate,
-                startDate: `${date.getMonth() + 1}월 ${date.getDate()}일`,
-                startVals: startDayVals
-            };
-        }
-
+        
         try {
             const res = await requestPredict(name, predictDate);
             const { id } = res.data;

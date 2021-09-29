@@ -73,7 +73,7 @@ const getVariance = (startVal, predictVal) => {
     return ret;
 }
 
-const createObj = (startVals, predictDayVals) => {
+const createVarianceObj = (startVals, predictDayVals) => {
     return { 
         open: getVariance(startVals.open, predictDayVals.open),
         high: getVariance(startVals.high, predictDayVals.high),
@@ -103,10 +103,11 @@ function Predict({ location }) {
         params: [name, id]
     });
     const { data } = state;
-    console.log('[Predict]: ', data);
+    // const { data: { accuracy, data: predictVals } } = data;
     const { data: { accuracy, data: predictVals } } = predictData;
+
     const predictDayVals = getPredictDayVals(predictVals, 3);
-    const variances = createObj(startVals, predictDayVals);
+    const variances = createVarianceObj(startVals, predictDayVals);
     const predictChartData = parseData(predictVals);
 
     return (
