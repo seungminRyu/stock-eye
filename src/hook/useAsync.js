@@ -2,44 +2,44 @@ import { useReducer, useEffect } from "react";
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'LOADING':
+        case "LOADING":
             return {
                 loading: true,
                 data: null,
-                error: null
+                error: null,
             };
-        case 'SUCCESS':
+        case "SUCCESS":
             return {
                 loading: false,
                 data: action.data,
-                error: null
+                error: null,
             };
-        case 'ERROR':
+        case "ERROR":
             return {
                 loading: false,
                 data: null,
-                error: action.error
+                error: action.error,
             };
         default:
             throw new Error(`[useAsync] Unhandled action type: ${action.type}`);
     }
-}
+};
 
 function useAsync({ callback, params = [] }, deps = []) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: null,
-        error: false
+        error: false,
     });
 
     const fetchData = async () => {
-        dispatch({ type: 'LOADING' });
+        dispatch({ type: "LOADING" });
         try {
             const respone = await callback(...params);
-            dispatch({ type: 'SUCCESS', data: respone });
-        } catch(err) {
+            dispatch({ type: "SUCCESS", data: respone });
+        } catch (err) {
             console.error(err.massage);
-            dispatch({ type: 'ERROR', error: err });
+            dispatch({ type: "ERROR", error: err });
         }
     };
 
