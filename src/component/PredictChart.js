@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactApexChart from 'react-apexcharts';
 
-const getInitialOption = (stockName) => {
+const getInitialOption = (stockName, series, labels) => {
     const ret = {
         series: [
             {
                 name: stockName,
-                data: [
-                    4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7,
-                    5,
-                ],
+                data: series,
+                // data: [
+                //     4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7,
+                //     5,
+                // ],
             },
         ],
         options: {
@@ -29,36 +30,38 @@ const getInitialOption = (stockName) => {
                 curve: 'smooth',
             },
             xaxis: {
-                type: 'datetime',
-                categories: [
-                    '1/11/2000',
-                    '2/11/2000',
-                    '3/11/2000',
-                    '4/11/2000',
-                    '5/11/2000',
-                    '6/11/2000',
-                    '7/11/2000',
-                    '8/11/2000',
-                    '9/11/2000',
-                    '10/11/2000',
-                    '11/11/2000',
-                    '12/11/2000',
-                    '1/11/2001',
-                    '2/11/2001',
-                    '3/11/2001',
-                    '4/11/2001',
-                    '5/11/2001',
-                    '6/11/2001',
-                ],
-                tickAmount: 10,
-                labels: {
-                    formatter: function (value, timestamp, opts) {
-                        return opts.dateFormatter(
-                            new Date(timestamp),
-                            'dd MMM'
-                        );
-                    },
-                },
+                type: 'category',
+                categories: labels,
+                // categories: [
+                //     '1/11/2000',
+                //     '2/11/2000',
+                //     '3/11/2000',
+                //     '4/11/2000',
+                //     '5/11/2000',
+                //     '6/11/2000',
+                //     '7/11/2000',
+                //     '8/11/2000',
+                //     '9/11/2000',
+                //     '10/11/2000',
+                //     '11/11/2000',
+                //     '12/11/2000',
+                //     '1/11/2001',
+                //     '2/11/2001',
+                //     '3/11/2001',
+                //     '4/11/2001',
+                //     '5/11/2001',
+                //     '6/11/2001',
+                // ],
+                // tickAmount: 5,
+                // labels: {
+                //     formatter: function (value, timestamp, opts) {
+                //         // return opts.dateFormatter(
+                //         //     new Date(timestamp),
+                //         //     'dd MMM'
+                //         // );
+                //         return timestamp;
+                //     },
+                // },
             },
             // title: {
             //     text: 'Forecast',
@@ -80,10 +83,10 @@ const getInitialOption = (stockName) => {
                     stops: [0, 100, 100, 100],
                 },
             },
-            yaxis: {
-                min: -10,
-                max: 40,
-            },
+            // yaxis: {
+            //     min: -10,
+            //     max: 40,
+            // },
         },
     };
 
@@ -91,13 +94,14 @@ const getInitialOption = (stockName) => {
 };
 
 function Chart(prop) {
-    const { name, data } = prop;
-    const chartData = getInitialOption(name);
+    const { name, data, type } = prop;
+    const chartData = getInitialOption(name, data.series, data.labels);
     // const [series, setSeries] = useState(data);
     // const [options, setOptions] = useState(initialOption);
 
     return (
         <ChartBlock>
+            <span>{type}</span>
             <div className="chart-wrapper">
                 <ReactApexChart
                     options={chartData.options}

@@ -52,15 +52,6 @@ const parseData = (values) => {
     return ret;
 };
 
-const parseValueOnType = (values, type) => {
-    const labels = Object.keys(values.Open);
-    const series = labels.map((date) =>
-        parseInt(parseFloat(values[type][date]).toFixed(0))
-    );
-
-    return { labels, series };
-};
-
 const getPredictDayVals = (predictVals, predictDate) => {
     const targetKey = `D+${predictDate}`;
     const {
@@ -112,6 +103,34 @@ const getVarianceState = (variance) => {
     }
 };
 
+const parseValueOnType = (values, startVals, type, variance) => {
+    const labels = Object.keys(values.Open);
+    const series = labels.map((date) => {
+        if (variance) {
+            const predict = parseInt(parseFloat(values[type][date]).toFixed(0));
+            const start = startVals[type.toLowerCase()];
+            return getVariance(start, predict);
+        } else {
+            return parseInt(parseFloat(values[type][date]).toFixed(0));
+        }
+    });
+
+    // if (type === 'variance') {
+    //     series = labels.map((date) => {
+    //         const predict = parseInt(parseFloat(values[type][date]).toFixed(0));
+    //         const start = startVals[type.toLowerCase()]
+
+    //         return getVariance(start, predict)
+    //     });
+    // } else {
+    //     series = labels.map((date) =>
+    //         parseInt(parseFloat(values[type][date]).toFixed(0))
+    //     );
+    // }
+
+    return { labels, series };
+};
+
 function Predict({ location }) {
     const name = getStockName(location.search);
     const { id, predictDate, startDate, startVals } =
@@ -120,7 +139,7 @@ function Predict({ location }) {
         callback: fetchPredictData,
         params: [name, id],
     });
-    const [chartType, setChartType] = useState('CLOSE');
+    const [chartType, setChartType] = useState('Close');
     const $actType = useRef();
     const { data } = state;
     // const { data: { accuracy, data: predictVals } } = data;
@@ -148,7 +167,7 @@ function Predict({ location }) {
         if (!$targetTypeItem) return;
         updateActType($targetTypeItem);
         setNextChartType($targetTypeItem);
-        console.log(parseValueOnType(predictVals, 'Close'));
+        console.log(parseValueOnType(predictVals, startVals, 'Open', true));
     };
 
     return (
@@ -257,26 +276,58 @@ function Predict({ location }) {
                             ref={$actType}
                             className="--act"
                             type="button"
-                            value="close"
+                            value="Close"
                         >
                             종가
                         </ChartTypeItem>
-                        <ChartTypeItem type="button" value="open">
+                        <ChartTypeItem type="button" value="Open">
                             시가
                         </ChartTypeItem>
-                        <ChartTypeItem type="button" value="low">
+                        <ChartTypeItem type="button" value="Low">
                             저가
                         </ChartTypeItem>
-                        <ChartTypeItem type="button" value="high">
+                        <ChartTypeItem type="button" value="High">
                             고가
                         </ChartTypeItem>
                     </ChartType>
                     <h2 className="section-title">예측값 차트</h2>
-                    <PredictChart name={name} data={predictChartData} />
+                    <PredictChart
+                        name={name}
+                        data={parseValueOnType(
+                            predictVals,
+                            startVals,
+                            chartType,
+                            false
+                        )}
+                        type={chartType}
+                    />
                     <h2 className="section-title">변동률 차트</h2>
-                    <VarianceChart name={name} data={predictChartData} />
+                    <VarianceChart
+                        name={name}
+                        data={parseValueOnType(
+                            predictVals,
+                            startVals,
+                            chartType,
+                            true
+                        )}
+                        type={chartType}
+                    />
                     <h2 className="section-title">거래량 차트</h2>
-                    <VolumeChart name={name} data={predictChartData} />
+                    <VolumeChart
+                        name={name}
+                        closeData={parseValueOnType(
+                            predictVals,
+                            startVals,
+                            'Close',
+                            false
+                        )}
+                        volumeData={parseValueOnType(
+                            predictVals,
+                            startVals,
+                            'Volume',
+                            false
+                        )}
+                    />
                 </ChartReport>
             </PredictBlock>
         </AppTemplate>
@@ -555,11 +606,11 @@ const predictData = {
                 'D+6': 120455.6015625,
             },
             Close: {
-                'D+1': 120338.80859375,
-                'D+2': 122338.80859375,
-                'D+3': 120328.80859375,
-                'D+4': 120330.80859375,
-                'D+5': 120328.80859375,
+                'D+1': 119292.80859375,
+                'D+2': 114338.80859375,
+                'D+3': 115323.80859375,
+                'D+4': 116330.80859375,
+                'D+5': 119329.80859375,
                 'D+6': 120458.80859375,
             },
             Volume: {

@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactApexChart from 'react-apexcharts';
 
-const getInitialOption = (stockName) => {
+const getInitialOption = (stockName, closes, volumes, labels) => {
     const ret = {
         series: [
             {
                 name: '종가',
                 type: 'column',
-                data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                data: closes,
+                // data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
             },
             {
                 name: '거래량',
                 type: 'line',
-                data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                data: volumes,
+                // data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
             },
         ],
         options: {
@@ -26,7 +28,7 @@ const getInitialOption = (stockName) => {
                 },
             },
             stroke: {
-                width: [0, 2, 5],
+                width: [0, 4],
                 curve: 'smooth',
             },
             plotOptions: {
@@ -34,54 +36,77 @@ const getInitialOption = (stockName) => {
                     columnWidth: '50%',
                 },
             },
-
             fill: {
-                opacity: [0.85, 0.25, 1],
-                gradient: {
-                    inverseColors: false,
-                    shade: 'light',
-                    type: 'vertical',
-                    opacityFrom: 0.85,
-                    opacityTo: 0.55,
-                    stops: [0, 100, 100, 100],
-                },
+                opacity: [0.85, 1],
+                // gradient: {
+                //     inverseColors: false,
+                //     shade: 'light',
+                //     type: 'vertical',
+                //     opacityFrom: 0.85,
+                //     opacityTo: 0.55,
+                //     stops: [0, 100, 100, 100],
+                // },
             },
-            labels: [
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
-            ],
+            labels: labels,
+            // labels: [
+            //     '01/01/2003',
+            //     '02/01/2003',
+            //     '03/01/2003',
+            //     '04/01/2003',
+            //     '05/01/2003',
+            //     '06/01/2003',
+            //     '07/01/2003',
+            //     '08/01/2003',
+            //     '09/01/2003',
+            //     '10/01/2003',
+            //     '11/01/2003',
+            // ],
             markers: {
                 size: 0,
             },
             xaxis: {
-                type: 'datetime',
+                type: 'category',
             },
-            yaxis: {
-                // title: {
-                //     text: 'Points',
-                // },
-                min: 0,
-            },
+            // yaxis: {
+            //     // title: {
+            //     //     text: 'Points',
+            //     // },
+            //     min: 0,
+            // },
+            yaxis: [
+                {
+                    // title: {
+                    //     text: '종가',
+                    // },
+                },
+                {
+                    opposite: true,
+                    // title: {
+                    //     text: '거래량',
+                    // },
+                },
+            ],
             tooltip: {
                 shared: true,
                 intersect: false,
-                y: {
-                    formatter: function (y) {
-                        if (typeof y !== 'undefined') {
-                            return y.toFixed(0) + ' points';
-                        }
-                        return y;
+                y: [
+                    {
+                        formatter: function (y) {
+                            if (typeof y !== 'undefined') {
+                                return y.toFixed(0) + '원';
+                            }
+                            return y;
+                        },
                     },
-                },
+                    {
+                        formatter: function (y) {
+                            if (typeof y !== 'undefined') {
+                                return y.toFixed(0);
+                            }
+                            return y;
+                        },
+                    },
+                ],
             },
         },
     };
@@ -90,8 +115,13 @@ const getInitialOption = (stockName) => {
 };
 
 function Chart(prop) {
-    const { name, data } = prop;
-    const chartData = getInitialOption(name);
+    const { name, closeData, volumeData } = prop;
+    const chartData = getInitialOption(
+        name,
+        closeData.series,
+        volumeData.series,
+        volumeData.labels
+    );
     // const [series, setSeries] = useState(data);
     // const [options, setOptions] = useState(initialOption);
 
