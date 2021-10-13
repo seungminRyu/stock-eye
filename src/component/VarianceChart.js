@@ -37,6 +37,10 @@ const getInitialOption = (stockName, series, labels) => {
                     columnWidth: "40%",
                 },
             },
+            fill: {
+                type: "solid",
+                colors: ["#658EFD"],
+            },
             dataLabels: {
                 enabled: false,
             },
@@ -79,7 +83,7 @@ function Chart(prop) {
                             ? window.innerWidth - 20
                             : 512 - 20
                     }
-                    height={200}
+                    height={240}
                 />
             </div>
         </ChartBlock>

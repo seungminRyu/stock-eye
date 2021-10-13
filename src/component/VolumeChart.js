@@ -25,9 +25,11 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
                     show: false,
                 },
             },
+            colors: ["#14D2D9", "#658EFD"],
             stroke: {
                 width: [0, 4],
                 curve: "smooth",
+                colors: ["#658EFD", "#14D2D9"],
             },
             plotOptions: {
                 bar: {
@@ -36,6 +38,7 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
             },
             fill: {
                 opacity: [0.85, 1],
+                colors: ["#658EFD", "#14D2D9"],
                 // gradient: {
                 //     inverseColors: false,
                 //     shade: 'light',
@@ -123,7 +126,7 @@ function Chart(prop) {
                             ? window.innerWidth - 10
                             : 512 - 10
                     }
-                    height={260}
+                    height={280}
                 />
             </div>
         </ChartBlock>
