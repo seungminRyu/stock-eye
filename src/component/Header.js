@@ -29,13 +29,14 @@ const HeaderBlock = styled.header`
     justify-content: space-between;
     max-width: 512px;
     width: 100%;
+    height: 400px;
     font-size: 32px;
     font-weight: 600;
     color: var(--font);
     background: url(${imgHeaderBg}) no-repeat;
     background-size: cover;
     background-position: center;
-    padding: 20px 20px 120px;
+    padding: 20px 20px 0;
 
     .date {
         font-size: 16px;

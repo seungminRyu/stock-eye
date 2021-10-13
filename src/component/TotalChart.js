@@ -10,34 +10,46 @@ const getInitialOption = (stockName) => {
                 show: false,
             },
         },
-        annotations: {
-            // xaxis: [
-            //   {
-            //     x: 'Oct 06 14:00',
-            //     borderColor: '#00E396',
-            //     label: {
-            //       borderColor: '#00E396',
-            //       style: {
-            //         fontSize: '12px',
-            //         color: '#fff',
-            //         background: '#00E396'
-            //       },
-            //       orientation: 'horizontal',
-            //       offsetY: 7,
-            //       text: 'Annotation Test'
-            //     }
-            //   }
-            // ]
-        },
+        // annotations: {
+        //     xaxis: [
+        //       {
+        //         x: 'Oct 06 14:00',
+        //         borderColor: '#00E396',
+        //         label: {
+        //           borderColor: '#00E396',
+        //           style: {
+        //             fontSize: '12px',
+        //             color: '#fff',
+        //             background: '#00E396'
+        //           },
+        //           orientation: 'horizontal',
+        //           offsetY: 7,
+        //           text: 'Annotation Test'
+        //         }
+        //       }
+        //     ]
+        // },
         tooltip: {
             enabled: true,
         },
         xaxis: {
             type: "category",
+            tickAmount: 0,
+            labels: {
+                rotate: 0,
+                style: {
+                    fontFamily: "NanumSquare",
+                },
+            },
         },
         yaxis: {
             tooltip: {
                 enabled: true,
+            },
+            labels: {
+                style: {
+                    fontFamily: "NanumSquare",
+                },
             },
         },
         plotOptions: {

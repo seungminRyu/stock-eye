@@ -1,5 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+
+function AppTemplate({ children }) {
+    return <AppTemplateBlock>{children}</AppTemplateBlock>;
+}
 
 const AppTemplateBlock = styled.div`
     position: relative;
@@ -12,10 +16,11 @@ const AppTemplateBlock = styled.div`
     box-sizing: border-box;
     overflow-y: scroll;
     margin: 0 auto;
-`;
 
-function AppTemplate({ children }) {
-    return <AppTemplateBlock>{ children }</AppTemplateBlock>
-}
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
 
 export default AppTemplate;

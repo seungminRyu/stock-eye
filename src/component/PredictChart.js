@@ -18,6 +18,7 @@ const getInitialOption = (stockName, series, labels) => {
                     show: false,
                 },
             },
+            labels,
             // forecastDataPoints: {
             //     count: 7,
             // },
@@ -28,18 +29,38 @@ const getInitialOption = (stockName, series, labels) => {
             },
             xaxis: {
                 type: "category",
-                categories: labels,
-                // tickAmount: 5,
-                // labels: {
-                //     formatter: function (value, timestamp, opts) {
-                //         // return opts.dateFormatter(
-                //         //     new Date(timestamp),
-                //         //     'dd MMM'
-                //         // );
-                //         return timestamp;
-                //     },
-                // },
+                tickAmount: 0,
+                labels: {
+                    rotate: 0,
+                    style: {
+                        fontFamily: "NanumSquare",
+                    },
+                },
             },
+            yaxis: {
+                tooltip: {
+                    enabled: true,
+                },
+                labels: {
+                    style: {
+                        fontFamily: "NanumSquare",
+                    },
+                },
+            },
+            // xaxis: {
+            //     type: "category",
+            //     categories: labels,
+            //     tickAmount: 5,
+            //     labels: {
+            //         formatter: function (value, timestamp, opts) {
+            //             // return opts.dateFormatter(
+            //             //     new Date(timestamp),
+            //             //     'dd MMM'
+            //             // );
+            //             return timestamp;
+            //         },
+            //     },
+            // },
             // title: {
             //     text: 'Forecast',
             //     align: 'left',

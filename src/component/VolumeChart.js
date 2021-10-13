@@ -54,26 +54,50 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
             },
             xaxis: {
                 type: "category",
+                tickAmount: 0,
+                labels: {
+                    rotate: 0,
+                    style: {
+                        fontFamily: "NanumSquare",
+                    },
+                },
             },
-            // yaxis: {
-            //     // title: {
-            //     //     text: 'Points',
-            //     // },
-            //     min: 0,
-            // },
             yaxis: [
                 {
-                    // title: {
-                    //     text: '종가',
-                    // },
+                    tooltip: {
+                        enabled: true,
+                    },
+                    labels: {
+                        style: {
+                            fontFamily: "NanumSquare",
+                        },
+                    },
                 },
                 {
                     opposite: true,
-                    // title: {
-                    //     text: '거래량',
-                    // },
+                    tooltip: {
+                        enabled: true,
+                    },
+                    labels: {
+                        style: {
+                            fontFamily: "NanumSquare",
+                        },
+                    },
                 },
             ],
+            // yaxis: [
+            //     {
+            //         // title: {
+            //         //     text: '종가',
+            //         // },
+            //     },
+            //     {
+            //         opposite: true,
+            //         // title: {
+            //         //     text: '거래량',
+            //         // },
+            //     },
+            // ],
             tooltip: {
                 shared: true,
                 intersect: false,

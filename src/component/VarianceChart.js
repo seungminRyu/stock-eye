@@ -24,13 +24,8 @@ const getInitialOption = (stockName, series, labels) => {
                         ranges: [
                             {
                                 from: -100,
-                                to: -46,
-                                color: "#F15B46",
-                            },
-                            {
-                                from: -45,
                                 to: 0,
-                                color: "#FEB019",
+                                color: "#FD657F",
                             },
                         ],
                     },
@@ -44,19 +39,28 @@ const getInitialOption = (stockName, series, labels) => {
             dataLabels: {
                 enabled: false,
             },
-            yaxis: {
+            labels,
+            xaxis: {
+                type: "category",
                 labels: {
+                    rotate: 0,
+                    style: {
+                        fontFamily: "NanumSquare",
+                    },
+                },
+            },
+            yaxis: {
+                tooltip: {
+                    enabled: true,
+                },
+                labels: {
+                    style: {
+                        fontFamily: "NanumSquare",
+                    },
                     formatter: function (y) {
                         return (y >= 0 ? "+" + y : y) + "%";
                     },
                 },
-            },
-            xaxis: {
-                type: "category",
-                categories: labels,
-                // labels: {
-                //     rotate: -90,
-                // },
             },
         },
     };

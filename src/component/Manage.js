@@ -78,6 +78,11 @@ const ManageBody = styled.div`
     height: 100%;
     overflow-y: scroll;
     padding-bottom: 40px;
+
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export default Manage;

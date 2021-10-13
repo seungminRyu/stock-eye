@@ -16,8 +16,11 @@ const parseData = (data) => {
     const { data: values } = data;
     const xValList = Object.keys(values.Open);
     const _data = xValList.map((xVal) => {
+        // 20210912 => 09/12
+        const date = xVal.split("").slice(4);
+        date.splice(2, 0, "/");
         return {
-            x: xVal,
+            x: date.join(""),
             y: [
                 parseInt(values.Open[xVal]),
                 parseInt(values.High[xVal]),

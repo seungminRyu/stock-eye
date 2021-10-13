@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
-import axios from 'axios';
-import ModalTemplate from './ModalTemplate';
-import SearchResultItem from './SearchResultItem';
-import { debouncer } from '../lib/util';
+import React, { useRef, useState } from "react";
+import styled, { css } from "styled-components";
+import axios from "axios";
+import ModalTemplate from "./ModalTemplate";
+import SearchResultItem from "./SearchResultItem";
+import { debouncer } from "../lib/util";
 
-import icoClose from '../static/asset/ico_close.svg';
-import icoSearchInput from '../static/asset/ico_search-input.svg'
+import icoClose from "../static/asset/ico_close.svg";
+import icoSearchInput from "../static/asset/ico_search-input.svg";
 
 function Search(props) {
     const { isSearchOpen, setIsSearchOpen } = props;
@@ -17,13 +17,13 @@ function Search(props) {
         const resetData = () => {
             $input.current.value = "";
             setSearchResultList([]);
-        }
-        
+        };
+
         const deactivateSearch = () => setIsSearchOpen(false);
 
         deactivateSearch();
         resetData();
-    }
+    };
 
     const onKeyUp = (e) => {
         const requestSearch = async (e) => {
@@ -32,13 +32,13 @@ function Search(props) {
             const url = `https://stock-mlp.com/graduation/search?name=${query}`;
             const respone = await axios.get(url);
             const ret = respone.data;
-            
+
             return ret;
-        }
+        };
 
         debouncer(300, async () => {
-            const searchResultList =  await requestSearch(e);
-            
+            const searchResultList = await requestSearch(e);
+
             if (searchResultList) {
                 setSearchResultList(searchResultList);
             }
@@ -53,27 +53,24 @@ function Search(props) {
                         <h1>주식 추가</h1>
                     </div>
                     <div className="search-header__quit-btn">
-                        <QuitButton onClick={onSearchQuit}/>
+                        <QuitButton onClick={onSearchQuit} />
                     </div>
                 </SearchHeader>
                 <SearchBody>
                     <SearchInput
-                        placeholder="주식명, 코드명을 입력하세요." 
+                        placeholder="주식명, 코드명을 입력하세요."
                         onKeyUp={onKeyUp}
                         ref={$input}
                     />
                     <SearchResult>
                         <ul className="search-result-list">
                             {searchResultList.map((resultItem, i) => (
-                                <SearchResultItem 
-                                    key={i}
-                                    stock={resultItem}
-                                />
+                                <SearchResultItem key={i} stock={resultItem} />
                             ))}
                         </ul>
                     </SearchResult>
                 </SearchBody>
-            </ModalTemplate>    
+            </ModalTemplate>
         </SearchBlock>
     );
 }
@@ -81,19 +78,17 @@ function Search(props) {
 const SearchBlock = styled.div`
     display: none;
 
-    ${props =>
+    ${(props) =>
         props.isSearchOpen &&
         css`
             display: block;
-        `
-    }
+        `}
 `;
 
 const SearchHeader = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-        ". title button";
+    grid-template-areas: ". title button";
     flex-shrink: 0;
     padding: 24px 0;
 
@@ -135,8 +130,8 @@ const SearchInput = styled.input`
     background-color: var(--light-gray);
     background-image: url(${icoSearchInput});
     background-repeat: no-repeat;
-    background-position: calc(100% - 10px) center;
-    padding: 14px 12px;
+    background-position: 8px center;
+    padding: 14px 12px 14px 40px;
 `;
 
 const SearchResult = styled.div`
@@ -144,6 +139,11 @@ const SearchResult = styled.div`
     overflow-y: scroll;
     padding-bottom: 40px;
     margin-top: 28px;
+
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export default Search;
