@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactApexChart from 'react-apexcharts';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ReactApexChart from "react-apexcharts";
 
 const getInitialOption = (stockName, closes, volumes, labels) => {
     const ret = {
         series: [
             {
-                name: '종가',
-                type: 'column',
+                name: "종가",
+                type: "column",
                 data: closes,
-                // data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
             },
             {
-                name: '거래량',
-                type: 'line',
+                name: "거래량",
+                type: "line",
                 data: volumes,
-                // data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
             },
         ],
         options: {
             chart: {
                 height: 350,
-                type: 'line',
+                type: "line",
                 stacked: false,
                 toolbar: {
                     show: false,
@@ -29,11 +27,11 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
             },
             stroke: {
                 width: [0, 4],
-                curve: 'smooth',
+                curve: "smooth",
             },
             plotOptions: {
                 bar: {
-                    columnWidth: '50%',
+                    columnWidth: "50%",
                 },
             },
             fill: {
@@ -48,24 +46,11 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
                 // },
             },
             labels: labels,
-            // labels: [
-            //     '01/01/2003',
-            //     '02/01/2003',
-            //     '03/01/2003',
-            //     '04/01/2003',
-            //     '05/01/2003',
-            //     '06/01/2003',
-            //     '07/01/2003',
-            //     '08/01/2003',
-            //     '09/01/2003',
-            //     '10/01/2003',
-            //     '11/01/2003',
-            // ],
             markers: {
                 size: 0,
             },
             xaxis: {
-                type: 'category',
+                type: "category",
             },
             // yaxis: {
             //     // title: {
@@ -92,15 +77,15 @@ const getInitialOption = (stockName, closes, volumes, labels) => {
                 y: [
                     {
                         formatter: function (y) {
-                            if (typeof y !== 'undefined') {
-                                return y.toFixed(0) + '원';
+                            if (typeof y !== "undefined") {
+                                return y.toFixed(0) + "원";
                             }
                             return y;
                         },
                     },
                     {
                         formatter: function (y) {
-                            if (typeof y !== 'undefined') {
+                            if (typeof y !== "undefined") {
                                 return y.toFixed(0);
                             }
                             return y;
@@ -127,6 +112,7 @@ function Chart(prop) {
 
     return (
         <ChartBlock>
+            <h2 className="section-title">예측 거래량</h2>
             <div className="chart-wrapper">
                 <ReactApexChart
                     options={chartData.options}
@@ -134,8 +120,8 @@ function Chart(prop) {
                     type="line"
                     width={
                         window.innerWidth < 512
-                            ? window.innerWidth - 60
-                            : 512 - 60
+                            ? window.innerWidth - 10
+                            : 512 - 10
                     }
                     height={280}
                 />
@@ -150,10 +136,10 @@ const ChartBlock = styled.div`
     width: 100%;
     opacity: 0;
     transform: translateY(10px);
-    border-radius: 16px;
-    background-color: var(--bg-gray);
     animation: show 0.3s forwards;
-    margin-top: 24px;
+    background-color: var(--bg-white);
+    padding: 0 20px 14px;
+    margin-top: 12px;
 
     @keyframes show {
         from {
@@ -168,7 +154,6 @@ const ChartBlock = styled.div`
 
     .chart-wrapper {
         width: 100%;
-        padding-top: 20px;
         margin-left: -10px;
     }
 `;

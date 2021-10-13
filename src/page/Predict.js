@@ -1,9 +1,9 @@
-import React, {useRef, useState} from "react";
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import React, { useRef, useState } from "react";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 import useAsync from "../hook/useAsync";
-import {fetchPredictData} from "../lib/api";
-import {getLocalStorageItem, parseQueryString} from "../lib/util";
+import { fetchPredictData } from "../lib/api";
+import { getLocalStorageItem, parseQueryString } from "../lib/util";
 
 import AppTemplate from "../component/AppTemplate";
 import TotalChart from "../component/TotalChart";
@@ -55,11 +55,11 @@ const parseData = (values) => {
 const getPredictDayVals = (predictVals, predictDate) => {
     const targetKey = `D+${predictDate}`;
     const {
-        Open: {[targetKey]: open},
-        High: {[targetKey]: high},
-        Low: {[targetKey]: low},
-        Close: {[targetKey]: close},
-        Volume: {[targetKey]: volume},
+        Open: { [targetKey]: open },
+        High: { [targetKey]: high },
+        Low: { [targetKey]: low },
+        Close: { [targetKey]: close },
+        Volume: { [targetKey]: volume },
     } = predictVals;
 
     const ret = {
@@ -128,23 +128,24 @@ const parseValueOnType = (values, startVals, type, variance) => {
     //     );
     // }
 
-    return {labels, series};
+    return { labels, series };
 };
 
-function Predict({location}) {
+function Predict({ location }) {
     const name = getStockName(location.search);
-    const {id, predictDate, startDate, startVals} = getTargetPredictItem(name);
+    const { id, predictDate, startDate, startVals } =
+        getTargetPredictItem(name);
     const [state, refetch] = useAsync({
         callback: fetchPredictData,
         params: [name, id],
     });
     const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
-    const {data} = state;
+    const { data } = state;
     console.log(data);
     // const { data: { accuracy, data: predictVals } } = data;
     const {
-        data: {accuracy, data: predictVals},
+        data: { accuracy, data: predictVals },
     } = predictData;
 
     const predictDayVals = getPredictDayVals(predictVals, 6);
@@ -184,32 +185,39 @@ function Predict({location}) {
                     </div>
                 </Nav>
                 <Header>
-                    <div className="predict-header__indicator">
-                        <Indicator
-                            varienceState={getVarianceState(variances.close)}
-                        >
-                            <div className="indicator-symbol --ani-fade-in"></div>
-                        </Indicator>
-                    </div>
-                    <div className="predict-header__summary">
-                        <Summary
-                            varienceState={getVarianceState(variances.close)}
-                        >
-                            <p>
-                                {startDate}로 부터{" "}
-                                <strong>{predictDate}일</strong> 뒤
-                            </p>
-                            <p>
-                                <strong>{name}</strong>의 예상가치는
-                            </p>
-                            <p>
-                                <span className="close-value --ani-fade-in">
-                                    {predictDayVals.close} 원 ({variances.close}
-                                    %)
-                                </span>{" "}
-                                입니다.
-                            </p>
-                        </Summary>
+                    <div className="predict-header-body">
+                        <div className="predict-header__indicator">
+                            <Indicator
+                                varienceState={getVarianceState(
+                                    variances.close
+                                )}
+                            >
+                                <div className="indicator-symbol --ani-fade-in"></div>
+                            </Indicator>
+                        </div>
+                        <div className="predict-header__summary">
+                            <Summary
+                                varienceState={getVarianceState(
+                                    variances.close
+                                )}
+                            >
+                                <p>
+                                    {startDate}로 부터{" "}
+                                    <strong>{predictDate}일</strong> 뒤
+                                </p>
+                                <p>
+                                    <strong>{name}</strong>의 예상가치는
+                                </p>
+                                <p>
+                                    <span className="close-value --ani-fade-in">
+                                        {predictDayVals.close} 원 (
+                                        {variances.close}
+                                        %)
+                                    </span>{" "}
+                                    입니다.
+                                </p>
+                            </Summary>
+                        </div>
                     </div>
                 </Header>
                 <Report>
@@ -269,28 +277,7 @@ function Predict({location}) {
                     </PredictValues>
                 </Report>
                 <ChartReport>
-                    <h2 className="section-title">총 예측값 차트</h2>
                     <TotalChart name={name} data={predictChartData} />
-                    <ChartType onClick={onChartTypeClick}>
-                        <ChartTypeItem
-                            ref={$actType}
-                            className="--act"
-                            type="button"
-                            value="Close"
-                        >
-                            종가
-                        </ChartTypeItem>
-                        <ChartTypeItem type="button" value="Open">
-                            시가
-                        </ChartTypeItem>
-                        <ChartTypeItem type="button" value="Low">
-                            저가
-                        </ChartTypeItem>
-                        <ChartTypeItem type="button" value="High">
-                            고가
-                        </ChartTypeItem>
-                    </ChartType>
-                    <h2 className="section-title">예측값 차트</h2>
                     <PredictChart
                         name={name}
                         data={parseValueOnType(
@@ -301,7 +288,6 @@ function Predict({location}) {
                         )}
                         type={chartType}
                     />
-                    <h2 className="section-title">변동률 차트</h2>
                     <VarianceChart
                         name={name}
                         data={parseValueOnType(
@@ -312,7 +298,27 @@ function Predict({location}) {
                         )}
                         type={chartType}
                     />
-                    <h2 className="section-title">거래량 차트</h2>
+                    <ChartType onClick={onChartTypeClick}>
+                        <div className="chart-type-body">
+                            <ChartTypeItem
+                                ref={$actType}
+                                className="--act"
+                                type="button"
+                                value="Close"
+                            >
+                                종가
+                            </ChartTypeItem>
+                            <ChartTypeItem type="button" value="Open">
+                                시가
+                            </ChartTypeItem>
+                            <ChartTypeItem type="button" value="Low">
+                                저가
+                            </ChartTypeItem>
+                            <ChartTypeItem type="button" value="High">
+                                고가
+                            </ChartTypeItem>
+                        </div>
+                    </ChartType>
                     <VolumeChart
                         name={name}
                         closeData={parseValueOnType(
@@ -336,17 +342,42 @@ function Predict({location}) {
 
 export default Predict;
 
-const ChartType = styled.div``;
+const ChartType = styled.div`
+    width: 100%;
+    background-color: var(--bg-white);
+    padding-bottom: 40px;
+
+    .chart-type-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 320px;
+        height: 44px;
+        background-color: var(--bg-gray);
+        border-radius: 10px;
+        padding: 0 20px;
+        margin: 0 auto;
+    }
+`;
 
 const ChartTypeItem = styled.button`
+    font-size: 13px;
+    color: var(--gray);
+    border-radius: 20px;
+    background-color: #ffffff00;
+    padding: 8px 14px;
+
     &.--act {
-        background-color: #cccccc;
+        color: var(--white);
+        font-weight: 600;
+        background-color: var(--main);
     }
 `;
 
 const PredictBlock = styled.div`
     width: 100%;
-    padding: 0 20px 80px;
+    background-color: var(--bg-gray);
+    padding-bottom: 80px;
 
     .section-title {
         font-size: 16px;
@@ -380,6 +411,8 @@ const Nav = styled.nav`
     width: 100%;
     height: 84px;
     flex-shrink: 0;
+    background-color: var(--bg-white);
+    padding: 0 20px;
 
     .predict-nav__back-btn {
         display: flex;
@@ -409,11 +442,16 @@ const BackBtn = styled.button`
 `;
 
 const Header = styled.header`
-    display: flex;
-    width: 100%;
-    border-radius: 16px;
-    background-color: var(--bg-gray);
-    padding: 24px 20px;
+    background-color: var(--bg-white);
+    padding: 0 20px;
+
+    .predict-header-body {
+        display: flex;
+        width: 100%;
+        border-radius: 16px;
+        background-color: var(--bg-gray);
+        padding: 24px 20px;
+    }
 
     .predict-header__summary {
         display: grid;
@@ -506,7 +544,8 @@ const Summary = styled.div`
 `;
 
 const Report = styled.section`
-    margin-top: 40px;
+    background-color: var(--bg-white);
+    padding: 40px 20px 40px;
 
     .label {
         font-size: 12px;
@@ -568,10 +607,11 @@ const ValueContainer = styled.div`
 `;
 
 const ChartReport = styled.section`
-    margin-top: 40px;
+    margin-top: 14px;
 
     .section-title {
         margin-top: 40px;
+        margin-left: 4px;
     }
 `;
 

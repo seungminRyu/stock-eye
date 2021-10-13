@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import useAsync from '../hook/useAsync';
-import { parseQueryString } from '../lib/util';
-import { fetchChartData } from '../lib/api';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import useAsync from "../hook/useAsync";
+import { parseQueryString } from "../lib/util";
+import { fetchChartData } from "../lib/api";
 
-import AppTemplate from '../component/AppTemplate';
-import TotalChart from '../component/TotalChart';
+import AppTemplate from "../component/AppTemplate";
+import TotalChart from "../component/TotalChart";
 
-import icoBack from '../static/asset/ico_back.svg';
-import PredictSetting from '../component/PredictSetting';
+import icoBack from "../static/asset/ico_back.svg";
+import PredictSetting from "../component/PredictSetting";
 
 // open, high, low, close
 const parseData = (data) => {
@@ -29,7 +29,7 @@ const parseData = (data) => {
 
     return [
         {
-            name: 'candle',
+            name: "candle",
             data: _data.slice(-30),
         },
     ];
@@ -83,7 +83,7 @@ const Header = styled.header`
         font-weight: 600;
         color: var(--gray);
         margin-top: 24px;
-        margin-left: 16px;
+        margin-left: 12px;
     }
 
     .stock-name {
@@ -91,7 +91,7 @@ const Header = styled.header`
         font-weight: 600;
         color: var(--font);
         margin-top: 8px;
-        margin-left: 16px;
+        margin-left: 12px;
     }
 `;
 

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactApexChart from 'react-apexcharts';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ReactApexChart from "react-apexcharts";
 
-const getInitialOption = stockName => {
+const getInitialOption = (stockName) => {
     const ret = {
         chart: {
-            type: 'candlestick',
+            type: "candlestick",
             toolbar: {
-                show: false
-            }
+                show: false,
+            },
         },
         annotations: {
             // xaxis: [
@@ -33,25 +33,25 @@ const getInitialOption = stockName => {
             enabled: true,
         },
         xaxis: {
-            // type: 'category'
+            type: "category",
         },
         yaxis: {
             tooltip: {
-              enabled: true
-            }
+                enabled: true,
+            },
         },
         plotOptions: {
             candlestick: {
-              colors: {
-                upward: '#FD657F',
-                downward: '#658EFD'
-              }
-            }
-        }
-    }
+                colors: {
+                    upward: "#FD657F",
+                    downward: "#658EFD",
+                },
+            },
+        },
+    };
 
     return ret;
-}
+};
 
 function Chart(prop) {
     const { name, data } = prop;
@@ -61,15 +61,16 @@ function Chart(prop) {
 
     return (
         <ChartBlock>
+            <h2 className="section-title">총 예측값 차트</h2>
             <div className="chart-wrapper">
-                <ReactApexChart 
+                <ReactApexChart
                     options={options}
                     series={series}
                     type="candlestick"
                     width={
-                        window.innerWidth < 512 ?
-                        window.innerWidth - 60 :
-                        512 - 60
+                        window.innerWidth < 512
+                            ? window.innerWidth - 20
+                            : 512 - 20
                     }
                     height={280}
                 />
@@ -84,10 +85,10 @@ const ChartBlock = styled.div`
     width: 100%;
     opacity: 0;
     transform: translateY(10px);
-    border-radius: 16px;
-    background-color: var(--bg-gray);
     animation: show 0.3s forwards;
-    margin-top: 40px;
+    background-color: var(--bg-white);
+    padding: 0 20px 14px;
+    margin-top: 12px;
 
     @keyframes show {
         from {
@@ -102,8 +103,7 @@ const ChartBlock = styled.div`
 
     .chart-wrapper {
         width: 100%;
-        padding-top: 20px;
-        margin-left: -10px
+        margin-left: -10px;
     }
 `;
 

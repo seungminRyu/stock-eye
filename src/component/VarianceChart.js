@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactApexChart from 'react-apexcharts';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ReactApexChart from "react-apexcharts";
 
 const getInitialOption = (stockName, series, labels) => {
     const ret = {
@@ -18,7 +18,7 @@ const getInitialOption = (stockName, series, labels) => {
         ],
         options: {
             chart: {
-                type: 'bar',
+                type: "bar",
                 height: 350,
                 toolbar: {
                     show: false,
@@ -31,16 +31,16 @@ const getInitialOption = (stockName, series, labels) => {
                             {
                                 from: -100,
                                 to: -46,
-                                color: '#F15B46',
+                                color: "#F15B46",
                             },
                             {
                                 from: -45,
                                 to: 0,
-                                color: '#FEB019',
+                                color: "#FEB019",
                             },
                         ],
                     },
-                    columnWidth: '80%',
+                    columnWidth: "80%",
                 },
             },
             dataLabels: {
@@ -49,12 +49,12 @@ const getInitialOption = (stockName, series, labels) => {
             yaxis: {
                 labels: {
                     formatter: function (y) {
-                        return (y >= 0 ? '+' + y : y) + '%';
+                        return (y >= 0 ? "+" + y : y) + "%";
                     },
                 },
             },
             xaxis: {
-                type: 'category',
+                type: "category",
                 categories: labels,
                 // categories: [
                 //     '2011-01-01',
@@ -110,7 +110,6 @@ function Chart(prop) {
     console.log(data.series);
     return (
         <ChartBlock>
-            <span>{type}</span>
             <div className="chart-wrapper">
                 <ReactApexChart
                     options={chartData.options}
@@ -118,8 +117,8 @@ function Chart(prop) {
                     type="bar"
                     width={
                         window.innerWidth < 512
-                            ? window.innerWidth - 60
-                            : 512 - 60
+                            ? window.innerWidth - 20
+                            : 512 - 20
                     }
                     height={280}
                 />
@@ -134,10 +133,9 @@ const ChartBlock = styled.div`
     width: 100%;
     opacity: 0;
     transform: translateY(10px);
-    border-radius: 16px;
-    background-color: var(--bg-gray);
     animation: show 0.3s forwards;
-    margin-top: 24px;
+    background-color: var(--bg-white);
+    padding: 0 20px 14px;
 
     @keyframes show {
         from {
@@ -152,7 +150,6 @@ const ChartBlock = styled.div`
 
     .chart-wrapper {
         width: 100%;
-        padding-top: 20px;
         margin-left: -10px;
     }
 `;

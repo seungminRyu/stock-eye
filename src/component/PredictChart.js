@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactApexChart from 'react-apexcharts';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ReactApexChart from "react-apexcharts";
 
 const getInitialOption = (stockName, series, labels) => {
     const ret = {
@@ -17,7 +17,7 @@ const getInitialOption = (stockName, series, labels) => {
         options: {
             chart: {
                 height: 350,
-                type: 'line',
+                type: "line",
                 toolbar: {
                     show: false,
                 },
@@ -27,10 +27,10 @@ const getInitialOption = (stockName, series, labels) => {
             // },
             stroke: {
                 width: 5,
-                curve: 'smooth',
+                curve: "smooth",
             },
             xaxis: {
-                type: 'category',
+                type: "category",
                 categories: labels,
                 // categories: [
                 //     '1/11/2000',
@@ -72,12 +72,12 @@ const getInitialOption = (stockName, series, labels) => {
             //     },
             // },
             fill: {
-                type: 'gradient',
+                type: "gradient",
                 gradient: {
-                    shade: 'dark',
-                    gradientToColors: ['#FDD835'],
+                    shade: "dark",
+                    gradientToColors: ["#FDD835"],
                     shadeIntensity: 1,
-                    type: 'horizontal',
+                    type: "horizontal",
                     opacityFrom: 1,
                     opacityTo: 1,
                     stops: [0, 100, 100, 100],
@@ -101,7 +101,7 @@ function Chart(prop) {
 
     return (
         <ChartBlock>
-            <span>{type}</span>
+            <h2 className="section-title">개별 예측값 및 변동률</h2>
             <div className="chart-wrapper">
                 <ReactApexChart
                     options={chartData.options}
@@ -109,8 +109,8 @@ function Chart(prop) {
                     type="line"
                     width={
                         window.innerWidth < 512
-                            ? window.innerWidth - 60
-                            : 512 - 60
+                            ? window.innerWidth - 20
+                            : 512 - 20
                     }
                     height={280}
                 />
@@ -125,10 +125,9 @@ const ChartBlock = styled.div`
     width: 100%;
     opacity: 0;
     transform: translateY(10px);
-    border-radius: 16px;
-    background-color: var(--bg-gray);
     animation: show 0.3s forwards;
-    margin-top: 24px;
+    background-color: var(--bg-white);
+    margin-top: 14px;
 
     @keyframes show {
         from {
@@ -143,7 +142,6 @@ const ChartBlock = styled.div`
 
     .chart-wrapper {
         width: 100%;
-        padding-top: 20px;
         margin-left: -10px;
     }
 `;
