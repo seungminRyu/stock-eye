@@ -1,29 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useStockState } from '../context/StockContext';
-import StockList from './StockList';
-import PredictList from './PredictList';
-import DashBoard from './DashBoard';
-
+import React from "react";
+import styled from "styled-components";
+import { useStockState } from "../context/StockContext";
+import StockList from "./StockList";
+import PredictList from "./PredictList";
+import DashBoard from "./DashBoard";
 
 function Main(props) {
-    const {
-        onSearchOpen,
-        onManageOpen
-    } = props;
+    const { onSearchOpen, onManageOpen } = props;
     const stockList = useStockState();
 
     return (
         <MainBlock>
-            <DashBoard 
+            <DashBoard
                 onManageOpen={onManageOpen}
                 onSearchOpen={onSearchOpen}
                 stockList={stockList}
             />
-            <PredictList/>
-            <StockList stockList={stockList}/>
+            <PredictList />
+            <StockList stockList={stockList} />
         </MainBlock>
-    )
+    );
 }
 
 const MainBlock = styled.main`
@@ -31,9 +27,11 @@ const MainBlock = styled.main`
     height: 100%;
     background-color: var(--bg-white);
     color: var(--font);
+    z-index: 10;
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
-    margin-top: -30px;
+    margin-top: 160px;
+    padding-bottom: 1000px;
 
     .section-title {
         font-size: 16px;

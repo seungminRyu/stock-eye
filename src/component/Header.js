@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import icoMenu from '../static/asset/ico_menu.svg';
-import imgHeaderBg from '../static/asset/img_header_bg.png';
+import icoMenu from "../static/asset/ico_menu.svg";
+import imgHeaderBg from "../static/asset/img_header_bg.png";
 
 function Header() {
     const date = new Date();
@@ -11,16 +11,24 @@ function Header() {
         <HeaderBlock>
             <HeaderText>
                 <h1>스톡아이</h1>
-                <p className="date">{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`}</p>
+                <p className="date">{`${date.getFullYear()}년 ${
+                    date.getMonth() + 1
+                }월 ${date.getDate()}일`}</p>
             </HeaderText>
-            <MoreBtn/>
+            <MoreBtn />
         </HeaderBlock>
-    )
+    );
 }
 
 const HeaderBlock = styled.header`
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
+    max-width: 512px;
+    width: 100%;
     font-size: 32px;
     font-weight: 600;
     color: var(--font);
@@ -37,8 +45,7 @@ const HeaderBlock = styled.header`
     }
 `;
 
-const HeaderText = styled.div`
-`;
+const HeaderText = styled.div``;
 
 const MoreBtn = styled.button`
     width: 36px;

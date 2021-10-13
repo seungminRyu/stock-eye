@@ -4,9 +4,9 @@ import styled from "styled-components";
 function ModalTemplate({ children }) {
     return (
         <ModalTemplateBlock>
-            <ModalBody>{ children }</ModalBody>
+            <ModalBody>{children}</ModalBody>
         </ModalTemplateBlock>
-    )
+    );
 }
 
 const ModalTemplateBlock = styled.div`
@@ -18,6 +18,7 @@ const ModalTemplateBlock = styled.div`
     justify-content: flex-end;
     width: 100%;
     height: 100%;
+    z-index: 100;
 `;
 
 const ModalBody = styled.div`
