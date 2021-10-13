@@ -115,19 +115,6 @@ const parseValueOnType = (values, startVals, type, variance) => {
         }
     });
 
-    // if (type === 'variance') {
-    //     series = labels.map((date) => {
-    //         const predict = parseInt(parseFloat(values[type][date]).toFixed(0));
-    //         const start = startVals[type.toLowerCase()]
-
-    //         return getVariance(start, predict)
-    //     });
-    // } else {
-    //     series = labels.map((date) =>
-    //         parseInt(parseFloat(values[type][date]).toFixed(0))
-    //     );
-    // }
-
     return { labels, series };
 };
 
