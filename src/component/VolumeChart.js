@@ -123,7 +123,7 @@ function Chart(prop) {
                             ? window.innerWidth - 10
                             : 512 - 10
                     }
-                    height={280}
+                    height={260}
                 />
             </div>
         </ChartBlock>

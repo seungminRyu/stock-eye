@@ -16,7 +16,7 @@ const getInitialOption = (stockName, series, labels) => {
         ],
         options: {
             chart: {
-                height: 350,
+                height: 280,
                 type: "line",
                 toolbar: {
                     show: false,
