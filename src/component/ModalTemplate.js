@@ -12,7 +12,7 @@ function ModalTemplate({ children }) {
 const ModalTemplateBlock = styled.div`
     position: fixed;
     left: 0;
-    bottom: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -26,12 +26,24 @@ const ModalBody = styled.div`
     flex-direction: column;
     max-width: 512px;
     width: 100%;
-    height: calc(100% - 60px);
+    height: 100%;
+    transform: translateY(100px);
+    opacity: 0;
     background-color: var(--bg-white);
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
     padding: 0 24px;
     margin: 0 auto;
+    animation: show-modal 0.3s forwards;
+
+    @keyframes show-modal {
+        from {
+            opacity: 0;
+            transform: translateY(400px);
+        }
+        to {
+            opacity: 100%;
+            transform: translateY(0);
+        }
+    }
 `;
 
 export default ModalTemplate;
