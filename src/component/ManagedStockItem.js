@@ -8,35 +8,44 @@ function ManagedStockItem({ stock }) {
 
     const onRemove = () => {
         const updatePredictListStorage = () => {
-            const currentPredictList = JSON.parse(localStorage.getItem('PREDICT_LIST'));
-            const nextPredictList = currentPredictList.filter(stock => stock.name !== name);
-            localStorage.setItem('PREDICT_LIST', JSON.stringify(nextPredictList)); 
-        }
+            const currentPredictList = JSON.parse(
+                localStorage.getItem("PREDICT_LIST")
+            );
+            const nextPredictList = currentPredictList.filter(
+                (stock) => stock.name !== name
+            );
+            localStorage.setItem(
+                "PREDICT_LIST",
+                JSON.stringify(nextPredictList)
+            );
+        };
 
         const updateStockListStorage = () => {
-            const currentStockList = JSON.parse(localStorage.getItem('STOCK_LIST'));
-            const nextStockList = currentStockList.filter(stock => stock.code !== code);
-            localStorage.setItem('STOCK_LIST', JSON.stringify(nextStockList));
-        }
+            const currentStockList = JSON.parse(
+                localStorage.getItem("STOCK_LIST")
+            );
+            const nextStockList = currentStockList.filter(
+                (stock) => stock.code !== code
+            );
+            localStorage.setItem("STOCK_LIST", JSON.stringify(nextStockList));
+        };
 
-        const removeStateItem = () => dispatch({ type: 'REMOVE', code });
-        
+        const removeStateItem = () => dispatch({ type: "REMOVE", code });
+
         updateStockListStorage();
         updatePredictListStorage();
         removeStateItem();
-    }
+    };
 
     return (
         <ManagedStockItemBlock>
             <StockLabel>
-                <span className="stock-code">{ code }</span>
-                <p className="stock-name">{ name }</p>
+                <span className="stock-code">{code}</span>
+                <p className="stock-name">{name}</p>
             </StockLabel>
-            <DeleteButton onClick={onRemove}>
-                삭제하기
-            </DeleteButton>
+            <DeleteButton onClick={onRemove}>삭제하기</DeleteButton>
         </ManagedStockItemBlock>
-    )
+    );
 }
 
 const ManagedStockItemBlock = styled.li`
@@ -63,12 +72,15 @@ const StockLabel = styled.div`
 `;
 
 const DeleteButton = styled.button`
+    display: grid;
+    place-content: center;
+    width: 68px;
+    height: 36px;
     font-size: 12px;
     font-weight: 600;
     color: var(--white);
     background-color: var(--red);
     border-radius: 8px;
-    padding: 12px 12px 11px;
 `;
 
 export default ManagedStockItem;
