@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import icoRight from '../static/asset/ico_right.svg';
+import React from "react";
+import styled from "styled-components";
+import icoRight from "../static/asset/ico_right.svg";
 
 function StockItem(props) {
-    const { index, name, code, id } = props;
+    const {index, name, code, id} = props;
 
     return (
         <StockItemBlock index={index}>
@@ -23,7 +23,7 @@ const StockItemBlock = styled.li`
     background-repeat: no-repeat;
     background-position: 100% center;
     padding: 16px 0;
-    animation: fade-in 0.2s ease-in-out 0.${props => props.index}s forwards;
+    animation: fade-in 0.2s ease-in-out forwards;
 
     @keyframes fade-in {
         from {

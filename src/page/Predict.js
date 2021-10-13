@@ -1,21 +1,21 @@
-import React, { useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-import useAsync from '../hook/useAsync';
-import { fetchPredictData } from '../lib/api';
-import { getLocalStorageItem, parseQueryString } from '../lib/util';
+import React, {useRef, useState} from "react";
+import styled, {css} from "styled-components";
+import {Link} from "react-router-dom";
+import useAsync from "../hook/useAsync";
+import {fetchPredictData} from "../lib/api";
+import {getLocalStorageItem, parseQueryString} from "../lib/util";
 
-import AppTemplate from '../component/AppTemplate';
-import TotalChart from '../component/TotalChart';
-import VarianceChart from '../component/VarianceChart';
-import PredictChart from '../component/PredictChart';
-import VolumeChart from '../component/VolumeChart';
+import AppTemplate from "../component/AppTemplate";
+import TotalChart from "../component/TotalChart";
+import VarianceChart from "../component/VarianceChart";
+import PredictChart from "../component/PredictChart";
+import VolumeChart from "../component/VolumeChart";
 
-import icoBack from '../static/asset/ico_back.svg';
-import imgGood from '../static/asset/img_good.png';
-import imgBad from '../static/asset/img_bad.png';
-import imgSoso from '../static/asset/img_soso.png';
-import imgCalc from '../static/asset/img_calculating.png';
+import icoBack from "../static/asset/ico_back.svg";
+import imgGood from "../static/asset/img_good.png";
+import imgBad from "../static/asset/img_bad.png";
+import imgSoso from "../static/asset/img_soso.png";
+import imgCalc from "../static/asset/img_calculating.png";
 
 const getStockName = (url) => {
     const queryObj = parseQueryString(url);
@@ -23,7 +23,7 @@ const getStockName = (url) => {
 };
 
 const getTargetPredictItem = (name) => {
-    return getLocalStorageItem('PREDICT_LIST').filter(
+    return getLocalStorageItem("PREDICT_LIST").filter(
         (item) => item.name === name
     )[0];
 };
@@ -44,7 +44,7 @@ const parseData = (values) => {
 
     const ret = [
         {
-            name: 'candle',
+            name: "candle",
             data: _data,
         },
     ];
@@ -55,11 +55,11 @@ const parseData = (values) => {
 const getPredictDayVals = (predictVals, predictDate) => {
     const targetKey = `D+${predictDate}`;
     const {
-        Open: { [targetKey]: open },
-        High: { [targetKey]: high },
-        Low: { [targetKey]: low },
-        Close: { [targetKey]: close },
-        Volume: { [targetKey]: volume },
+        Open: {[targetKey]: open},
+        High: {[targetKey]: high},
+        Low: {[targetKey]: low},
+        Close: {[targetKey]: close},
+        Volume: {[targetKey]: volume},
     } = predictVals;
 
     const ret = {
@@ -95,11 +95,11 @@ const getVarianceState = (variance) => {
     const varianceVal = parseFloat(variance);
 
     if (varianceVal > 0) {
-        return 'PLUS';
+        return "PLUS";
     } else if (varianceVal === 0) {
-        return 'ZERO';
+        return "ZERO";
     } else {
-        return 'MINUS';
+        return "MINUS";
     }
 };
 
@@ -128,23 +128,23 @@ const parseValueOnType = (values, startVals, type, variance) => {
     //     );
     // }
 
-    return { labels, series };
+    return {labels, series};
 };
 
-function Predict({ location }) {
+function Predict({location}) {
     const name = getStockName(location.search);
-    const { id, predictDate, startDate, startVals } =
-        getTargetPredictItem(name);
+    const {id, predictDate, startDate, startVals} = getTargetPredictItem(name);
     const [state, refetch] = useAsync({
         callback: fetchPredictData,
         params: [name, id],
     });
-    const [chartType, setChartType] = useState('Close');
+    const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
-    const { data } = state;
+    const {data} = state;
+    console.log(data);
     // const { data: { accuracy, data: predictVals } } = data;
     const {
-        data: { accuracy, data: predictVals },
+        data: {accuracy, data: predictVals},
     } = predictData;
 
     const predictDayVals = getPredictDayVals(predictVals, 6);
@@ -153,8 +153,8 @@ function Predict({ location }) {
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
-            $actType.current.classList.remove('--act');
-            $targetTypeItem.classList.add('--act');
+            $actType.current.classList.remove("--act");
+            $targetTypeItem.classList.add("--act");
             $actType.current = $targetTypeItem;
         };
 
@@ -163,11 +163,11 @@ function Predict({ location }) {
             setChartType(nextType);
         };
 
-        const $targetTypeItem = e.target.closest('button');
+        const $targetTypeItem = e.target.closest("button");
         if (!$targetTypeItem) return;
         updateActType($targetTypeItem);
         setNextChartType($targetTypeItem);
-        console.log(parseValueOnType(predictVals, startVals, 'Open', true));
+        console.log(parseValueOnType(predictVals, startVals, "Open", true));
     };
 
     return (
@@ -196,7 +196,7 @@ function Predict({ location }) {
                             varienceState={getVarianceState(variances.close)}
                         >
                             <p>
-                                {startDate}로 부터{' '}
+                                {startDate}로 부터{" "}
                                 <strong>{predictDate}일</strong> 뒤
                             </p>
                             <p>
@@ -206,7 +206,7 @@ function Predict({ location }) {
                                 <span className="close-value --ani-fade-in">
                                     {predictDayVals.close} 원 ({variances.close}
                                     %)
-                                </span>{' '}
+                                </span>{" "}
                                 입니다.
                             </p>
                         </Summary>
@@ -318,13 +318,13 @@ function Predict({ location }) {
                         closeData={parseValueOnType(
                             predictVals,
                             startVals,
-                            'Close',
+                            "Close",
                             false
                         )}
                         volumeData={parseValueOnType(
                             predictVals,
                             startVals,
-                            'Volume',
+                            "Volume",
                             false
                         )}
                     />
@@ -376,7 +376,7 @@ const PredictBlock = styled.div`
 const Nav = styled.nav`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: 'button title .';
+    grid-template-areas: "button title .";
     width: 100%;
     height: 84px;
     flex-shrink: 0;
@@ -439,7 +439,7 @@ const Indicator = styled.div`
     }
 
     ${(props) =>
-        props.varienceState === 'PLUS' &&
+        props.varienceState === "PLUS" &&
         css`
             background-color: var(--red);
             .indicator-symbol {
@@ -448,7 +448,7 @@ const Indicator = styled.div`
         `}
 
     ${(props) =>
-        props.varienceState === 'MINUS' &&
+        props.varienceState === "MINUS" &&
         css`
             background-color: var(--blue);
             .indicator-symbol {
@@ -457,7 +457,7 @@ const Indicator = styled.div`
         `}
     
     ${(props) =>
-        props.varienceState === 'ZERO' &&
+        props.varienceState === "ZERO" &&
         css`
             background-color: var(--gray);
             .indicator-symbol {
@@ -486,19 +486,19 @@ const Summary = styled.div`
         padding-top: 4px;
 
         ${(props) =>
-            props.varienceState === 'PLUS' &&
+            props.varienceState === "PLUS" &&
             css`
                 color: var(--red);
             `}
 
         ${(props) =>
-            props.varienceState === 'MINUS' &&
+            props.varienceState === "MINUS" &&
             css`
                 color: var(--blue);
             `}
         
         ${(props) =>
-            props.varienceState === 'ZERO' &&
+            props.varienceState === "ZERO" &&
             css`
                 color: var(--gray);
             `}
@@ -548,19 +548,19 @@ const ValueContainer = styled.div`
         animation-delay: 0.2s;
         margin-top: 8px;
         ${(props) =>
-            props.varienceState === 'PLUS' &&
+            props.varienceState === "PLUS" &&
             css`
                 color: var(--red);
             `}
 
         ${(props) =>
-            props.varienceState === 'MINUS' &&
+            props.varienceState === "MINUS" &&
             css`
                 color: var(--blue);
             `}
 
         ${(props) =>
-            props.varienceState === 'ZERO' &&
+            props.varienceState === "ZERO" &&
             css`
                 color: var(--gray);
             `}
@@ -576,50 +576,50 @@ const ChartReport = styled.section`
 `;
 
 const predictData = {
-    200: 'Success',
+    200: "Success",
     data: {
-        name: '카카오',
+        name: "카카오",
         accuracy: 0.0181183852,
         data: {
             Open: {
-                'D+1': 120091.849609375,
-                'D+2': 120051.849609375,
-                'D+3': 120071.849609375,
-                'D+4': 120093.849609375,
-                'D+5': 120041.849609375,
-                'D+6': 120231.849609375,
+                "D+1": 120091.849609375,
+                "D+2": 120051.849609375,
+                "D+3": 120071.849609375,
+                "D+4": 120093.849609375,
+                "D+5": 120041.849609375,
+                "D+6": 120231.849609375,
             },
             High: {
-                'D+1': 121249.166015625,
-                'D+2': 121319.166015625,
-                'D+3': 121229.166015625,
-                'D+4': 121210.166015625,
-                'D+5': 121329.166015625,
-                'D+6': 121459.166015625,
+                "D+1": 121249.166015625,
+                "D+2": 121319.166015625,
+                "D+3": 121229.166015625,
+                "D+4": 121210.166015625,
+                "D+5": 121329.166015625,
+                "D+6": 121459.166015625,
             },
             Low: {
-                'D+1': 120015.6015625,
-                'D+2': 129315.6015625,
-                'D+3': 120025.6015625,
-                'D+4': 120010.6015625,
-                'D+5': 120325.6015625,
-                'D+6': 120455.6015625,
+                "D+1": 120015.6015625,
+                "D+2": 129315.6015625,
+                "D+3": 120025.6015625,
+                "D+4": 120010.6015625,
+                "D+5": 120325.6015625,
+                "D+6": 120455.6015625,
             },
             Close: {
-                'D+1': 119292.80859375,
-                'D+2': 114338.80859375,
-                'D+3': 115323.80859375,
-                'D+4': 116330.80859375,
-                'D+5': 119329.80859375,
-                'D+6': 120458.80859375,
+                "D+1": 119292.80859375,
+                "D+2": 114338.80859375,
+                "D+3": 115323.80859375,
+                "D+4": 116330.80859375,
+                "D+5": 119329.80859375,
+                "D+6": 120458.80859375,
             },
             Volume: {
-                'D+1': 2089179,
-                'D+2': 3089379,
-                'D+3': 3089129,
-                'D+4': 3089170,
-                'D+5': 3089329,
-                'D+6': 3089459,
+                "D+1": 2089179,
+                "D+2": 3089379,
+                "D+3": 3089129,
+                "D+4": 3089170,
+                "D+5": 3089329,
+                "D+6": 3089459,
             },
         },
         id: 1632410113788,
