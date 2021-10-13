@@ -1,20 +1,16 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import icoSearch from '../static/asset/ico_search.svg';
-import icoManage from '../static/asset/ico_manage.svg';
+import icoSearch from "../static/asset/ico_search.svg";
+import icoManage from "../static/asset/ico_manage.svg";
 
 function DashBoard(props) {
-    const {
-        onSearchOpen,
-        onManageOpen,
-        stockList
-    } = props;
+    const { onSearchOpen, onManageOpen, stockList } = props;
     const stockNum = stockList.length;
 
     return (
         <DashBoardBlock>
-            <h2 className="section-title">유승민 님의 Stock-eye</h2>
+            <h2 className="section-title">나의 Stock-eye</h2>
             <div className="dashboard-wrapper">
                 <StockNum>
                     <p>현재 관리중인 주식:</p>
@@ -31,7 +27,7 @@ function DashBoard(props) {
                 </Menu>
             </div>
         </DashBoardBlock>
-    )
+    );
 }
 
 const DashBoardBlock = styled.section`
