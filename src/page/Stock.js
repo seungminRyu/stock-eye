@@ -6,7 +6,8 @@ import { parseQueryString } from "../lib/util";
 import { fetchChartData } from "../lib/api";
 
 import AppTemplate from "../component/AppTemplate";
-import TotalChart from "../component/TotalChart";
+import Chart from "../component/Chart";
+import PredictChart from "../component/PredictChart";
 
 import icoBack from "../static/asset/ico_back.svg";
 import PredictSetting from "../component/PredictSetting";
@@ -33,7 +34,7 @@ const parseData = (data) => {
     return [
         {
             name: "candle",
-            data: _data.slice(-30),
+            data: _data.slice(-240),
         },
     ];
 };
@@ -43,6 +44,15 @@ const getStockInfo = (url) => {
     const name = decodeURIComponent(queryObj.name);
     const code = decodeURIComponent(queryObj.code);
     return { name, code };
+};
+
+const parseValueOnType = (values, type) => {
+    const labels = Object.keys(values.Open);
+    const series = labels.map((date) => {
+        return parseInt(parseFloat(values[type][date]).toFixed(0));
+    });
+
+    return { labels, series };
 };
 
 function Stock({ location }) {
@@ -56,8 +66,14 @@ function Stock({ location }) {
     const isDataLoaded = data ? true : false;
     let chartData;
     if (isDataLoaded) {
-        chartData = parseData(data);
+        console.log(data.data);
+        chartData = parseValueOnType(data.data, "Close");
+        console.log(chartData);
     }
+    // if (isDataLoaded) {
+    //     chartData = parseData(data);
+    //     console.log(chartData);
+    // }
 
     return (
         <AppTemplate>
@@ -69,7 +85,8 @@ function Stock({ location }) {
                     <p className="stock-code">{code}</p>
                     <h1 className="stock-name">{name}</h1>
                 </Header>
-                {isDataLoaded && <TotalChart name={name} data={chartData} />}
+                {isDataLoaded && <Chart name={name} data={chartData} />}
+                {/* {isDataLoaded && <Chart name={name} data={chartData} />} */}
                 <PredictSetting name={name} values={state.data} />
             </StockBlock>
         </AppTemplate>
