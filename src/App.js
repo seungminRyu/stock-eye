@@ -8,6 +8,8 @@ import Home from "./page/Home";
 import Stock from "./page/Stock";
 import Predict from "./page/Predict";
 
+const switchCalcDoneSign = () => {};
+
 const initSocket = (setCalcState) => {
     const url = "wss://stock-mlp.com/graduation/socket";
     const websocket = new WebSocket(url);
@@ -19,6 +21,9 @@ const initSocket = (setCalcState) => {
     const onMessage = (e) => {
         const calcState = e.data;
         setCalcState(calcState);
+        if (calcState === "DONE") {
+            switchCalcDoneSign();
+        }
     };
 
     const onClose = () => {

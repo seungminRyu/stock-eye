@@ -7,7 +7,7 @@ import { fetchChartData } from "../lib/api";
 
 import AppTemplate from "../component/AppTemplate";
 import Chart from "../component/Chart";
-import PredictChart from "../component/PredictChart";
+import TotalChart from "../component/TotalChart";
 
 import icoBack from "../static/asset/ico_back.svg";
 import PredictSetting from "../component/PredictSetting";
@@ -85,7 +85,7 @@ function Stock({ location }) {
                     <p className="stock-code">{code}</p>
                     <h1 className="stock-name">{name}</h1>
                 </Header>
-                {isDataLoaded && <Chart name={name} data={chartData} />}
+                {isDataLoaded && <TotalChart name={name} data={chartData} />}
                 {/* {isDataLoaded && <Chart name={name} data={chartData} />} */}
                 <PredictSetting name={name} values={state.data} />
             </StockBlock>

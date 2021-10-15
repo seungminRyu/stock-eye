@@ -370,6 +370,7 @@ const PredictBlock = styled.div`
         font-size: 16px;
         font-weight: 600;
         color: var(--font);
+        margin-bottom: 16px;
     }
 
     .--ani-fade-in {
