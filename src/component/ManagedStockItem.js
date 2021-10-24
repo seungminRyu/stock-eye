@@ -59,13 +59,13 @@ const ManagedStockItemBlock = styled.li`
 const StockLabel = styled.div`
     .stock-code {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--gray);
     }
 
     .stock-name {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--font);
         margin-top: 8px;
     }
@@ -77,7 +77,7 @@ const DeleteButton = styled.button`
     width: 68px;
     height: 36px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--white);
     background-color: var(--red);
     border-radius: 8px;

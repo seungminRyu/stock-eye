@@ -3,7 +3,7 @@ import styled from "styled-components";
 import icoRight from "../static/asset/ico_right.svg";
 
 function StockItem(props) {
-    const {index, name, code, id} = props;
+    const { index, name, code, id } = props;
 
     return (
         <StockItemBlock index={index}>
@@ -40,7 +40,7 @@ const StockItemBlock = styled.li`
 const StockLabel = styled.div`
     .stock-name {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--font);
         margin-top: 8px;
     }

@@ -32,7 +32,7 @@ const ModalBody = styled.div`
     background-color: var(--bg-white);
     padding: 0 24px;
     margin: 0 auto;
-    animation: show-modal 0.3s forwards;
+    animation: show-modal 0.3s ease-in-out forwards;
 
     @keyframes show-modal {
         from {

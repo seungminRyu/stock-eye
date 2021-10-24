@@ -176,25 +176,11 @@ const PredictBtn = styled.button`
     width: 100%;
     height: 58px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--white);
     background-color: var(--main);
     border-radius: 14px;
     margin-top: 16px;
 `;
-
-// const RequestingBtn = styled.button`
-//     display: grid;
-//     place-content: center;
-//     width: 100%;
-//     height: 58px;
-//     background-color: var(--main);
-//     background-image: url(${aniLoading});
-//     background-repeat: no-repeat;
-//     background-position: center center;
-//     background-size: 84px 84px;
-//     border-radius: 14px;
-//     margin-top: 16px;
-// `;
 
 export default PredictSetting;

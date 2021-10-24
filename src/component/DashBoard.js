@@ -51,7 +51,7 @@ const StockNum = styled.div`
 
     .num-text {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         text-align: end;
     }
 `;

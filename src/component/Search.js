@@ -124,14 +124,16 @@ const SearchBody = styled.div`
 
 const SearchInput = styled.input`
     font-size: 14px;
+    font-weight: 300;
     color: var(--black);
     border: none;
     border-radius: 8px;
     background-color: var(--light-gray);
     background-image: url(${icoSearchInput});
+    background-size: 24px 24px;
     background-repeat: no-repeat;
     background-position: 8px center;
-    padding: 14px 12px 14px 40px;
+    padding: 12px 12px 12px 36px;
 `;
 
 const SearchResult = styled.div`

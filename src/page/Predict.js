@@ -356,7 +356,7 @@ const ChartTypeItem = styled.button`
 
     &.--act {
         color: var(--white);
-        font-weight: 600;
+        font-weight: 500;
         background-color: var(--main);
     }
 `;
@@ -368,7 +368,7 @@ const PredictBlock = styled.div`
 
     .section-title {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--font);
         margin-bottom: 16px;
     }
@@ -501,13 +501,13 @@ const Summary = styled.div`
     margin-left: 8px;
 
     strong {
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .close-value {
         display: inline-block;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         animation-delay: 0.1s;
         padding-top: 4px;
 
@@ -550,7 +550,7 @@ const PredictInfo = styled.div`
     .info-data {
         display: inline-block;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--font);
         margin-top: 8px;
     }
@@ -571,7 +571,7 @@ const ValueContainer = styled.div`
     .predict-value {
         display: inline-block;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         animation-delay: 0.2s;
         margin-top: 8px;
         ${(props) =>

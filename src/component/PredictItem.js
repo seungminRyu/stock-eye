@@ -5,7 +5,7 @@ import icoRight from "../static/asset/ico_right.svg";
 
 function PredictItem(props) {
     const {
-        predictInfo: {id, name, predictDate, startDate},
+        predictInfo: { id, name, predictDate, startDate },
         isDone,
         index,
     } = props;
@@ -52,13 +52,14 @@ const PredictItemBlock = styled.div`
 const StockLabel = styled.div`
     .stock-name {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         white-space: nowrap;
         color: var(--font);
     }
 
     .predict-date {
         font-size: 12px;
+        font-weight: 300;
         color: var(--gray);
         white-space: nowrap;
         margin-top: 12px;
@@ -68,7 +69,7 @@ const StockLabel = styled.div`
 const PredictInfo = styled.div`
     width: 100%;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     text-align: end;
     // background-image: url(${icoRight});
     // background-repeat: no-repeat;
@@ -80,7 +81,7 @@ const PredictInfo = styled.div`
         color: var(--gray);
         background-color: #f2f2f2;
         border-radius: 6px;
-        padding: 8px 12px;
+        padding: 10px 12px;
     }
 
     .predict-done {
@@ -88,7 +89,7 @@ const PredictInfo = styled.div`
         color: var(--main);
         background-color: #cefeff;
         border-radius: 6px;
-        padding: 8px 12px;
+        padding: 10px 12px;
     }
 `;
 
