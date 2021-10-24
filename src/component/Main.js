@@ -33,6 +33,7 @@ const MainBlock = styled.main`
     margin-top: 160px;
 
     .section-title {
+        color: var(--black);
         font-size: 16px;
         font-weight: 500;
         margin-bottom: 16px;

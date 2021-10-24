@@ -68,7 +68,6 @@ function Stock({ location }) {
     if (isDataLoaded) {
         console.log(data.data);
         chartData = parseValueOnType(data.data, "Close");
-        console.log(chartData);
     }
     // if (isDataLoaded) {
     //     chartData = parseData(data);

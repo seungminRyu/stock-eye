@@ -59,38 +59,45 @@ function PredictSetting(props) {
             setLocalStorageItem("PREDICT_LIST", nextPredictList);
         };
 
-        const createPredictItem = (id, startDayVals) => {
+        const createPredictItem = (id, startVals, pastVals) => {
             const date = new Date();
             return {
                 id,
                 name,
                 predictDate,
                 startDate: `${date.getMonth() + 1}월 ${date.getDate()}일`,
-                startVals: startDayVals,
+                startVals,
+                pastVals,
             };
         };
 
-        const getStartDayVals = () => {
+        const getPastVals = () => {
+            const pastValDate = 19;
             const { data } = values;
-            let ret = {};
-            Object.keys(data).forEach((dataType) => {
-                const todayIdx = Object.keys(data[dataType]).pop();
-                const todayVal = data[dataType][todayIdx];
 
-                ret = {
-                    ...ret,
-                    [dataType.toLowerCase()]: todayVal,
+            const stockValTypes = Object.keys(data);
+            const dates = Object.keys(data["Close"]).slice(
+                parseInt(`-${pastValDate}`)
+            );
+
+            const ret = dates.map((date) => {
+                return {
+                    open: data.Open[date],
+                    close: data.Close[date],
+                    low: data.Low[date],
+                    high: data.High[date],
                 };
             });
-
+            console.log(ret);
             return ret;
         };
 
         try {
             const res = await requestPredict(name, predictDate);
             const { id } = res.data;
-            const startDayVals = getStartDayVals();
-            const predictItem = createPredictItem(id, startDayVals);
+            const pastValList = getPastVals();
+            const startVals = pastValList[pastValList.length - 1];
+            const predictItem = createPredictItem(id, startVals, pastValList);
             updatePredictList(predictItem);
         } catch (e) {
             console.error("네트워트 에러: ", e.message);

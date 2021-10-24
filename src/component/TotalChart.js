@@ -81,7 +81,7 @@ function TotalChart(prop) {
     const initialOption = getInitialOption(name);
     const [series, setSeries] = useState(data);
     const [options, setOptions] = useState(initialOption);
-    console.log(JSON.stringify(series));
+
     return (
         <ChartBlock>
             <h2 className="section-title">총 예측값 차트</h2>
