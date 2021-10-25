@@ -118,6 +118,30 @@ const parseValueOnType = (values, startVals, type, variance) => {
     return { labels, series };
 };
 
+const getMovingAvgData = (pastVals, predictVals, avgDate) => {
+    const l = predictVals.length;
+    const valList =
+        avgDate === 5
+            ? pastVals.slice(-4).concat(predictVals)
+            : pastVals.concat(predictVals);
+    let ret = [];
+
+    for (let i = 0; i < l; i++) {
+        let sum = 0;
+        for (let j = i; j < i + avgDate; j++) {
+            sum += valList[j];
+            // console.log(valList[j]);
+        }
+
+        ret[i] = sum / avgDate;
+        // console.log(i, " 번째");
+        // console.log("합:", sum);
+        // console.log("평균:", ret[i]);
+    }
+
+    return ret;
+};
+
 function Predict({ location }) {
     const name = getStockName(location.search);
     const { id, predictDate, startDate, startVals } =
@@ -129,7 +153,6 @@ function Predict({ location }) {
     const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
     const { data } = state;
-    console.log(data);
     // const { data: { accuracy, data: predictVals } } = data;
     const {
         data: { accuracy, data: predictVals },
@@ -138,6 +161,14 @@ function Predict({ location }) {
     const predictDayVals = getPredictDayVals(predictVals, 6);
     const variances = createVarianceObj(startVals, predictDayVals);
     const predictChartData = parseData(predictVals);
+
+    // for dev
+    const past = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+    ];
+    const pred = [1, 2, 3, 4, 5, 6, 7];
+    console.log("5일: ", getMovingAvgData(past, pred, 5));
+    console.log("20일: ", getMovingAvgData(past, pred, 20));
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
@@ -155,7 +186,6 @@ function Predict({ location }) {
         if (!$targetTypeItem) return;
         updateActType($targetTypeItem);
         setNextChartType($targetTypeItem);
-        console.log(parseValueOnType(predictVals, startVals, "Open", true));
     };
 
     return (
