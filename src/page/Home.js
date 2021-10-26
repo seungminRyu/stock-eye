@@ -16,12 +16,12 @@ function Home() {
         console.log("Home: ", undoneList);
 
         // 계산완료한 주식 목록 받음
-        // const calcDoneStocks = await fetchAllPredictData(undoneList);
-        // console.log(calcDoneStocks);
+        const calcDoneStocks = await fetchAllPredictData(undoneList);
+        console.log("fetch: ", calcDoneStocks);
 
         // 계산완료한 주식 목록을 로컬로 업데이트
         let nextPredictList = getLocalStorageItem("PREDICT_LIST");
-        testCalcDoneStocks.forEach((predictData) => {
+        calcDoneStocks.forEach((predictData) => {
             const targetIdx = nextPredictList.findIndex(
                 (item) => item.name === predictData.data.name
             );

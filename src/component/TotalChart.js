@@ -220,7 +220,9 @@ function TotalChart(prop) {
             data: longAvgChartData,
         },
     ];
-    console.log(finalChartSeries);
+    console.log("opt", options);
+    console.log("candle data", predictChartData);
+    console.log("avg data", finalChartSeries);
 
     return (
         <ChartBlock>
@@ -239,7 +241,7 @@ function TotalChart(prop) {
                 />
             </div>
             <div className="chart-wrapper">
-                <ReactApexChart
+                {/* <ReactApexChart
                     options={options}
                     series={finalChartSeries}
                     type="candlestick"
@@ -249,7 +251,7 @@ function TotalChart(prop) {
                             : 512 - 20
                     }
                     height={320}
-                />
+                /> */}
             </div>
         </ChartBlock>
     );

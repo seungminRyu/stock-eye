@@ -15,7 +15,7 @@ export const requestQueueInStocks = async (stockList) => {
         )
         .then(
             axios.spread((...res) => {
-                console.log(res);
+                console.log("Success request queue in stocks");
             })
         );
 };
@@ -55,8 +55,14 @@ export const fetchAllPredictData = async (stockList) => {
         .then(
             axios.spread((...resList) => {
                 resList.forEach((res) => {
-                    if (res.data["200"] === "Success") {
+                    console.log("res", res);
+                    if (
+                        res.data["200"] === "Success" &&
+                        res.data.data !== false
+                    ) {
                         ret.push(res.data["data"]);
+                    } else {
+                        console.log("undone or error", res);
                     }
                 });
             })
