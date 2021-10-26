@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ReactApexChart from "react-apexcharts";
 
-const getInitialOption = (stockName) => {
+const getInitialOption = (stockName, breakPointAnnotations) => {
     const ret = {
         chart: {
             type: "candlestick",
@@ -10,6 +10,7 @@ const getInitialOption = (stockName) => {
                 show: false,
             },
         },
+        annotations: breakPointAnnotations,
         // annotations: {
         //     xaxis: [
         //         {
@@ -42,7 +43,7 @@ const getInitialOption = (stockName) => {
         },
         stroke: {
             colors: ["#00e396", "#FEb016"],
-            width: [2, 2],
+            width: [3, 3],
             curve: "smooth",
         },
         xaxis: {
@@ -92,7 +93,7 @@ const getMovingAvgData = (pastVals, predictVals, avgDate) => {
             // console.log(valList[j]);
         }
 
-        ret[i] = sum / avgDate;
+        ret[i] = (sum / avgDate).toFixed(1);
         // console.log(i, " 번째");
         // console.log("합:", sum);
         // console.log("평균:", ret[i]);
@@ -132,10 +133,55 @@ const parseAvgVals = (avgList, labels) =>
         return { x: labels[i], y: val };
     });
 
+const getbreakPointAnnotations = (breakPointIndex, act) => {
+    let ret;
+
+    if (breakPointIndex === -1) {
+        ret = false;
+    } else {
+        let text;
+        if (act === "BUY") {
+            text = "예상 매수 구간";
+        } else if (act === "SELL") {
+            text = "예상 매도 구간";
+        }
+        const x2 = `D+${breakPointIndex + 1}`;
+        const x = breakPointIndex > 1 ? `D+${breakPointIndex - 1}` : "D+1";
+
+        ret = {
+            xaxis: [
+                {
+                    x,
+                    x2,
+                    borderColor: "#658EFD",
+                    strokeDashArray: 8,
+                    fillColor: "#658EFD",
+                    opacity: 0.3,
+                    offsetX: 0,
+                    offsetY: 0,
+                    label: {
+                        borderColor: "#658EFD",
+                        style: {
+                            fontSize: "12px",
+                            fontFamily: "NanumSquare",
+                            color: "#fff",
+                            background: "#658EFD",
+                        },
+                        orientation: "horizontal",
+                        offsetY: -20,
+                        text,
+                    },
+                },
+            ],
+        };
+    }
+
+    return ret;
+};
+
 function TotalChart(prop) {
     const { name, predictChartData, predictCloseChartData, pastCloseVals } =
         prop;
-    const options = getInitialOption(name);
     // const [series, setSeries] = useState(data); // state로 쓸 필요 없어서(고정값)
     // const [options, setOptions] = useState(initialOption); // state로 쓸 필요 x
 
@@ -156,6 +202,11 @@ function TotalChart(prop) {
     const longAvgChartData = parseAvgVals(longAvgList, labels);
     console.log("5일: ", shortAvgChartData);
     console.log("20일: ", longAvgChartData);
+    const breakPointAnnotations = getbreakPointAnnotations(
+        breakPointIndex,
+        act
+    );
+    const options = getInitialOption(name, breakPointAnnotations);
 
     const finalChartSeries = [
         {
@@ -178,7 +229,6 @@ function TotalChart(prop) {
                 <ReactApexChart
                     options={options}
                     series={predictChartData}
-                    // series={series}
                     type="candlestick"
                     width={
                         window.innerWidth < 512
@@ -192,7 +242,6 @@ function TotalChart(prop) {
                 <ReactApexChart
                     options={options}
                     series={finalChartSeries}
-                    // series={series}
                     type="candlestick"
                     width={
                         window.innerWidth < 512
