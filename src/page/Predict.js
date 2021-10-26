@@ -144,18 +144,6 @@ function Predict({ location }) {
     );
     const pastCloseVals = pastVals.map((val) => parseInt(val.close));
 
-    // for dev
-    // const past = [
-    //     9, 10, 11, 12, 13, 14, 15, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-    // ];
-    // const pred = [19, 18, 14, 10, 9, 10, 11, 10, 9];
-    // const short = getMovingAvgData(past, pred, 5);
-    // const long = getMovingAvgData(past, pred, 20);
-    // console.log("5일: ", short);
-    // console.log("20일: ", long);
-    // const [breakPointIndex, act] = getBreakPoint(short, long);
-    // console.log(breakPointIndex, act);
-
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
             $actType.current.classList.remove("--act");

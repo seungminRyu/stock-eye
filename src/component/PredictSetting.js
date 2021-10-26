@@ -68,6 +68,8 @@ function PredictSetting(props) {
                 startDate: `${date.getMonth() + 1}월 ${date.getDate()}일`,
                 startVals,
                 pastVals,
+                predictResult: {},
+                isDone: false,
             };
         };
 
