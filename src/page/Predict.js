@@ -125,6 +125,7 @@ const getMovingAvgData = (pastVals, predictVals, avgDate) => {
             ? pastVals.slice(-4).concat(predictVals)
             : pastVals.concat(predictVals);
     let ret = [];
+    console.log(valList);
 
     for (let i = 0; i < l; i++) {
         let sum = 0;
@@ -139,12 +140,38 @@ const getMovingAvgData = (pastVals, predictVals, avgDate) => {
         // console.log("평균:", ret[i]);
     }
 
+    console.log(ret);
+    return ret;
+};
+
+const getBreakPoint = (shortAvgList, longAvgList) => {
+    const l = shortAvgList.length;
+    let ret = [-1, "NONE"];
+
+    // 5일 선이 위로 뚫을때 diff: minus => plus;
+    // 5일 선이 아래로 뚫을때 diff: plus => minus;
+    let prevDiff = shortAvgList[0] - longAvgList[0];
+
+    for (let i = 0; i < l; i++) {
+        const diff = shortAvgList[i] - longAvgList[i];
+        console.log(`이전: ${prevDiff} / 현재: ${diff}`);
+
+        if (prevDiff < 0 && diff > 0) {
+            ret = [i - 1, "BUY"];
+            break;
+        } else if (prevDiff > 0 && diff < 0) {
+            ret = [i - 1, "SELL"];
+            break;
+        }
+        prevDiff = diff;
+    }
+
     return ret;
 };
 
 function Predict({ location }) {
     const name = getStockName(location.search);
-    const { id, predictDate, startDate, startVals } =
+    const { id, predictDate, startDate, startVals, pastVals } =
         getTargetPredictItem(name);
     const [state, refetch] = useAsync({
         callback: fetchPredictData,
@@ -163,12 +190,27 @@ function Predict({ location }) {
     const predictChartData = parseData(predictVals);
 
     // for dev
-    const past = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+    // const past = [
+    //     9, 10, 11, 12, 13, 14, 15, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+    // ];
+    // const pred = [19, 18, 14, 10, 9, 10, 11, 10, 9];
+    // const short = getMovingAvgData(past, pred, 5);
+    // const long = getMovingAvgData(past, pred, 20);
+    // console.log("5일: ", short);
+    // console.log("20일: ", long);
+    // const [breakPointIndex, act] = getBreakPoint(short, long);
+    // console.log(breakPointIndex, act);
+    const testPredictVal = [
+        151500, 155000, 154000, 155000, 156500, 155500, 154000, 138500, 128500,
+        130000, 124500, 124000, 122500, 121500, 119500, 115000, 119500, 120000,
+        117500, 116500,
     ];
-    const pred = [1, 2, 3, 4, 5, 6, 7];
-    console.log("5일: ", getMovingAvgData(past, pred, 5));
-    console.log("20일: ", getMovingAvgData(past, pred, 20));
+    const pastCloseVals = pastVals.map((valObj) => parseInt(valObj.close));
+    const shortAvgList = getMovingAvgData(pastCloseVals, testPredictVal, 5);
+    const longAvgList = getMovingAvgData(pastCloseVals, testPredictVal, 20);
+    // console.log("5일: ", shortAvgList);
+    // console.log("20일: ", longAvgList);
+    // console.timeLog(getBreakPoint(shortAvgList, longAvgList));
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
