@@ -118,57 +118,6 @@ const parseValueOnType = (values, startVals, type, variance) => {
     return { labels, series };
 };
 
-const getMovingAvgData = (pastVals, predictVals, avgDate) => {
-    const l = predictVals.length;
-    const valList =
-        avgDate === 5
-            ? pastVals.slice(-4).concat(predictVals)
-            : pastVals.concat(predictVals);
-    let ret = [];
-    console.log(valList);
-
-    for (let i = 0; i < l; i++) {
-        let sum = 0;
-        for (let j = i; j < i + avgDate; j++) {
-            sum += valList[j];
-            // console.log(valList[j]);
-        }
-
-        ret[i] = sum / avgDate;
-        // console.log(i, " 번째");
-        // console.log("합:", sum);
-        // console.log("평균:", ret[i]);
-    }
-
-    console.log(ret);
-    return ret;
-};
-
-const getBreakPoint = (shortAvgList, longAvgList) => {
-    const l = shortAvgList.length;
-    let ret = [-1, "NONE"];
-
-    // 5일 선이 위로 뚫을때 diff: minus => plus;
-    // 5일 선이 아래로 뚫을때 diff: plus => minus;
-    let prevDiff = shortAvgList[0] - longAvgList[0];
-
-    for (let i = 0; i < l; i++) {
-        const diff = shortAvgList[i] - longAvgList[i];
-        console.log(`이전: ${prevDiff} / 현재: ${diff}`);
-
-        if (prevDiff < 0 && diff > 0) {
-            ret = [i - 1, "BUY"];
-            break;
-        } else if (prevDiff > 0 && diff < 0) {
-            ret = [i - 1, "SELL"];
-            break;
-        }
-        prevDiff = diff;
-    }
-
-    return ret;
-};
-
 function Predict({ location }) {
     const name = getStockName(location.search);
     const { id, predictDate, startDate, startVals, pastVals } =
@@ -183,11 +132,17 @@ function Predict({ location }) {
     // const { data: { accuracy, data: predictVals } } = data;
     const {
         data: { accuracy, data: predictVals },
-    } = predictData;
+    } = testPredictData;
 
     const predictDayVals = getPredictDayVals(predictVals, 6);
     const variances = createVarianceObj(startVals, predictDayVals);
-    const predictChartData = parseData(predictVals);
+    const predictChartData = parseData(predictVals); // 종합 차트에 쓸
+    const predictCloseChartData = parseValueOnType(
+        predictVals,
+        undefined,
+        "Close"
+    );
+    const pastCloseVals = pastVals.map((val) => parseInt(val.close));
 
     // for dev
     // const past = [
@@ -200,17 +155,6 @@ function Predict({ location }) {
     // console.log("20일: ", long);
     // const [breakPointIndex, act] = getBreakPoint(short, long);
     // console.log(breakPointIndex, act);
-    const testPredictVal = [
-        151500, 155000, 154000, 155000, 156500, 155500, 154000, 138500, 128500,
-        130000, 124500, 124000, 122500, 121500, 119500, 115000, 119500, 120000,
-        117500, 116500,
-    ];
-    const pastCloseVals = pastVals.map((valObj) => parseInt(valObj.close));
-    const shortAvgList = getMovingAvgData(pastCloseVals, testPredictVal, 5);
-    const longAvgList = getMovingAvgData(pastCloseVals, testPredictVal, 20);
-    // console.log("5일: ", shortAvgList);
-    // console.log("20일: ", longAvgList);
-    // console.timeLog(getBreakPoint(shortAvgList, longAvgList));
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
@@ -336,7 +280,12 @@ function Predict({ location }) {
                     </PredictValues>
                 </Report>
                 <ChartReport>
-                    <TotalChart name={name} data={predictChartData} />
+                    <TotalChart
+                        name={name}
+                        predictChartData={predictChartData}
+                        predictCloseChartData={predictCloseChartData}
+                        pastCloseVals={pastCloseVals}
+                    />
                     <PredictChart
                         name={name}
                         data={parseValueOnType(
@@ -675,7 +624,7 @@ const ChartReport = styled.section`
     }
 `;
 
-const predictData = {
+const testPredictData = {
     200: "Success",
     data: {
         name: "카카오",
