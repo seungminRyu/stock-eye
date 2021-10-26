@@ -1,30 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import icoRight from "../static/asset/ico_right.svg";
 
 function PredictItem(props) {
     const {
-        predictInfo: { id, name, predictDate, startDate },
-        isDone,
+        predictInfo: { id, name, predictDate, startDate, isDone },
         index,
     } = props;
     return (
-        <PredictItemBlock index={index}>
-            <StockLabel>
-                <p className="stock-name">{name}</p>
-                <p className="predict-date">
-                    {startDate}로 부터 D+{predictDate}
-                </p>
-            </StockLabel>
-            <PredictInfo>
-                {isDone ? (
-                    <p className="predict-done">완료</p>
-                ) : (
-                    <p className="predict-on-going">예측값 계산중</p>
-                )}
-            </PredictInfo>
-        </PredictItemBlock>
+        <Link to={isDone ? `/predict?name=${name}` : "/"}>
+            <PredictItemBlock index={index}>
+                <StockLabel>
+                    <p className="stock-name">{name}</p>
+                    <p className="predict-date">
+                        {startDate}로 부터 D+{predictDate}
+                    </p>
+                </StockLabel>
+                <PredictInfo>
+                    {isDone ? (
+                        <p className="predict-done">완료</p>
+                    ) : (
+                        <p className="predict-on-going">예측값 계산중</p>
+                    )}
+                </PredictInfo>
+            </PredictItemBlock>
+        </Link>
     );
 }
 

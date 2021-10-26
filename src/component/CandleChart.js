@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ReactApexChart from "react-apexcharts";
 
-const getInitialOption = (stockName, breakPointAnnotations) => {
+const getInitialOption = (stockName) => {
     const ret = {
         chart: {
             type: "candlestick",
@@ -10,33 +10,6 @@ const getInitialOption = (stockName, breakPointAnnotations) => {
                 show: false,
             },
         },
-        annotations: breakPointAnnotations,
-        // annotations: {
-        //     xaxis: [
-        //         {
-        //             x: "09/03",
-        //             x2: "09/08",
-        //             borderColor: "#658EFD",
-        //             strokeDashArray: 8,
-        //             fillColor: "#658EFD",
-        //             opacity: 0.3,
-        //             offsetX: 0,
-        //             offsetY: 0,
-        //             label: {
-        //                 borderColor: "#658EFD",
-        //                 style: {
-        //                     fontSize: "12px",
-        //                     fontFamily: "NanumSquare",
-        //                     color: "#fff",
-        //                     background: "#658EFD",
-        //                 },
-        //                 orientation: "horizontal",
-        //                 offsetY: -20,
-        //                 text: "예측 매도 구간",
-        //             },
-        //         },
-        //     ],
-        // },
         colors: ["#00e396", "#FEb016", "FFFFFF00"],
         tooltip: {
             enabled: true,
@@ -180,8 +153,9 @@ const getbreakPointAnnotations = (breakPointIndex, act) => {
 };
 
 function TotalChart(prop) {
-    const { name, predictChartData, predictCloseChartData, pastCloseVals } =
-        prop;
+    const { name, data } = prop;
+    // const { name, predictChartData, predictCloseChartData, pastCloseVals } =
+    //     prop;
     // const [series, setSeries] = useState(data); // state로 쓸 필요 없어서(고정값)
     // const [options, setOptions] = useState(initialOption); // state로 쓸 필요 x
 
@@ -190,58 +164,44 @@ function TotalChart(prop) {
     //     130000, 124500, 124000, 122500, 121500, 119500, 115000, 119500, 120000,
     //     117500, 116500,
     // ];
-    console.log("예측값들", predictCloseChartData.series);
-    const predictCloseVals = predictCloseChartData.series.map((val) =>
-        parseInt(val)
-    );
-    const labels = predictCloseChartData.labels;
-    const shortAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 5);
-    const longAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 20);
-    const [breakPointIndex, act] = getBreakPoint(shortAvgList, longAvgList);
-    const shortAvgChartData = parseAvgVals(shortAvgList, labels);
-    const longAvgChartData = parseAvgVals(longAvgList, labels);
-    console.log("5일: ", shortAvgChartData);
-    console.log("20일: ", longAvgChartData);
-    const breakPointAnnotations = getbreakPointAnnotations(
-        breakPointIndex,
-        act
-    );
-    const options = getInitialOption(name, breakPointAnnotations);
+    // console.log("예측값들", predictCloseChartData.series);
+    // const predictCloseVals = predictCloseChartData.series.map((val) =>
+    //     parseInt(val)
+    // );
+    // const labels = predictCloseChartData.labels;
+    // const shortAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 5);
+    // const longAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 20);
+    // const [breakPointIndex, act] = getBreakPoint(shortAvgList, longAvgList);
+    // const shortAvgChartData = parseAvgVals(shortAvgList, labels);
+    // const longAvgChartData = parseAvgVals(longAvgList, labels);
+    // console.log("5일: ", shortAvgChartData);
+    // console.log("20일: ", longAvgChartData);
+    // const breakPointAnnotations = getbreakPointAnnotations(
+    //     breakPointIndex,
+    //     act
+    // );
+    const options = getInitialOption(name);
 
-    const finalChartSeries = [
-        {
-            name: "5일 평균선",
-            type: "line",
-            data: shortAvgChartData,
-        },
-        {
-            name: "20일 평균선",
-            type: "line",
-            data: longAvgChartData,
-        },
-    ];
-    console.log(finalChartSeries);
+    // const finalChartSeries = [
+    //     {
+    //         name: "5일",
+    //         type: "line",
+    //         data: shortAvgChartData,
+    //     },
+    //     {
+    //         name: "20일",
+    //         type: "line",
+    //         data: longAvgChartData,
+    //     },
+    // ];
+    // console.log(finalChartSeries);
 
     return (
         <ChartBlock>
-            <h2 className="section-title">총 예측값 차트</h2>
             <div className="chart-wrapper">
                 <ReactApexChart
                     options={options}
-                    series={predictChartData}
-                    type="candlestick"
-                    width={
-                        window.innerWidth < 512
-                            ? window.innerWidth - 20
-                            : 512 - 20
-                    }
-                    height={320}
-                />
-            </div>
-            <div className="chart-wrapper">
-                <ReactApexChart
-                    options={options}
-                    series={finalChartSeries}
+                    series={data}
                     type="candlestick"
                     width={
                         window.innerWidth < 512

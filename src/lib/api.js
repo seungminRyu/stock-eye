@@ -1,15 +1,15 @@
 import axios from "axios";
+import { getLocalStorageItem } from "./util";
 const URL = "https://stock-mlp.com/graduation";
 
 export const requestQueueInStocks = async (stockList) => {
     await axios
         .all(
-            stockList.map(stockItem => {
+            stockList.map((stockItem) => {
                 const formData = new FormData();
                 formData.append("name", stockItem.name);
-                return axios.post(`${URL}/stock`, formData,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' }
+                return axios.post(`${URL}/stock`, formData, {
+                    headers: { "Content-Type": "multipart/form-data" },
                 });
             })
         )
@@ -17,8 +17,8 @@ export const requestQueueInStocks = async (stockList) => {
             axios.spread((...res) => {
                 console.log(res);
             })
-        )
-}
+        );
+};
 
 export const fetchChartData = async (stockName) => {
     const res = await axios.get(`${URL}/stock?name=${stockName}`);
@@ -26,18 +26,40 @@ export const fetchChartData = async (stockName) => {
         const ret = res.data.data;
         return ret;
     } else {
-        console.error('[fetchChartData]: ', res.data);
+        console.error("[fetchChartData]: ", res.data);
     }
-}
+};
 
 export const requestPredict = (stockName, predictDate) => {
     const formData = new FormData();
     formData.append("name", stockName);
     formData.append("date", predictDate);
-    return axios.post(`${URL}/predict`, formData,
-    {
-        headers: { 'Content-Type': 'multipart/form-data' }
+    return axios.post(`${URL}/predict`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
     });
-}
+};
 
-export const fetchPredictData = (stockName, id) => axios.get(`${URL}/predict?name=${stockName}&id=${id}`);
+export const fetchPredictData = (stockName, id) =>
+    axios.get(`${URL}/predict?name=${stockName}&id=${id}`);
+
+export const fetchAllPredictData = async (stockList) => {
+    let ret = [];
+    await axios
+        .all(
+            stockList.map((stockItem) =>
+                axios.get(
+                    `${URL}/predict?name=${stockItem.name}&id=${stockItem.id}`
+                )
+            )
+        )
+        .then(
+            axios.spread((...resList) => {
+                resList.forEach((res) => {
+                    if (res.data["200"] === "Success") {
+                        ret.push(res.data["data"]);
+                    }
+                });
+            })
+        );
+    return ret;
+};

@@ -119,20 +119,21 @@ const parseValueOnType = (values, startVals, type, variance) => {
 };
 
 function Predict({ location }) {
-    const name = getStockName(location.search);
-    const { id, predictDate, startDate, startVals, pastVals } =
-        getTargetPredictItem(name);
-    const [state, refetch] = useAsync({
-        callback: fetchPredictData,
-        params: [name, id],
-    });
     const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
-    const { data } = state;
+    const name = getStockName(location.search);
+    const { id, predictDate, startDate, startVals, pastVals, predictResult } =
+        getTargetPredictItem(name);
+    console.log(predictResult);
+    // const [state, refetch] = useAsync({
+    //     callback: fetchPredictData,
+    //     params: [name, id],
+    // });
+    // const { data } = state;
     // const { data: { accuracy, data: predictVals } } = data;
     const {
         data: { accuracy, data: predictVals },
-    } = testPredictData;
+    } = predictResult;
 
     const predictDayVals = getPredictDayVals(predictVals, 6);
     const variances = createVarianceObj(startVals, predictDayVals);
@@ -143,6 +144,9 @@ function Predict({ location }) {
         "Close"
     );
     const pastCloseVals = pastVals.map((val) => parseInt(val.close));
+    console.log("pcd", predictChartData);
+    console.log("pccd", predictCloseChartData);
+    console.log("pcv", pastCloseVals);
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
@@ -268,12 +272,12 @@ function Predict({ location }) {
                     </PredictValues>
                 </Report>
                 <ChartReport>
-                    <TotalChart
+                    {/* <TotalChart
                         name={name}
                         predictChartData={predictChartData}
                         predictCloseChartData={predictCloseChartData}
                         pastCloseVals={pastCloseVals}
-                    />
+                    /> */}
                     <PredictChart
                         name={name}
                         data={parseValueOnType(

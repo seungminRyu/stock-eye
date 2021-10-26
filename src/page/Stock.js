@@ -6,7 +6,7 @@ import { parseQueryString } from "../lib/util";
 import { fetchChartData } from "../lib/api";
 
 import AppTemplate from "../component/AppTemplate";
-import Chart from "../component/Chart";
+import CandleChart from "../component/CandleChart";
 import TotalChart from "../component/TotalChart";
 
 import icoBack from "../static/asset/ico_back.svg";
@@ -34,7 +34,7 @@ const parseData = (data) => {
     return [
         {
             name: "candle",
-            data: _data.slice(-240),
+            data: _data.slice(-60),
         },
     ];
 };
@@ -65,14 +65,14 @@ function Stock({ location }) {
     const { loading, data, error } = state;
     const isDataLoaded = data ? true : false;
     let chartData;
-    if (isDataLoaded) {
-        console.log(data.data);
-        chartData = parseValueOnType(data.data, "Close");
-    }
     // if (isDataLoaded) {
-    //     chartData = parseData(data);
-    //     console.log(chartData);
+    //     console.log(data.data);
+    //     chartData = parseValueOnType(data.data, "Close");
     // }
+    if (isDataLoaded) {
+        chartData = parseData(data);
+        console.log(chartData);
+    }
 
     return (
         <AppTemplate>
@@ -84,8 +84,8 @@ function Stock({ location }) {
                     <p className="stock-code">{code}</p>
                     <h1 className="stock-name">{name}</h1>
                 </Header>
-                {isDataLoaded && <TotalChart name={name} data={chartData} />}
-                {/* {isDataLoaded && <Chart name={name} data={chartData} />} */}
+                {/* {isDataLoaded && <TotalChart name={name} data={chartData} />} */}
+                {isDataLoaded && <CandleChart name={name} data={chartData} />}
                 <PredictSetting name={name} values={state.data} />
             </StockBlock>
         </AppTemplate>
