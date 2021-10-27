@@ -58,7 +58,7 @@ export const fetchAllPredictData = async (stockList) => {
                     console.log("res", res);
                     if (
                         res.data["200"] === "Success" &&
-                        res.data.data !== false
+                        res.data.data !== "Data Length Error !"
                     ) {
                         ret.push(res.data["data"]);
                     } else {

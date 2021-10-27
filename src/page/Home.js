@@ -13,27 +13,38 @@ function Home() {
         const undoneList = getLocalStorageItem("PREDICT_LIST").filter(
             (item) => item.isDone === false
         );
-        console.log("Home: ", undoneList);
+        console.log("undone: ", undoneList);
 
-        // 계산완료한 주식 목록 받음
-        const calcDoneStocks = await fetchAllPredictData(undoneList);
-        console.log("fetch: ", calcDoneStocks);
+        setInterval(async () => {
+            // 계산완료한 주식 목록 받음
+            const calcDoneStocks = await fetchAllPredictData(undoneList);
+            // const testCalcDoneStocks = [
+            //     {
+            //         accuracy: 0,
+            //         data: "Data Length Error !",
+            //         id: 1635303977236,
+            //         name: "카카오뱅크",
+            //     },
+            // ];
+            console.log("fetch: ", calcDoneStocks);
 
-        // 계산완료한 주식 목록을 로컬로 업데이트
-        let nextPredictList = getLocalStorageItem("PREDICT_LIST");
-        calcDoneStocks.forEach((predictData) => {
-            const targetIdx = nextPredictList.findIndex(
-                (item) => item.name === predictData.data.name
-            );
-            const targetItem = nextPredictList[targetIdx];
-            nextPredictList[targetIdx] = {
-                ...targetItem,
-                isDone: true,
-                predictResult: predictData,
-            };
-        });
-        setLocalStorageItem("PREDICT_LIST", nextPredictList);
-        return console.log("home dismounted");
+            // 계산완료한 주식 목록을 로컬로 업데이트
+            let nextPredictList = getLocalStorageItem("PREDICT_LIST");
+            calcDoneStocks.forEach((predictData) => {
+                const targetIdx = nextPredictList.findIndex(
+                    (item) => item.name === predictData.name
+                );
+                const targetItem = nextPredictList[targetIdx];
+                nextPredictList[targetIdx] = {
+                    ...targetItem,
+                    isDone: true,
+                    predictResult: predictData,
+                };
+            });
+            console.log("next: ", nextPredictList);
+            setLocalStorageItem("PREDICT_LIST", nextPredictList);
+            return console.log("home dismounted");
+        }, 5000);
     });
 
     const [isManageOpen, setIsManageOpen] = useState(false);
