@@ -3,14 +3,13 @@ import styled from "styled-components";
 import ReactApexChart from "react-apexcharts";
 
 const getInitialOption = (stockName, breakPointAnnotations) => {
-    const ret = {
+    let ret = {
         chart: {
             type: "candlestick",
             toolbar: {
                 show: false,
             },
         },
-        annotations: breakPointAnnotations,
         // annotations: {
         //     xaxis: [
         //         {
@@ -73,6 +72,13 @@ const getInitialOption = (stockName, breakPointAnnotations) => {
             line: {},
         },
     };
+
+    if (breakPointAnnotations) {
+        ret = {
+            ...ret,
+            annotations: breakPointAnnotations,
+        };
+    }
 
     return ret;
 };
@@ -190,18 +196,18 @@ function TotalChart(prop) {
     //     130000, 124500, 124000, 122500, 121500, 119500, 115000, 119500, 120000,
     //     117500, 116500,
     // ];
-    console.log("예측값들", predictCloseChartData.series);
+    // console.log("predict closes", predictCloseChartData.series);
     const predictCloseVals = predictCloseChartData.series.map((val) =>
         parseInt(val)
     );
     const labels = predictCloseChartData.labels;
     const shortAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 5);
     const longAvgList = getMovingAvgData(pastCloseVals, predictCloseVals, 20);
-    const [breakPointIndex, act] = getBreakPoint(shortAvgList, longAvgList);
     const shortAvgChartData = parseAvgVals(shortAvgList, labels);
     const longAvgChartData = parseAvgVals(longAvgList, labels);
-    console.log("5일: ", shortAvgChartData);
-    console.log("20일: ", longAvgChartData);
+    // console.log("5일: ", shortAvgChartData);
+    // console.log("20일: ", longAvgChartData);
+    const [breakPointIndex, act] = getBreakPoint(shortAvgList, longAvgList);
     const breakPointAnnotations = getbreakPointAnnotations(
         breakPointIndex,
         act
@@ -220,10 +226,9 @@ function TotalChart(prop) {
             data: longAvgChartData,
         },
     ];
-    console.log("opt", options);
-    console.log("candle data", predictChartData);
-    console.log("avg data", finalChartSeries);
-
+    // console.log("opt", options);
+    // console.log("candle data", predictChartData);
+    // console.log("avg data", finalChartSeries);
     return (
         <ChartBlock>
             <h2 className="section-title">총 예측값 차트</h2>
@@ -241,7 +246,7 @@ function TotalChart(prop) {
                 />
             </div>
             <div className="chart-wrapper">
-                {/* <ReactApexChart
+                <ReactApexChart
                     options={options}
                     series={finalChartSeries}
                     type="candlestick"
@@ -251,7 +256,7 @@ function TotalChart(prop) {
                             : 512 - 20
                     }
                     height={320}
-                /> */}
+                />
             </div>
         </ChartBlock>
     );
