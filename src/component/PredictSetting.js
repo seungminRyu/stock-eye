@@ -76,8 +76,6 @@ function PredictSetting(props) {
         const getPastVals = () => {
             const pastValDate = 19;
             const { data } = values;
-
-            const stockValTypes = Object.keys(data);
             const dates = Object.keys(data["Close"]).slice(
                 parseInt(`-${pastValDate}`)
             );
@@ -90,15 +88,30 @@ function PredictSetting(props) {
                     high: data.High[date],
                 };
             });
-            console.log(ret);
             return ret;
+        };
+
+        const getStartVals = () => {
+            const { data } = values;
+            const dates = Object.keys(data["Close"]).slice(-1);
+
+            const ret = dates.map((date) => {
+                return {
+                    open: data.Open[date],
+                    close: data.Close[date],
+                    low: data.Low[date],
+                    high: data.High[date],
+                    volume: data.Volume[date],
+                };
+            });
+            return ret[0];
         };
 
         try {
             const res = await requestPredict(name, predictDate);
             const { id } = res.data;
             const pastValList = getPastVals();
-            const startVals = pastValList[pastValList.length - 1];
+            const startVals = getStartVals();
             const predictItem = createPredictItem(id, startVals, pastValList);
             updatePredictList(predictItem);
         } catch (e) {

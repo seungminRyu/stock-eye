@@ -73,8 +73,13 @@ const getPredictDayVals = (predictVals, predictDate) => {
     return ret;
 };
 
-const getVariance = (startVal, predictVal) => {
+const getVariance = (start, predict) => {
+    console.log(start);
+    const startVal = parseInt(start);
+    const predictVal = parseInt(predict);
+    console.log("s, p: ", startVal, predictVal);
     const percent = ((predictVal - startVal) / startVal) * 100;
+    console.log("per: ", percent);
     const ret =
         percent >= 0 ? `+${percent.toFixed(2)}` : `${percent.toFixed(2)}`;
 
@@ -130,12 +135,11 @@ function Predict({ location }) {
     // });
     // const { data } = state;
     // const { data: { accuracy, data: predictVals } } = data;
-    const {
-        data: { accuracy, data: predictVals },
-    } = predictResult;
-
-    const predictDayVals = getPredictDayVals(predictVals, 6);
+    const { accuracy, data: predictVals } = predictResult;
+    const predictDayVals = getPredictDayVals(predictVals, predictDate);
     const variances = createVarianceObj(startVals, predictDayVals);
+    console.log(startVals);
+    console.log(predictDayVals);
 
     // 종합 차트에 쓸 데이터
     const predictChartData = parseData(predictVals);

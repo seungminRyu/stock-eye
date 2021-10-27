@@ -7,10 +7,15 @@ function PredictList() {
     const [predictList, setPredictList] = useState(
         getLocalStorageItem("PREDICT_LIST")
     );
-    setInterval(() => {
-        console.log("Recieve");
-        setPredictList(getLocalStorageItem("PREDICT_LIST"));
-    }, 5000);
+    const [inter, setInter] = useState(null);
+
+    if (inter === null) {
+        setInterval(() => {
+            console.log("Recieve");
+            setPredictList(getLocalStorageItem("PREDICT_LIST"));
+        }, 5000);
+        setInter(true);
+    }
 
     return (
         <PredictListBlock>

@@ -8,14 +8,15 @@ import { fetchAllPredictData } from "../lib/api";
 import { getLocalStorageItem, setLocalStorageItem } from "../lib/util";
 
 function Home() {
-    useEffect(async () => {
-        // 계산안된 로컬 주식 목록들
-        const undoneList = getLocalStorageItem("PREDICT_LIST").filter(
-            (item) => item.isDone === false
-        );
-        console.log("undone: ", undoneList);
+    const [inter, setInter] = useState(null);
 
+    if (inter === null) {
         setInterval(async () => {
+            // 계산안된 로컬 주식 목록들
+            const undoneList = getLocalStorageItem("PREDICT_LIST").filter(
+                (item) => item.isDone === false
+            );
+            console.log("undone: ", undoneList);
             // 계산완료한 주식 목록 받음
             const calcDoneStocks = await fetchAllPredictData(undoneList);
             // const testCalcDoneStocks = [
@@ -45,7 +46,9 @@ function Home() {
             setLocalStorageItem("PREDICT_LIST", nextPredictList);
             return console.log("home dismounted");
         }, 5000);
-    });
+
+        setInter(true);
+    }
 
     const [isManageOpen, setIsManageOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
