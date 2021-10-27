@@ -58,7 +58,8 @@ const getInitialOption = (stockName, series, labels) => {
                         fontFamily: "NanumSquare",
                     },
                     formatter: function (y) {
-                        return (y >= 0 ? "+" + y : y) + "%";
+                        const yVal = y.toFixed(1);
+                        return (yVal >= 0 ? "+" + yVal : yVal) + "%";
                     },
                 },
             },

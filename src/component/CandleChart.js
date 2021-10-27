@@ -21,6 +21,7 @@ const getInitialOption = (stockName) => {
         },
         xaxis: {
             labels: {
+                show: false,
                 style: {
                     fontFamily: "NanumSquare",
                 },
