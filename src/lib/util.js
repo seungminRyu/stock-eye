@@ -26,6 +26,3 @@ export const getLocalStorageItem = (key) =>
 
 export const setLocalStorageItem = (key, data) =>
     localStorage.setItem(key, JSON.stringify(data));
-
-export const initWebSocket = () =>
-    setTimeout(() => console.log("success websocket connect"), 1000);

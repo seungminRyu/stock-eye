@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getLocalStorageItem } from "./util";
 const URL = "https://stock-mlp.com/graduation";
 
 export const requestQueueInStocks = async (stockList) => {
