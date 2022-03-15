@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import useAsync from "../hook/useAsync";
 import { parseQueryString } from "../lib/util";
 import { fetchChartData } from "../lib/api";
-import AppTemplate from "../component/AppTemplate";
-import CandleChart from "../component/CandleChart";
-import TotalChart from "../component/TotalChart";
-import PredictSetting from "../component/PredictSetting";
+import AppTemplate from "../components/AppTemplate";
+import CandleChart from "../components/CandleChart";
+import TotalChart from "../components/TotalChart";
+import PredictSetting from "../components/PredictSetting";
 
 import icoBack from "../static/asset/ico_back.svg";
 

@@ -5,11 +5,11 @@ import useAsync from "../hook/useAsync";
 import { fetchPredictData } from "../lib/api";
 import { getLocalStorageItem, parseQueryString } from "../lib/util";
 
-import AppTemplate from "../component/AppTemplate";
-import TotalChart from "../component/TotalChart";
-import VarianceChart from "../component/VarianceChart";
-import PredictChart from "../component/PredictChart";
-import VolumeChart from "../component/VolumeChart";
+import AppTemplate from "../components/AppTemplate";
+import TotalChart from "../components/TotalChart";
+import VarianceChart from "../components/VarianceChart";
+import PredictChart from "../components/PredictChart";
+import VolumeChart from "../components/VolumeChart";
 
 import icoBack from "../static/asset/ico_back.svg";
 import imgGood from "../static/asset/img_good.png";

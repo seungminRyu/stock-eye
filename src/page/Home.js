@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Search from "../component/Search";
-import Manage from "../component/Manage";
-import Main from "../component/Main";
-import Header from "../component/Header";
-import AppTemplate from "../component/AppTemplate";
+import Search from "../components/Search";
+import Manage from "../components/Manage";
+import Main from "../components/Main";
+import Header from "../components/Header";
+import AppTemplate from "../components/AppTemplate";
 import { fetchAllPredictData } from "../lib/api";
 import { getLocalStorageItem, setLocalStorageItem } from "../lib/util";
 
