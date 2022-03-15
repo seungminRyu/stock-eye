@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 import useAsync from "../hook/useAsync";
 import { parseQueryString } from "../lib/util";
 import { fetchChartData } from "../lib/api";
-
 import AppTemplate from "../component/AppTemplate";
 import CandleChart from "../component/CandleChart";
 import TotalChart from "../component/TotalChart";
+import PredictSetting from "../component/PredictSetting";
 
 import icoBack from "../static/asset/ico_back.svg";
-import PredictSetting from "../component/PredictSetting";
 
 // open, high, low, close
 const parseData = (data) => {
@@ -81,12 +80,17 @@ function Stock({ location }) {
                     <Link to="/">
                         <BackBtn />
                     </Link>
-                    <p className="stock-code">{code}</p>
-                    <h1 className="stock-name">{name}</h1>
+                    {/* <p className="stock-code">{code}</p>
+                    <h1 className="stock-name">{name}</h1> */}
+                    <p className="stock-code">{"000000"}</p>
+                    <h1 className="stock-name">{"TEST STOCK NAME"}</h1>
                 </Header>
                 {/* {isDataLoaded && <TotalChart name={name} data={chartData} />} */}
-                {isDataLoaded && <CandleChart name={name} data={chartData} />}
-                <PredictSetting name={name} values={state.data} />
+                {/* {isDataLoaded && (
+                    <CandleChart name={"TEST STOCK NAME"} data={chartData} />
+                )} */}
+                <CandleChart name={"TEST STOCK NAME"} data={chartData} />
+                <PredictSetting name={"TEST STOCK NAME"} values={state.data} />
             </StockBlock>
         </AppTemplate>
     );
