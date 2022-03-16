@@ -126,20 +126,30 @@ const parseValueOnType = (values, startVals, type, variance) => {
 function Predict({ location }) {
     const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
-    const name = getStockName(location.search);
+    // const name = getStockName(location.search);
+    const name = "테스트 주식";
+
+    // 예측등록 당시 가치
+    // const { id, predictDate, startDate, startVals, pastVals, predictResult } =
+    //     getTargetPredictItem(name);
     const { id, predictDate, startDate, startVals, pastVals, predictResult } =
-        getTargetPredictItem(name);
+        testPastData;
+
     // const [state, refetch] = useAsync({
     //     callback: fetchPredictData,
     //     params: [name, id],
     // });
     // const { data } = state;
     // const { data: { accuracy, data: predictVals } } = data;
-    const { accuracy, data: predictVals } = predictResult;
+
+    // 예측 가치
+    // const { accuracy, data: predictVals } = predictResult;
+    const {
+        data: { accuracy, data: predictVals },
+    } = testPredictData;
+
     const predictDayVals = getPredictDayVals(predictVals, predictDate);
     const variances = createVarianceObj(startVals, predictDayVals);
-    console.log(startVals);
-    console.log(predictDayVals);
 
     // 종합 차트에 쓸 데이터
     const predictChartData = parseData(predictVals);
@@ -148,7 +158,14 @@ function Predict({ location }) {
         undefined,
         "Close"
     );
-    const pastCloseVals = pastVals.map((val) => parseInt(val.close));
+
+    // 과거 20일 차트 값
+    // const pastCloseVals = pastVals.map((item) => parseInt(item.close));
+    const pastCloseVals = [
+        115066, 118848, 123579, 113854, 114291, 112788, 121238, 113782, 127892,
+        128792, 120091, 117882, 121238, 121237, 129273, 131293, 135123, 122349,
+        136812, 128911,
+    ];
 
     const onChartTypeClick = (e) => {
         const updateActType = ($targetTypeItem) => {
@@ -618,6 +635,28 @@ const ChartReport = styled.section`
     }
 `;
 
+const testPastData = {
+    id: 0,
+    predictDate: "6",
+    startDate: "2022년 3월 16일",
+    startVals: {
+        open: 120091.849609375,
+        high: 120091.849609375,
+        low: 120091.849609375,
+        close: 120091.849609375,
+        volume: 120091.849609375,
+    },
+    pastVals: [
+        // {
+        //     open: 0000,
+        //     high: 0000,
+        //     low: 0000,
+        //     close: 0000,
+        // },
+    ],
+    predictResult: {},
+};
+
 const testPredictData = {
     200: "Success",
     data: {
@@ -626,35 +665,35 @@ const testPredictData = {
         data: {
             Open: {
                 "D+1": 120091.849609375,
-                "D+2": 120051.849609375,
-                "D+3": 120071.849609375,
-                "D+4": 120093.849609375,
-                "D+5": 120041.849609375,
-                "D+6": 120231.849609375,
+                "D+2": 121271.849609375,
+                "D+3": 125781.849609375,
+                "D+4": 122123.849609375,
+                "D+5": 128901.849609375,
+                "D+6": 131827.849609375,
             },
             High: {
                 "D+1": 121249.166015625,
-                "D+2": 121319.166015625,
-                "D+3": 121229.166015625,
-                "D+4": 121210.166015625,
-                "D+5": 121329.166015625,
-                "D+6": 121459.166015625,
+                "D+2": 126319.166015625,
+                "D+3": 123229.166015625,
+                "D+4": 129210.166015625,
+                "D+5": 131329.166015625,
+                "D+6": 128459.166015625,
             },
             Low: {
                 "D+1": 120015.6015625,
                 "D+2": 129315.6015625,
-                "D+3": 120025.6015625,
-                "D+4": 120010.6015625,
-                "D+5": 120325.6015625,
-                "D+6": 120455.6015625,
+                "D+3": 125025.6015625,
+                "D+4": 127010.6015625,
+                "D+5": 124325.6015625,
+                "D+6": 129455.6015625,
             },
             Close: {
-                "D+1": 119292.80859375,
-                "D+2": 114338.80859375,
-                "D+3": 115323.80859375,
-                "D+4": 116330.80859375,
-                "D+5": 119329.80859375,
-                "D+6": 120458.80859375,
+                "D+1": 124292.80859375,
+                "D+2": 127338.80859375,
+                "D+3": 118323.80859375,
+                "D+4": 123330.80859375,
+                "D+5": 129329.80859375,
+                "D+6": 130458.80859375,
             },
             Volume: {
                 "D+1": 2089179,
