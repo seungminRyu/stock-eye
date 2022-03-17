@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useStockDispatch } from "../context/StockContext";
-import { getLocalStorageItem } from "../lib/util";
+import { useStockDispatch } from "../../context/StockContext";
+import { getLocalStorageItem } from "../../lib/util";
 
 function SearchResultItem({ stock }) {
     const { name, code } = stock;

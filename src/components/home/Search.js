@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
-import ModalTemplate from "./ModalTemplate";
+import ModalTemplate from "../ModalTemplate";
 import SearchResultItem from "./SearchResultItem";
-import { debouncer } from "../lib/util";
+import { debouncer } from "../../lib/util";
 
-import icoClose from "../static/asset/ico_close.svg";
-import icoSearchInput from "../static/asset/ico_search-input.svg";
+import icoClose from "../../static/asset/ico_close.svg";
+import icoSearchInput from "../../static/asset/ico_search-input.svg";
 
 function Search(props) {
     const { isSearchOpen, setIsSearchOpen } = props;

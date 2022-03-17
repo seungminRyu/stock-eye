@@ -1,14 +1,16 @@
 import React from "react";
-import { useStockState } from "../context/StockContext";
+import { useStockState } from "../../context/StockContext";
 import styled, { css } from "styled-components";
-import ModalTemplate from "./ModalTemplate";
+import ModalTemplate from "../ModalTemplate";
 import ManagedStockItem from "./ManagedStockItem";
 
-import icoClose from "../static/asset/ico_close.svg";
+import icoClose from "../../static/asset/ico_close.svg";
 
 function Manage(props) {
-    const { isManageOpen, onManageQuit } = props;
+    const { isManageOpen, setIsManageOpen } = props;
     const managedStocklist = useStockState();
+
+    const onQuitBtnClick = () => setIsManageOpen(false);
 
     return (
         <ManageBlock isManageOpen={isManageOpen}>
@@ -18,7 +20,7 @@ function Manage(props) {
                         <h1>주식 관리</h1>
                     </div>
                     <div className="manage-header__quit-btn">
-                        <QuitButton onClick={onManageQuit} />
+                        <QuitButton onClick={onQuitBtnClick} />
                     </div>
                 </ManageHeader>
                 <ManageBody>

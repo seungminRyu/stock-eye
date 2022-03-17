@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useStockDispatch } from "../context/StockContext";
+import { useStockDispatch } from "../../context/StockContext";
 
 function ManagedStockItem({ stock }) {
     const { name, code } = stock;
