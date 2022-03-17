@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { useStockState } from "../context/StockContext";
+import { useStockState } from "../../context/StockContext";
 import StockList from "./StockList";
 import PredictList from "./PredictList";
 import DashBoard from "./DashBoard";
 
-function Main(props) {
+function HomeMain(props) {
     const { onSearchOpen, onManageOpen } = props;
     const stockList = useStockState();
 
     return (
-        <MainBlock>
+        <HomeMainBlock>
             <DashBoard
                 onManageOpen={onManageOpen}
                 onSearchOpen={onSearchOpen}
@@ -18,11 +18,11 @@ function Main(props) {
             />
             <PredictList />
             <StockList stockList={stockList} />
-        </MainBlock>
+        </HomeMainBlock>
     );
 }
 
-const MainBlock = styled.main`
+const HomeMainBlock = styled.main`
     width: 100%;
     height: 100%;
     background-color: var(--bg-white);
@@ -40,4 +40,4 @@ const MainBlock = styled.main`
     }
 `;
 
-export default Main;
+export default HomeMain;

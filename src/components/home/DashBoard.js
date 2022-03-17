@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import icoSearch from "../static/asset/ico_search.svg";
-import icoManage from "../static/asset/ico_manage.svg";
+import icoSearch from "../../static/asset/ico_search.svg";
+import icoManage from "../../static/asset/ico_manage.svg";
 
 function DashBoard(props) {
     const { onSearchOpen, onManageOpen, stockList } = props;

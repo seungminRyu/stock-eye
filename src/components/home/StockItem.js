@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import icoRight from "../static/asset/ico_right.svg";
+
+import icoRight from "../../static/asset/ico_right.svg";
 
 function StockItem(props) {
     const { index, name, code, id } = props;

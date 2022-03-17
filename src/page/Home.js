@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Search from "../components/Search";
 import Manage from "../components/Manage";
-import Main from "../components/Main";
-import Header from "../components/Header";
+import HomeMain from "../components/home/HomeMain";
+import HomeBanner from "../components/home/HomeBanner";
 import AppTemplate from "../components/AppTemplate";
 import { fetchAllPredictData } from "../lib/api";
 import { getLocalStorageItem, setLocalStorageItem } from "../lib/util";
@@ -70,8 +70,8 @@ function Home() {
 
     return (
         <AppTemplate>
-            <Header />
-            <Main onManageOpen={onManageOpen} onSearchOpen={onSearchOpen} />
+            <HomeBanner />
+            <HomeMain onManageOpen={onManageOpen} onSearchOpen={onSearchOpen} />
             <Manage isManageOpen={isManageOpen} onManageQuit={onManageQuit} />
             <Search
                 isSearchOpen={isSearchOpen}
@@ -80,106 +80,5 @@ function Home() {
         </AppTemplate>
     );
 }
-const testCalcDoneStocks = [
-    {
-        200: "Success",
-        data: {
-            name: "카카오",
-            accuracy: 0.0181183852,
-            data: {
-                Open: {
-                    "D+1": 120091.849609375,
-                    "D+2": 120051.849609375,
-                    "D+3": 120071.849609375,
-                    "D+4": 120093.849609375,
-                    "D+5": 120041.849609375,
-                    "D+6": 120231.849609375,
-                },
-                High: {
-                    "D+1": 121249.166015625,
-                    "D+2": 121319.166015625,
-                    "D+3": 121229.166015625,
-                    "D+4": 121210.166015625,
-                    "D+5": 121329.166015625,
-                    "D+6": 121459.166015625,
-                },
-                Low: {
-                    "D+1": 120015.6015625,
-                    "D+2": 129315.6015625,
-                    "D+3": 120025.6015625,
-                    "D+4": 120010.6015625,
-                    "D+5": 120325.6015625,
-                    "D+6": 120455.6015625,
-                },
-                Close: {
-                    "D+1": 119292.80859375,
-                    "D+2": 114338.80859375,
-                    "D+3": 115323.80859375,
-                    "D+4": 116330.80859375,
-                    "D+5": 119329.80859375,
-                    "D+6": 120458.80859375,
-                },
-                Volume: {
-                    "D+1": 2089179,
-                    "D+2": 3089379,
-                    "D+3": 3089129,
-                    "D+4": 3089170,
-                    "D+5": 3089329,
-                    "D+6": 3089459,
-                },
-            },
-            id: 1632410113788,
-        },
-    },
-    {
-        200: "Success",
-        data: {
-            name: "카카오게임즈",
-            accuracy: 0.0181183852,
-            data: {
-                Open: {
-                    "D+1": 120091.849609375,
-                    "D+2": 120051.849609375,
-                    "D+3": 120071.849609375,
-                    "D+4": 120093.849609375,
-                    "D+5": 120041.849609375,
-                    "D+6": 120231.849609375,
-                },
-                High: {
-                    "D+1": 121249.166015625,
-                    "D+2": 121319.166015625,
-                    "D+3": 121229.166015625,
-                    "D+4": 121210.166015625,
-                    "D+5": 121329.166015625,
-                    "D+6": 121459.166015625,
-                },
-                Low: {
-                    "D+1": 120015.6015625,
-                    "D+2": 129315.6015625,
-                    "D+3": 120025.6015625,
-                    "D+4": 120010.6015625,
-                    "D+5": 120325.6015625,
-                    "D+6": 120455.6015625,
-                },
-                Close: {
-                    "D+1": 119292.80859375,
-                    "D+2": 114338.80859375,
-                    "D+3": 115323.80859375,
-                    "D+4": 116330.80859375,
-                    "D+5": 119329.80859375,
-                    "D+6": 120458.80859375,
-                },
-                Volume: {
-                    "D+1": 2089179,
-                    "D+2": 3089379,
-                    "D+3": 3089129,
-                    "D+4": 3089170,
-                    "D+5": 3089329,
-                    "D+6": 3089459,
-                },
-            },
-            id: 1632410113788,
-        },
-    },
-];
+
 export default Home;
