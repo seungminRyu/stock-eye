@@ -1,10 +1,10 @@
 import React from "react";
-import Search from "../components/home/Search";
-import Manage from "../components/home/Manage";
-import HomeMain from "../components/home/HomeMain";
-import HomeBanner from "../components/home/HomeBanner";
-import AppTemplate from "../components/AppTemplate";
-import useHome from "./hooks/useHome";
+import Search from "../../components/home/Search";
+import Manage from "../../components/home/Manage";
+import HomeMain from "../../components/home/HomeMain";
+import HomeBanner from "../../components/home/HomeBanner";
+import AppTemplate from "../../components/AppTemplate";
+import useHome from "../hooks/useHome";
 // import { fetchAllPredictData } from "../lib/api";
 // import { getLocalStorageItem, setLocalStorageItem } from "../lib/util";
 

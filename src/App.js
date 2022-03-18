@@ -4,7 +4,7 @@ import { Route } from "react-router";
 import { getLocalStorageItem } from "./lib/util";
 import { requestQueueInStocks } from "./lib/api";
 import { StockProvider } from "./context/StockContext";
-import Home from "./page/Home";
+import Home from "./page/home/Home";
 import Stock from "./page/Stock";
 import Predict from "./page/Predict";
 
