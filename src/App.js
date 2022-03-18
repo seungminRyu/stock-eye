@@ -5,7 +5,7 @@ import { getLocalStorageItem } from "./lib/util";
 import { requestQueueInStocks } from "./lib/api";
 import { StockProvider } from "./context/StockContext";
 import Home from "./page/home/Home";
-import Stock from "./page/Stock";
+import Register from "./page/register/Register";
 import Predict from "./page/Predict";
 
 const initPredictList = () => {
@@ -26,7 +26,7 @@ function App() {
         <StockProvider>
             <GlobalStyle />
             <Route path="/" exact={true} component={Home} />
-            <Route path="/stock" component={Stock} />
+            <Route path="/register" component={Register} />
             <Route path="/predict" component={Predict} />
         </StockProvider>
     );

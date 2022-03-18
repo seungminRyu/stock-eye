@@ -1,11 +1,11 @@
 import React, { useReducer, useState } from "react";
 import styled from "styled-components";
-import { requestPredict } from "../lib/api";
-import { getLocalStorageItem, setLocalStorageItem } from "../lib/util";
+import { requestPredict } from "../../lib/api";
+import { getLocalStorageItem, setLocalStorageItem } from "../../lib/util";
 
-import icoPlus from "../static/asset/ico_plus.svg";
-import icoMinus from "../static/asset/ico_minus.svg";
-import aniLoading from "../static/asset/ani_loading.gif";
+import icoPlus from "../../static/asset/ico_plus.svg";
+import icoMinus from "../../static/asset/ico_minus.svg";
+import aniLoading from "../../static/asset/ani_loading.gif";
 
 const predictDateReducer = (state, action) => {
     switch (action.type) {

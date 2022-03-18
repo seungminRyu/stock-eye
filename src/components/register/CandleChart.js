@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactApexChart from "react-apexcharts";
-import { getChartOption } from "../lib/util";
+import { getChartOption } from "../../lib/util";
 
 function TotalChart(props) {
     const { name, data } = props;
