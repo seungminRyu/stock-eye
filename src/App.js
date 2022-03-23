@@ -6,7 +6,7 @@ import { requestQueueInStocks } from "./lib/api";
 import { StockProvider } from "./context/StockContext";
 import Home from "./page/home/Home";
 import Register from "./page/register/Register";
-import Predict from "./page/Predict";
+import Report from "./page/report/Report";
 
 const initPredictList = () => {
     if (localStorage.getItem("PREDICT_LIST") === null) {
@@ -27,10 +27,11 @@ function App() {
             <GlobalStyle />
             <Route path="/" exact={true} component={Home} />
             <Route path="/register" component={Register} />
-            <Route path="/predict" component={Predict} />
+            <Route path="/report" component={Report} />
         </StockProvider>
     );
 }
+
 const GlobalStyle = createGlobalStyle`
     body {
         display: block;

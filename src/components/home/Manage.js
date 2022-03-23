@@ -1,7 +1,7 @@
 import React from "react";
 import { useStockState } from "../../context/StockContext";
 import styled, { css } from "styled-components";
-import ModalTemplate from "../ModalTemplate";
+import ModalTemplate from "../common/ModalTemplate";
 import ManagedStockItem from "./ManagedStockItem";
 
 import icoClose from "../../static/asset/ico_close.svg";

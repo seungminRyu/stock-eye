@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
-import ModalTemplate from "../ModalTemplate";
+import ModalTemplate from "../common/ModalTemplate";
 import SearchResultItem from "./SearchResultItem";
 import { debouncer } from "../../lib/util";
 

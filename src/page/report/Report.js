@@ -1,21 +1,20 @@
 import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import useAsync from "../hook/useAsync";
-import { fetchPredictData } from "../lib/api";
-import { getLocalStorageItem, parseQueryString } from "../lib/util";
+import useAsync from "../../hook/useAsync";
+import { fetchPredictData } from "../../lib/api";
+import { getLocalStorageItem, parseQueryString } from "../../lib/util";
+import AppTemplate from "../../components/common/AppTemplate";
+import TotalChart from "../../components/report/TotalChart";
+import VarianceChart from "../../components/report/VarianceChart";
+import PredictChart from "../../components/report/PredictChart";
+import VolumeChart from "../../components/report/VolumeChart";
 
-import AppTemplate from "../components/AppTemplate";
-import TotalChart from "../components/TotalChart";
-import VarianceChart from "../components/VarianceChart";
-import PredictChart from "../components/PredictChart";
-import VolumeChart from "../components/VolumeChart";
-
-import icoBack from "../static/asset/ico_back.svg";
-import imgGood from "../static/asset/img_good.png";
-import imgBad from "../static/asset/img_bad.png";
-import imgSoso from "../static/asset/img_soso.png";
-import imgCalc from "../static/asset/img_calculating.png";
+import icoBack from "../../static/asset/ico_back.svg";
+import imgGood from "../../static/asset/img_good.png";
+import imgBad from "../../static/asset/img_bad.png";
+import imgSoso from "../../static/asset/img_soso.png";
+import imgCalc from "../../static/asset/img_calculating.png";
 
 const getStockName = (url) => {
     const queryObj = parseQueryString(url);
@@ -123,7 +122,7 @@ const parseValueOnType = (values, startVals, type, variance) => {
     return { labels, series };
 };
 
-function Predict({ location }) {
+function Report({ location }) {
     const [chartType, setChartType] = useState("Close");
     const $actType = useRef();
     // const name = getStockName(location.search);
@@ -234,7 +233,7 @@ function Predict({ location }) {
                         </div>
                     </div>
                 </Header>
-                <Report>
+                <ReportContainer>
                     <h2 className="section-title">결과리포트</h2>
                     <PredictInfo>
                         <div>
@@ -289,7 +288,7 @@ function Predict({ location }) {
                             </p>
                         </ValueContainer>
                     </PredictValues>
-                </Report>
+                </ReportContainer>
                 <ChartReport>
                     <TotalChart
                         name={name}
@@ -358,8 +357,6 @@ function Predict({ location }) {
         </AppTemplate>
     );
 }
-
-export default Predict;
 
 const ChartType = styled.div`
     width: 100%;
@@ -563,7 +560,7 @@ const Summary = styled.div`
     }
 `;
 
-const Report = styled.section`
+const ReportContainer = styled.section`
     background-color: var(--bg-white);
     padding: 40px 20px 40px;
 
@@ -707,3 +704,5 @@ const testPredictData = {
         id: 1632410113788,
     },
 };
+
+export default Report;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { getLocalStorageItem } from "../../lib/util";
-import PredictItem from "../PredictItem";
+import PredictItem from "./PredictItem";
 
 function PredictList() {
     const [predictList, setPredictList] = useState(
