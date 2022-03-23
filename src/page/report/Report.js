@@ -3,7 +3,11 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import useAsync from "../../hook/useAsync";
 import { fetchPredictData } from "../../lib/api";
-import { getLocalStorageItem, parseQueryString } from "../../lib/util";
+import {
+    getLocalStorageItem,
+    getVarianceState,
+    parseQueryString,
+} from "../../lib/util";
 import AppTemplate from "../../components/common/AppTemplate";
 import TotalChart from "../../components/report/TotalChart";
 import VarianceChart from "../../components/report/VarianceChart";
@@ -15,6 +19,7 @@ import imgGood from "../../static/asset/img_good.png";
 import imgBad from "../../static/asset/img_bad.png";
 import imgSoso from "../../static/asset/img_soso.png";
 import imgCalc from "../../static/asset/img_calculating.png";
+import ReportPredictResult from "../../components/report/ReportPredictResult";
 
 const getStockName = (url) => {
     const queryObj = parseQueryString(url);
@@ -93,18 +98,6 @@ const createVarianceObj = (startVals, predictDayVals) => {
         close: getVariance(startVals.close, predictDayVals.close),
         volume: getVariance(startVals.volume, predictDayVals.volume),
     };
-};
-
-const getVarianceState = (variance) => {
-    const varianceVal = parseFloat(variance);
-
-    if (varianceVal > 0) {
-        return "PLUS";
-    } else if (varianceVal === 0) {
-        return "ZERO";
-    } else {
-        return "MINUS";
-    }
 };
 
 const parseValueOnType = (values, startVals, type, variance) => {
@@ -233,62 +226,12 @@ function Report({ location }) {
                         </div>
                     </div>
                 </Header>
-                <ReportContainer>
-                    <h2 className="section-title">결과리포트</h2>
-                    <PredictInfo>
-                        <div>
-                            <p className="label">예측기간</p>
-                            <p className="info-data">{predictDate}일</p>
-                        </div>
-                        <div className="split-bar"></div>
-                        <div>
-                            <p className="label">MSE(평균제곱오차)</p>
-                            <p className="info-data">{accuracy}</p>
-                        </div>
-                    </PredictInfo>
-                    <PredictValues>
-                        <ValueContainer
-                            varienceState={getVarianceState(variances.open)}
-                        >
-                            <p className="label">예상 시가</p>
-                            <p className="predict-value --ani-fade-in">
-                                {predictDayVals.open}원 ({variances.open}%)
-                            </p>
-                        </ValueContainer>
-                        <ValueContainer
-                            varienceState={getVarianceState(variances.close)}
-                        >
-                            <p className="label">예상 종가</p>
-                            <p className="predict-value --ani-fade-in">
-                                {predictDayVals.close}원 ({variances.close}%)
-                            </p>
-                        </ValueContainer>
-                        <ValueContainer
-                            varienceState={getVarianceState(variances.high)}
-                        >
-                            <p className="label">예상 고가</p>
-                            <p className="predict-value --ani-fade-in">
-                                {predictDayVals.high}원 ({variances.high}%)
-                            </p>
-                        </ValueContainer>
-                        <ValueContainer
-                            varienceState={getVarianceState(variances.low)}
-                        >
-                            <p className="label">예상 저가</p>
-                            <p className="predict-value --ani-fade-in">
-                                {predictDayVals.low}원 ({variances.low}%)
-                            </p>
-                        </ValueContainer>
-                        <ValueContainer
-                            varienceState={getVarianceState(variances.volume)}
-                        >
-                            <p className="label">예상 거래량</p>
-                            <p className="predict-value --ani-fade-in">
-                                {predictDayVals.volume} ({variances.volume}%)
-                            </p>
-                        </ValueContainer>
-                    </PredictValues>
-                </ReportContainer>
+                <ReportPredictResult
+                    predictDayVals={predictDayVals}
+                    varianceVals={variances}
+                    predictDate={predictDate}
+                    accuracy={accuracy}
+                />
                 <ChartReport>
                     <TotalChart
                         name={name}
@@ -552,69 +495,6 @@ const Summary = styled.div`
                 color: var(--blue);
             `}
         
-        ${(props) =>
-            props.varienceState === "ZERO" &&
-            css`
-                color: var(--gray);
-            `}
-    }
-`;
-
-const ReportContainer = styled.section`
-    background-color: var(--bg-white);
-    padding: 40px 20px 40px;
-
-    .label {
-        font-size: 12px;
-        color: var(--gray);
-    }
-`;
-
-const PredictInfo = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    text-align: center;
-    margin-top: 30px;
-
-    .info-data {
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--font);
-        margin-top: 8px;
-    }
-`;
-
-const PredictValues = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 12px;
-    width: 100%;
-    margin-top: 8px;
-`;
-
-const ValueContainer = styled.div`
-    border-bottom: solid 1px var(--bg-gray);
-    padding: 16px 0;
-
-    .predict-value {
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        animation-delay: 0.2s;
-        margin-top: 8px;
-        ${(props) =>
-            props.varienceState === "PLUS" &&
-            css`
-                color: var(--red);
-            `}
-
-        ${(props) =>
-            props.varienceState === "MINUS" &&
-            css`
-                color: var(--blue);
-            `}
-
         ${(props) =>
             props.varienceState === "ZERO" &&
             css`

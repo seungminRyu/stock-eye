@@ -73,3 +73,15 @@ export const getChartOption = () => {
         },
     };
 };
+
+export const getVarianceState = (variance) => {
+    const varianceVal = parseFloat(variance);
+
+    if (varianceVal > 0) {
+        return "PLUS";
+    } else if (varianceVal === 0) {
+        return "ZERO";
+    } else {
+        return "MINUS";
+    }
+};
